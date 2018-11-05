@@ -1,6 +1,7 @@
 # The functions here can be certainly optimised for speed using numpy better and no loops.
 
 import numpy as np
+import sys
 
 
 def power_function(k, sigmasignal = 17.5, amplitude = 1e6 ):
@@ -63,3 +64,34 @@ def make_map(size, sigmasignal=None):
             map_fourier[size - i, size - j] = np.conj(power_sample[i, j])
 
     return np.fft.ifft2(np.fft.fftshift(map_fourier)), power_map
+
+
+def rescale_map(array, scaling, shift, invert=False):
+    """
+    This rescales an array, usually do to make range between 0 and 1
+    :param array: original array
+    :param scaling: multiplicative factor to elements
+    :param shift: additive shift to the elements
+    :param invert: if invert is True, the inverse of the rescale_map function will be done
+    :return: rescaled array
+    """
+    if invert is True:
+        shift = -shift / scaling
+        scaling = 1.0 / scaling
+    return np.copy(array) * scaling + shift
+
+
+def rescale_unit_test():
+    """
+    this checks the invert option works
+    """
+    original_array = np.linspace(0, 500, 5)
+    new_array = rescale_map(rescale_map(original_array, 0.1, 0.5, False), 0.1, 0.5, True)
+
+    if (original_array == new_array).all():
+        print('Unit passed passed: rescale_map')
+    else:
+        print(original_array)
+        print(new_array)
+        print('Unit test failed: rescale_map')
+        sys.exit()
