@@ -11,7 +11,7 @@ Tensorflow (version 1.12.0 works)
 Keras (version 2.2.4 works)
 ```
 
-## Running the tests
+### Running the tests
 
 ```
 python unit_tests.py
