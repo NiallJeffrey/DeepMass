@@ -16,3 +16,12 @@ Keras (version 2.2.4 works)
 ```
 python unit_tests.py
 ```
+
+### Authors
+
+* **Niall Jeffrey** 
+* **Francois Lanusse** 
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
