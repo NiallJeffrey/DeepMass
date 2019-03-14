@@ -74,7 +74,6 @@ print('training network \n')
 autoencoder_instance = cnn.autoencoder_model(map_size = 256)
 autoencoder = autoencoder_instance.model()
 
-t= time.time()
 autoencoder.fit(mf.rescale_map(train_array_noisy, 0.25, 0.5),
                 mf.rescale_map(train_array_clean, 0.25, 0.5),
                 epochs=1,
@@ -83,9 +82,6 @@ autoencoder.fit(mf.rescale_map(train_array_noisy, 0.25, 0.5),
                 validation_data=(mf.rescale_map(test_array_noisy, 0.25, 0.5),
                                  mf.rescale_map(test_array_clean, 0.25, 0.5)),
                 callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
-
-time_taken = time.time() - t
-print(str('training time: ' + str(time_taken[:(int(np.log10(time_taken)) + 5)]) + ' s \n'))
 
 
 # save network
