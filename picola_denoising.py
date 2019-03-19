@@ -76,7 +76,7 @@ test_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/ou
 
 if resize_bool==True:
     test_array_clean = downscale_images(test_array_clean, map_size)
-    train_array_noisy = downscale_images(test_array_noisy, map_size)
+    test_array_noisy = downscale_images(test_array_noisy, map_size)
     test_array_wiener = downscale_images(test_array_wiener, map_size)
 
 x = np.where(np.sum(test_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
