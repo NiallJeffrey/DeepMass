@@ -10,7 +10,7 @@ from keras.optimizers import Adam
 
 class simple_model:
     """
-    A CNN class that creates a denoising autoencoder
+    A CNN class that creates a simple denoiser
     """
 
     def __init__(self, map_size):
@@ -30,14 +30,47 @@ class simple_model:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = UpSampling2D((2, 2))(x)
-        decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
+        final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
-        autoencoder = Model(input_img, decoded)
-        autoencoder.summary()
-        autoencoder.compile(optimizer='adadelta', loss='mse')
+        simple = Model(input_img, final)
+        simple.summary()
+        simple.compile(optimizer='adadelta', loss='mse')
 
-        return autoencoder
+        return simple
+
+    
+class simple_model_residual:
+    """
+    A CNN class that creates a residual CNN
+    """
+
+    def __init__(self, map_size):
+        """
+        Initialisation
+        :param map_size: size of square image (there are map_size**2 pixels)
+        """
+        self.map_size = map_size
+
+
+    def model(self):
+        input_img = Input(shape=(self.map_size, self.map_size, 1))
+
+        filters = 32
+
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        
+        x = add([x, input_img])
+        final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
+
+        simple = Model(input_img, final)
+        simple.summary()
+        simple.compile(optimizer='adadelta', loss='mse')
+
+        return simple
+    
 
 class autoencoder_model:
     """
