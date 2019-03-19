@@ -2,7 +2,7 @@
 import matplotlib
 matplotlib.use('pdf')
 import matplotlib.pyplot as plt
-
+from skimage.transform import resize
 from deepmass import map_functions as mf
 from deepmass import cnn_keras as cnn
 
@@ -14,7 +14,7 @@ import os
 
 print(os.getcwd())
 
-map_size = 256
+map_size = 64
 max_training_data = 7500
 plot_results = True
 output_dir = 'picola_script_outputs'
@@ -31,13 +31,19 @@ scale_wiener = 1.
 print('loading data:')
 
 print('- loading clean training')
-train_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
+train_array_clean_orig = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
+train_array_clean = np.empty((len(train_array_clean_orig[:,0,0,0]), map_size, map_size, 1), dtype = np.float32)
+
+for i in range(len(train_array_clean[:,0,0,0])):
+	train_array_clean[i,:,:,0] = resize(train_array_clean[i,:,:,0], (map_size,map_size))
 
 print('- loading ks training')
-train_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
+train_array_noisy_orig = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
+train_array_noisy = resize(train_array_noisy, (map_size,map_size))
 
 print('- loading wiener training')
 train_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener.npy')
+train_array_wiener = resize(train_array_wiener, (map_size,map_size))
 
 x = np.where(np.sum(train_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(train_array_noisy[:,0,0,0].shape,dtype=np.bool)
@@ -50,13 +56,15 @@ print(np.sum(train_array_clean), np.sum(train_array_noisy), np.sum(train_array_w
 
 print('- loading clean testing')
 test_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true_test500.npy')
+test_array_clean = resize(test_array_clean, (map_size,map_size))
 
 print('- loading noisy testing \n')
 test_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS_test500.npy')
+test_array_noisy = resize(test_array_noisy, (map_size,map_size))
 
 print('- loading wiener testing \n')
 test_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener_test500.npy')
-
+test_array_wiener = resize(test_array_wiener, (map_size,map_size))
 
 x = np.where(np.sum(test_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(test_array_noisy[:,0,0,0].shape,dtype=np.bool)
@@ -142,12 +150,13 @@ if plot_results:
     for i in range(n_images):
         # display original
         plt.subplot(3, n_images, i + 1)
-        plt.imshow(test_array_clean[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_kappa, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + n_images)
-        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_wiener, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
 
         plt.subplot(3, n_images, i + 1 + 2 * n_images)
         plt.imshow(test_output[i, :, :, 0], origin='lower')
@@ -171,11 +180,11 @@ if plot_results:
     for i in range(n_images):
         # display original
         plt.subplot(3, n_images, i + 1)
-        plt.imshow(test_array_clean[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_kappa, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + n_images)
-        plt.imshow(test_array_wiener[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + 2 * n_images)
