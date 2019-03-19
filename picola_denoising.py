@@ -14,6 +14,7 @@ import os
 
 print(os.getcwd())
 
+resize_bool=True
 map_size = 64
 max_training_data = 7500
 plot_results = True
@@ -26,24 +27,33 @@ scale_kappa = 1.0
 scale_ks = 1.
 scale_wiener = 1.
 
+
+def downscale_images(image_array, new_size):
+    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
+
+    for i in range(len(image_array[:,0,0,0])):
+        image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))
+
+    return image_array_new
+
+
 # Load the data
 
 print('loading data:')
 
 print('- loading clean training')
-train_array_clean_orig = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
-train_array_clean = np.empty((len(train_array_clean_orig[:,0,0,0]), map_size, map_size, 1), dtype = np.float32)
-
-for i in range(len(train_array_clean[:,0,0,0])):
-	train_array_clean[i,:,:,0] = resize(train_array_clean[i,:,:,0], (map_size,map_size))
+train_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
 
 print('- loading ks training')
-train_array_noisy_orig = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
-train_array_noisy = resize(train_array_noisy, (map_size,map_size))
+train_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
 
 print('- loading wiener training')
 train_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener.npy')
-train_array_wiener = resize(train_array_wiener, (map_size,map_size))
+
+if resize_bool==True:
+    train_array_clean = downscale_images(train_array_clean, map_size)
+    train_array_noisy = downscale_images(train_array_noisy, map_size)
+    train_array_wiener = downscale_images(train_array_wiener, map_size)
 
 x = np.where(np.sum(train_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(train_array_noisy[:,0,0,0].shape,dtype=np.bool)
@@ -56,15 +66,18 @@ print(np.sum(train_array_clean), np.sum(train_array_noisy), np.sum(train_array_w
 
 print('- loading clean testing')
 test_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true_test500.npy')
-test_array_clean = resize(test_array_clean, (map_size,map_size))
 
 print('- loading noisy testing \n')
 test_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS_test500.npy')
-test_array_noisy = resize(test_array_noisy, (map_size,map_size))
 
 print('- loading wiener testing \n')
 test_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener_test500.npy')
-test_array_wiener = resize(test_array_wiener, (map_size,map_size))
+
+
+if resize_bool==True:
+    test_array_clean = downscale_images(test_array_clean, map_size)
+    train_array_noisy = downscale_images(test_array_noisy, map_size)
+    test_array_wiener = downscale_images(test_array_wiener, map_size)
 
 x = np.where(np.sum(test_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(test_array_noisy[:,0,0,0].shape,dtype=np.bool)
