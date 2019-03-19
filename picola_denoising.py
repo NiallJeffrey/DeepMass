@@ -19,7 +19,12 @@ max_training_data = 7500
 plot_results = True
 output_dir = 'picola_script_outputs'
 output_model_file = 'encoder_190318.h5'
-n_epoch = 10
+n_epoch = 4
+
+# rescaling quantities
+scale_kappa = 2.0
+scale_ks = 0.5
+scale_wiener = 20.
 
 # Load the data
 
@@ -89,13 +94,13 @@ print('training network KS \n')
 autoencoder_instance = cnn.autoencoder_model(map_size = map_size)
 autoencoder = autoencoder_instance.model()
 
-autoencoder.fit(mf.rescale_map(train_array_noisy, 0.25, 0.5),
-                mf.rescale_map(train_array_clean, 0.25, 0.5),
+autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
+                mf.rescale_map(train_array_clean, scale_kappa, 0.5),
                 epochs=n_epoch,
                 batch_size=30,
                 shuffle=True,
-                validation_data=(mf.rescale_map(test_array_noisy, 0.25, 0.5),
-                                 mf.rescale_map(test_array_clean, 0.25, 0.5)),
+                validation_data=(mf.rescale_map(test_array_noisy, scale_ks, 0.5),
+                                 mf.rescale_map(test_array_clean, scale_kappa, 0.5)),
                 callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
 
 
@@ -109,13 +114,13 @@ print('training network wiener \n')
 autoencoder_instance_wiener = cnn.autoencoder_model(map_size = map_size)
 autoencoder_wiener = autoencoder_instance_wiener.model()
 
-autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, 0.25, 0.5),
-                mf.rescale_map(train_array_clean, 0.25, 0.5),
+autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
+                mf.rescale_map(train_array_clean, scale_kappa, 0.5),
                 epochs=n_epoch,
                 batch_size=30,
                 shuffle=True,
-                validation_data=(mf.rescale_map(test_array_wiener, 0.25, 0.5),
-                                 mf.rescale_map(test_array_clean, 0.25, 0.5)),
+                validation_data=(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),
+                                 mf.rescale_map(test_array_clean, scale_kappa, 0.5)),
                 callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
 
 
