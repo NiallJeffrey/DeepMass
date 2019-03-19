@@ -22,9 +22,9 @@ output_model_file = 'encoder_190318.h5'
 n_epoch = 4
 
 # rescaling quantities
-scale_kappa = 2.0
-scale_ks = 0.5
-scale_wiener = 20.
+scale_kappa = 1.0
+scale_ks = 1.
+scale_wiener = 1.
 
 # Load the data
 
@@ -46,6 +46,7 @@ mask_bad_data[x] = False
 train_array_clean=train_array_clean[mask_bad_data,:,:,:]
 train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]
 train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
+print(np.sum(train_array_clean), np.sum(train_array_noisy), np.sum(train_array_wiener))
 
 print('- loading clean testing')
 test_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true_test500.npy')
@@ -73,15 +74,15 @@ if plot_results:
     for i in range(n):
         # display original
         plt.subplot(3, n, i + 1)
-        plt.imshow(train_array_clean[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(train_array_clean[i, :, :, 0], scale_kappa, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n, i + 1 + n)
-        plt.imshow(train_array_noisy[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(train_array_noisy[i, :, :, 0], scale_ks, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n, i + 1 + 2*n)
-        plt.imshow(train_array_wiener[i, :, :, 0], origin='lower')
+        plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
     plt.savefig(str(output_dir) + '/picola_data.pdf'), plt.close()
@@ -133,8 +134,8 @@ if plot_results:
     print('plotting result \n')
     n_images = 6
 
-    test_output = autoencoder.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], 0.25, 0.5))
-    test_output = mf.rescale_map(test_output, 0.25, 0.5, True)
+    test_output = autoencoder.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
+#     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
 
 
     plt.figure(figsize=(30, 15))
@@ -162,8 +163,8 @@ if plot_results:
     print('plotting result wiener \n')
     n_images = 6
 
-    test_output = autoencoder_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], 0.25, 0.5))
-    test_output = mf.rescale_map(test_output, 0.25, 0.5, True)
+    test_output = autoencoder_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
+#     test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
 
 
     plt.figure(figsize=(30, 15))
