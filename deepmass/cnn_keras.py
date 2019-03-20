@@ -53,7 +53,7 @@ class simple_model_residual:
         :param learning_rate: learning rate for the optimizer
         """
         self.map_size = map_size
-        self.map_size = map_size
+        self.learning_rate = learning_rate
 
 
     def model(self):
@@ -80,6 +80,7 @@ class autoencoder_model:
     """
     A CNN class that creates a denoising autoencoder
     """
+
 
     def __init__(self, map_size, learning_rate):
         """
@@ -154,7 +155,7 @@ class residual_autoencoder_model:
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+        autoencoder.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return autoencoder
 
