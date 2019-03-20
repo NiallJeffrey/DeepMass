@@ -110,7 +110,7 @@ class autoencoder_model:
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+        autoencoder.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return autoencoder
 

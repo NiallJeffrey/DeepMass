@@ -21,16 +21,16 @@ max_training_data = 7500
 plot_results = True
 output_dir = 'picola_script_outputs'
 output_model_file = 'encoder_200318.h5'
-n_epoch = 10
+n_epoch = 50
 batch_size = 30
 learning_rate = 1e-5
 
 sigma_smooth = 2.
 
 # rescaling quantities
-scale_kappa = 3.0
-scale_ks = 3.
-scale_wiener = 3.0
+scale_kappa = 8.0
+scale_ks = 8.
+scale_wiener = 8.0
 
 # make SV mask
 
@@ -141,7 +141,7 @@ if plot_results:
 
 print('training network KS \n')
 
-autoencoder_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate)
+autoencoder_instance = cnn.autoencoder_model(map_size = map_size, learning_rate=learning_rate)
 autoencoder = autoencoder_instance.model()
 
 autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
