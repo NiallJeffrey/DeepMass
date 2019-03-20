@@ -16,12 +16,14 @@ import os
 print(os.getcwd())
 
 resize_bool=True
-map_size = 64
+map_size = 128
 max_training_data = 7500
 plot_results = True
 output_dir = 'picola_script_outputs'
-output_model_file = 'encoder_190318.h5'
+output_model_file = 'encoder_200318.h5'
 n_epoch = 10
+batch_size = 30
+learning_rate = 1e-5
 
 sigma_smooth = 2.
 
@@ -56,15 +58,23 @@ print('loading data:')
 
 print('- loading clean training')
 train_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
+train_array_clean1 = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output1_kappa_true.npy')
+train_array_clean = np.concatenate([train_array_clean,train_array_clean1])
+
 train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 print('- loading ks training')
 train_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
+train_array_noisy1 = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output1_KS.npy')
+train_array_noisy = np.concatenate([train_array_noisy,train_array_noisy1])
+
 train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth*0.5,sigma_smooth*0.5, 0))
 
 
 print('- loading wiener training')
 train_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener.npy')
+train_array_wiener1 = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output1_wiener.npy')
+train_array_wiener = np.concatenate([train_array_wiener,train_array_wiener1])
 
 if resize_bool==True:
     train_array_clean = downscale_images(train_array_clean, map_size, mask)
@@ -131,13 +141,13 @@ if plot_results:
 
 print('training network KS \n')
 
-autoencoder_instance = cnn.simple_model(map_size = map_size)
+autoencoder_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate)
 autoencoder = autoencoder_instance.model()
 
 autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
                 mf.rescale_map(train_array_clean, scale_kappa, 0.5),
                 epochs=n_epoch,
-                batch_size=30,
+                batch_size=batch_size,
                 shuffle=True,
                 validation_data=(mf.rescale_map(test_array_noisy, scale_ks, 0.5),
                                  mf.rescale_map(test_array_clean, scale_kappa, 0.5)),
@@ -151,13 +161,13 @@ autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
 
 print('training network wiener \n')
 
-autoencoder_instance_wiener = cnn.simple_model_residual(map_size = map_size)
+autoencoder_instance_wiener = cnn.simple_model_residual(map_size = map_size, learning_rate=learning_rate)
 autoencoder_wiener = autoencoder_instance_wiener.model()
 
 autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
                 mf.rescale_map(train_array_clean, scale_kappa, 0.5),
                 epochs=n_epoch,
-                batch_size=30,
+                batch_size=batch_size,
                 shuffle=True,
                 validation_data=(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),
                                  mf.rescale_map(test_array_clean, scale_kappa, 0.5)),

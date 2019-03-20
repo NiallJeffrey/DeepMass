@@ -13,12 +13,14 @@ class simple_model:
     A CNN class that creates a simple denoiser
     """
 
-    def __init__(self, map_size):
+    def __init__(self, map_size, learning_rate):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
         """
         self.map_size = map_size
+        self.learning_rate = learning_rate
 
 
     def model(self):
@@ -34,7 +36,7 @@ class simple_model:
 
         simple = Model(input_img, final)
         simple.summary()
-        simple.compile(optimizer='adadelta', loss='mse')
+        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return simple
 
@@ -44,11 +46,13 @@ class simple_model_residual:
     A CNN class that creates a residual CNN
     """
 
-    def __init__(self, map_size):
+    def __init__(self, map_size, learning_rate):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
         """
+        self.map_size = map_size
         self.map_size = map_size
 
 
@@ -61,13 +65,13 @@ class simple_model_residual:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
 #        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        
+
         x = add([x, input_img])
         final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
         simple = Model(input_img, final)
         simple.summary()
-        simple.compile(optimizer=Adam(lr=1e-4), loss='mse')
+        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return simple
     
@@ -77,12 +81,14 @@ class autoencoder_model:
     A CNN class that creates a denoising autoencoder
     """
 
-    def __init__(self, map_size):
+    def __init__(self, map_size, learning_rate):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
         """
         self.map_size = map_size
+        self.learning_rate = learning_rate
 
 
     def model(self):
@@ -103,7 +109,7 @@ class autoencoder_model:
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
+        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return autoencoder
 
@@ -116,13 +122,14 @@ class residual_autoencoder_model:
     A CNN class that creates a denoising autoencoder
     """
 
-    def __init__(self, map_size, learn_rate=1e-4):
+    def __init__(self, map_size, learning_rate):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
         """
         self.map_size = map_size
-        self.learn_rate = learn_rate
+        self.learning_rate = learning_rate
 
 
     def model(self):
@@ -147,7 +154,7 @@ class residual_autoencoder_model:
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        autoencoder.compile(optimizer='adadelta', loss='mse')
+        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return autoencoder
 
