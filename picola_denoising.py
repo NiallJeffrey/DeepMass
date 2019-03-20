@@ -6,6 +6,7 @@ from skimage.transform import resize
 from deepmass import map_functions as mf
 from deepmass import cnn_keras as cnn
 
+import scipy.ndimage as ndimage
 from keras.callbacks import TensorBoard
 
 import numpy as np
@@ -20,19 +21,31 @@ max_training_data = 7500
 plot_results = True
 output_dir = 'picola_script_outputs'
 output_model_file = 'encoder_190318.h5'
-n_epoch = 4
+n_epoch = 10
+
+sigma_smooth = 2.
 
 # rescaling quantities
-scale_kappa = 1.0
-scale_ks = 1.
-scale_wiener = 1.
+scale_kappa = 3.0
+scale_ks = 3.
+scale_wiener = 3.0
+
+# make SV mask
+
+print('loading mask \n')
+counts = np.load('mice_mock/sv_counts.npy')
+
+counts_shaped =  counts.reshape(map_size, int(counts.shape[0]/map_size),
+                                map_size, int(counts.shape[1]/map_size)).sum(axis=1).sum(axis=2)
+mask = np.where(counts_shaped>0.0, 1.0, 0.0)
+mask = np.float32(mask.real)
 
 
-def downscale_images(image_array, new_size):
+def downscale_images(image_array, new_size, correct_mask):
     image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
 
     for i in range(len(image_array[:,0,0,0])):
-        image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))
+        image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
 
     return image_array_new
 
@@ -43,17 +56,20 @@ print('loading data:')
 
 print('- loading clean training')
 train_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true.npy')
+train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 print('- loading ks training')
 train_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS.npy')
+train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth*0.5,sigma_smooth*0.5, 0))
+
 
 print('- loading wiener training')
 train_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener.npy')
 
 if resize_bool==True:
-    train_array_clean = downscale_images(train_array_clean, map_size)
-    train_array_noisy = downscale_images(train_array_noisy, map_size)
-    train_array_wiener = downscale_images(train_array_wiener, map_size)
+    train_array_clean = downscale_images(train_array_clean, map_size, mask)
+    train_array_noisy = downscale_images(train_array_noisy, map_size, mask)
+    train_array_wiener = downscale_images(train_array_wiener, map_size, mask)
 
 x = np.where(np.sum(train_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(train_array_noisy[:,0,0,0].shape,dtype=np.bool)
@@ -63,21 +79,23 @@ train_array_clean=train_array_clean[mask_bad_data,:,:,:]
 train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]
 train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
 print(np.sum(train_array_clean), np.sum(train_array_noisy), np.sum(train_array_wiener))
+print(np.max(np.abs(train_array_clean)), np.max(np.abs(train_array_noisy)), np.max(np.abs(train_array_wiener)))
 
 print('- loading clean testing')
 test_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true_test500.npy')
-
+test_array_clean = ndimage.gaussian_filter(test_array_clean, sigma=(0,sigma_smooth, sigma_smooth, 0))
 print('- loading noisy testing \n')
 test_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS_test500.npy')
+test_array_noisy = ndimage.gaussian_filter(test_array_noisy, sigma=(0,sigma_smooth*0.5,sigma_smooth*0.5, 0))
 
 print('- loading wiener testing \n')
 test_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener_test500.npy')
 
 
 if resize_bool==True:
-    test_array_clean = downscale_images(test_array_clean, map_size)
-    test_array_noisy = downscale_images(test_array_noisy, map_size)
-    test_array_wiener = downscale_images(test_array_wiener, map_size)
+    test_array_clean = downscale_images(test_array_clean, map_size, mask)
+    test_array_noisy = downscale_images(test_array_noisy, map_size, mask)
+    test_array_wiener = downscale_images(test_array_wiener, map_size, mask)
 
 x = np.where(np.sum(test_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(test_array_noisy[:,0,0,0].shape,dtype=np.bool)
@@ -113,7 +131,7 @@ if plot_results:
 
 print('training network KS \n')
 
-autoencoder_instance = cnn.autoencoder_model(map_size = map_size)
+autoencoder_instance = cnn.simple_model(map_size = map_size)
 autoencoder = autoencoder_instance.model()
 
 autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
@@ -127,13 +145,13 @@ autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
 
 
 # save network
-autoencoder.save(str(output_dir) + '/' + str(output_model_file))
+#autoencoder.save(str(output_dir) + '/' + str(output_model_file))
 
 # Load encoder and train
 
 print('training network wiener \n')
 
-autoencoder_instance_wiener = cnn.autoencoder_model(map_size = map_size)
+autoencoder_instance_wiener = cnn.simple_model_residual(map_size = map_size)
 autoencoder_wiener = autoencoder_instance_wiener.model()
 
 autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),

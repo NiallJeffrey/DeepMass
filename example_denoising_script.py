@@ -10,12 +10,15 @@ from keras.callbacks import TensorBoard
 
 import numpy as np
 import time
+import os
 
-map_size = 256
-max_training_data = 1000
+print(os.getcwd())
+
+map_size = 64
+max_training_data = 7500
 plot_results = True
 output_dir = 'example_script_outputs'
-output_model_file = 'encoder_140318.h5'
+output_model_file = 'encoder_180318.h5'
 
 # make SV mask
 
@@ -31,23 +34,23 @@ if plot_results:
     print('plotting mask \n')
     plt.figure()
     plt.imshow(mask, origin = 'lower'), plt.colorbar(fraction=0.046, pad=0.04)
-    plt.savefig(str(output_dir) + '/example_mask.pdf'), plt.close()
+    plt.savefig(str(os.getcwd()) + '/' + str(output_dir) + '/example_mask.pdf'), plt.close()
 
 # Load the data
 
 print('loading data:')
 
 print('- loading clean training')
-train_array_clean = np.load('misc_data/train_clean_256_10000.npy')[:max_training_data]
+train_array_clean = np.load(str(os.getcwd()) + '/' +'misc_data/train_clean_' + str(map_size) + '_7500.npy')
 
 print('- loading noisy training')
-train_array_noisy = np.load('misc_data/train_noisy_256_10000.npy')[:max_training_data]
+train_array_noisy = np.load(str(os.getcwd()) + '/' +'misc_data/train_noisy_' + str(map_size) + '_7500.npy')
 
 print('- loading clean testing')
-test_array_clean = np.load('misc_data/test_clean_256_1000.npy')
+test_array_clean = np.load(str(os.getcwd()) + '/' +'misc_data/test_clean_' + str(map_size) + '_1000.npy')
 
 print('- loading noisy testing \n')
-test_array_noisy = np.load('misc_data/test_noisy_256_1000.npy')
+test_array_noisy = np.load(str(os.getcwd()) + '/' +'misc_data/test_noisy_' + str(map_size) + '_1000.npy')
 
 # plot data
 if plot_results:
@@ -71,13 +74,13 @@ if plot_results:
 
 print('training network \n')
 
-autoencoder_instance = cnn.autoencoder_model(map_size = 256)
+autoencoder_instance = cnn.autoencoder_model(map_size = map_size)
 autoencoder = autoencoder_instance.model()
 
 autoencoder.fit(mf.rescale_map(train_array_noisy, 0.25, 0.5),
                 mf.rescale_map(train_array_clean, 0.25, 0.5),
-                epochs=1,
-                batch_size=100,
+                epochs=200,
+                batch_size=30,
                 shuffle=True,
                 validation_data=(mf.rescale_map(test_array_noisy, 0.25, 0.5),
                                  mf.rescale_map(test_array_clean, 0.25, 0.5)),

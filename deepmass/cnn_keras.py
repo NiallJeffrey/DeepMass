@@ -28,7 +28,7 @@ class simple_model:
 
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+#        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
@@ -59,7 +59,7 @@ class simple_model_residual:
 
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+#        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         
         x = add([x, input_img])
@@ -67,7 +67,7 @@ class simple_model_residual:
 
         simple = Model(input_img, final)
         simple.summary()
-        simple.compile(optimizer='adadelta', loss='mse')
+        simple.compile(optimizer=Adam(lr=1e-4), loss='mse')
 
         return simple
     
@@ -103,7 +103,7 @@ class autoencoder_model:
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        autoencoder.compile(optimizer='adadelta', loss='mse')
+        autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
         return autoencoder
 
