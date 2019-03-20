@@ -24,7 +24,7 @@ n_epoch = 100
 batch_size = 30
 learning_rate = 1e-5
 
-sigma_smooth = 1.
+sigma_smooth = 2.
 
 # rescaling quantities
 scale_kappa = 8.0
