@@ -20,16 +20,15 @@ map_size = 128
 plot_results = True
 output_dir = 'picola_script_outputs'
 output_model_file = 'encoder_200318b.h5'
-n_epoch = 100
+n_epoch = 3
 batch_size = 30
 learning_rate = 1e-5
 
 sigma_smooth = 2.
 
 # rescaling quantities
-scale_kappa = 8.0
 scale_ks = 8.
-scale_wiener = 8.0
+scale_wiener = 24.0
 
 # make SV mask
 
@@ -122,7 +121,7 @@ if plot_results:
     for i in range(n):
         # display original
         plt.subplot(3, n, i + 1)
-        plt.imshow(mf.rescale_map(train_array_clean[i, :, :, 0], scale_kappa, 0.5), origin='lower')
+        plt.imshow(mf.rescale_map(train_array_clean[i, :, :, 0], scale_wiener, 0.5), origin='lower')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n, i + 1 + n)
@@ -144,17 +143,17 @@ autoencoder_instance = cnn.autoencoder_model(map_size = map_size, learning_rate=
 autoencoder = autoencoder_instance.model()
 
 autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
-                mf.rescale_map(train_array_clean, scale_kappa, 0.5),
+                mf.rescale_map(train_array_clean, scale_ks, 0.5),
                 epochs=n_epoch,
                 batch_size=batch_size,
                 shuffle=True,
                 validation_data=(mf.rescale_map(test_array_noisy, scale_ks, 0.5),
-                                 mf.rescale_map(test_array_clean, scale_kappa, 0.5)),
+                                 mf.rescale_map(test_array_clean, scale_ks, 0.5)),
                 callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
 
 
 # save network
-#autoencoder.save(str(output_dir) + '/' + str(output_model_file))
+autoencoder.save(str(output_dir) + '/' + str(output_model_file))
 
 # Load encoder and train
 
@@ -163,13 +162,13 @@ print('training network wiener \n')
 autoencoder_instance_wiener = cnn.simple_model_residual(map_size = map_size, learning_rate=learning_rate)
 autoencoder_wiener = autoencoder_instance_wiener.model()
 
-autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener*3., 0.5),
-                mf.rescale_map(train_array_clean, scale_kappa*3., 0.5),
+autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
+                mf.rescale_map(train_array_clean, scale_wiener, 0.5),
                 epochs=n_epoch,
                 batch_size=batch_size,
                 shuffle=True,
-                validation_data=(mf.rescale_map(test_array_wiener, scale_wiener*3., 0.5),
-                                 mf.rescale_map(test_array_clean, scale_kappa*3., 0.5)),
+                validation_data=(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),
+                                 mf.rescale_map(test_array_clean, scale_wiener, 0.5)),
                 callbacks=[TensorBoard(log_dir='/tmp/autoencoder')])
 
 
@@ -183,23 +182,25 @@ if plot_results:
     n_images = 6
 
     test_output = autoencoder.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
-#     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
+    test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
 
 
     plt.figure(figsize=(30, 15))
     for i in range(n_images):
         # display original
         plt.subplot(3, n_images, i + 1)
-        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_kappa*3., 0.5), origin='lower')
+#        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.025,0.03), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + n_images)
-        plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_wiener*3., 0.5), origin='lower')
+        #plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower', clim = (-0.1,0.1), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
 
         plt.subplot(3, n_images, i + 1 + 2 * n_images)
-        plt.imshow(test_output[i, :, :, 0], origin='lower')
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.025,0.03), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
@@ -213,22 +214,24 @@ if plot_results:
     n_images = 6
 
     test_output = autoencoder_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener*3., 0.5))
-#     test_output = mf.rescale_map(test_output, scale_wiener*3., 0.5, True)
+    test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
 
 
     plt.figure(figsize=(30, 15))
     for i in range(n_images):
         # display original
         plt.subplot(3, n_images, i + 1)
-        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_kappa*3., 0.5), origin='lower')
+        #plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.025,0.03), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + n_images)
-        plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener*3., 0.5), origin='lower')
+        #plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+        plt.imshow(test_array_wiener[i, :, :, 0], origin='lower', clim = (-0.025,0.03), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.subplot(3, n_images, i + 1 + 2 * n_images)
-        plt.imshow(test_output[i, :, :, 0], origin='lower')
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.025,0.03), cmap ='inferno')
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
