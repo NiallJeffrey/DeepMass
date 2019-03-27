@@ -4,8 +4,18 @@ import numpy as np
 from keras import backend as K
 from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, add
 from keras.models import Model
-
+from keras.callbacks import Callback
 from keras.optimizers import Adam
+
+class LossHistory(Callback):
+    def on_train_begin(self, logs={}):
+        self.losses = []
+        self.val_losses = []
+
+    def on_batch_end(self, batch, logs={}):
+        self.losses.append(logs.get('loss'))
+        self.val_losses.append(logs.get('val_loss'))
+
 
 
 class simple_model:
@@ -63,13 +73,13 @@ class simple_model_residual:
 
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-#        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = add([x, input_img])
-        final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
-        simple = Model(input_img, final)
+        x = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+
+        simple = Model(input_img, x)
         simple.summary()
         simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
@@ -106,7 +116,7 @@ class autoencoder_model:
         x = UpSampling2D((2, 2))(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = UpSampling2D((2, 2))(x)
-        decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
+        decoded = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
@@ -148,9 +158,9 @@ class residual_autoencoder_model:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = UpSampling2D((2, 2))(x)
         
-        final = add([x, input_img])
         
-        decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(final)
+        decoded = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        decoded = add([decoded, input_img])
 
 
         autoencoder = Model(input_img, decoded)
