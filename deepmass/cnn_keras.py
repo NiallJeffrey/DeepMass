@@ -41,8 +41,8 @@ class simple_model:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
 #        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
+#        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        final = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
 
         simple = Model(input_img, final)
         simple.summary()
@@ -73,11 +73,11 @@ class simple_model_residual:
 
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        #x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = add([x, input_img])
 
         x = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        x = add([x, input_img])
 
         simple = Model(input_img, x)
         simple.summary()

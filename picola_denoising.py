@@ -15,32 +15,23 @@ import time
 import os
 
 
-def downscale_images(image_array, new_size, correct_mask):
-    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
-
-    for i in range(len(image_array[:,0,0,0])):
-        #image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
-        image_array_new[i,:,:,0] = image_array[i,:,:,0]*correct_mask
-
-    return image_array_new
-
 print(os.getcwd())
 
-resize_bool=True
+resize_bool=False
 map_size = 256
 plot_results = True
 output_dir = 'picola_script_outputs'
 output_model_file = 'encoder_270318.h5'
 n_epoch = 10
-batch_size = 30
-learning_rate_ks = 1e-5
-learning_rate_wiener = 4e-5  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+batch_size = 50
+learning_rate_ks = 1e-4
+learning_rate_wiener = 1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
-sigma_smooth = 1.5
+sigma_smooth = 1.0
 
 # rescaling quantities
-scale_ks = 4.
-scale_wiener = 16.0
+scale_ks = 1.3
+scale_wiener = 3.4
 
 # make SV mask
 
@@ -49,9 +40,7 @@ counts = np.load('mice_mock/sv_counts.npy')
 
 counts_shaped =  counts.reshape(map_size, int(counts.shape[0]/map_size),
                                 map_size, int(counts.shape[1]/map_size)).sum(axis=1).sum(axis=2)
-mask = np.where(counts_shaped>0.0, 1.0, 0.0)
-mask = np.float32(mask.real)
-
+mask = np.float32(np.real(np.where(counts_shaped>0.0, 1.0, 0.0)))
 
 
 # Load the data
@@ -85,53 +74,54 @@ train_array_wiener3 = np.load(str(os.getcwd()) + '/picola_training/test_outputs/
 train_array_wiener = np.concatenate([train_array_wiener,train_array_wiener1,train_array_wiener2,train_array_wiener3])
 
 if resize_bool==True:
-    train_array_clean = downscale_images(train_array_clean, map_size, mask)
-    train_array_noisy = downscale_images(train_array_noisy, map_size, mask)
-    train_array_wiener = downscale_images(train_array_wiener, map_size, mask)
+    train_array_clean = mf.downscale_images(train_array_clean, map_size, mask)
+    train_array_noisy = mf.downscale_images(train_array_noisy, map_size, mask)
+    train_array_wiener = mf.downscale_images(train_array_wiener, map_size, mask)
+else:
+    train_array_clean = mf.mask_images(train_array_clean, map_size, mask)
+    train_array_noisy = mf.mask_images(train_array_noisy, map_size, mask)
+    train_array_wiener = mf.mask_images(train_array_wiener, map_size, mask)
+
+
+# remove maps where numerical errors give really low numbers (seem to occasionally happen - need to look into this)
 
 x = np.where(np.sum(train_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
 mask_bad_data = np.ones(train_array_noisy[:,0,0,0].shape,dtype=np.bool)
 mask_bad_data[x] = False
 
-train_array_clean=train_array_clean[mask_bad_data,:,:,:]
-train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]
-train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
+
+train_array_clean=train_array_clean[mask_bad_data,:,:,:] - np.mean(train_array_clean[mask_bad_data,:,:,:].flatten())
+train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]- np.mean(train_array_noisy[mask_bad_data,:,:,:].flatten())
+train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]- np.mean(train_array_wiener[mask_bad_data,:,:,:].flatten())
+
 print(np.sum(train_array_clean), np.sum(train_array_noisy), np.sum(train_array_wiener))
-print(np.max(np.abs(train_array_clean)), np.max(np.abs(train_array_noisy)), np.max(np.abs(train_array_wiener)))
-
-print('- loading clean testing')
-test_array_clean = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_kappa_true_test500.npy')
-test_array_clean = ndimage.gaussian_filter(test_array_clean, sigma=(0,sigma_smooth, sigma_smooth, 0))
-print('- loading noisy testing \n')
-test_array_noisy = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_KS_test500.npy')
-test_array_noisy = ndimage.gaussian_filter(test_array_noisy, sigma=(0,sigma_smooth*0.5,sigma_smooth*0.5, 0))
-
-print('- loading wiener testing \n')
-test_array_wiener = np.load(str(os.getcwd()) + '/picola_training/test_outputs/output_wiener_test500.npy')
+print(np.max(np.abs(train_array_clean.flatten())), np.max(np.abs(train_array_noisy.flatten())), np.max(np.abs(train_array_wiener)))
 
 
-if resize_bool==True:
-    test_array_clean = downscale_images(test_array_clean, map_size, mask)
-    test_array_noisy = downscale_images(test_array_noisy, map_size, mask)
-    test_array_wiener = downscale_images(test_array_wiener, map_size, mask)
+# split a validation set 
 
-x = np.where(np.sum(test_array_noisy[:,:,:,:] , axis = (1,2,3)) < -1e20)
-mask_bad_data = np.ones(test_array_noisy[:,0,0,0].shape,dtype=np.bool)
-mask_bad_data[x] = False
+test_array_clean = train_array_clean[:1000]
+train_array_clean = train_array_clean[1000:]
 
-test_array_clean=test_array_clean[mask_bad_data,:,:,:]
-test_array_noisy=test_array_noisy[mask_bad_data,:,:,:]
-test_array_wiener=test_array_wiener[mask_bad_data,:,:,:]
+test_array_noisy = train_array_noisy[:1000]
+train_array_noisy = train_array_noisy[1000:]
+
+test_array_wiener = train_array_wiener[:1000]
+train_array_wiener = train_array_wiener[1000:]
 
 
-test_array_clean = np.concatenate([test_array_clean,train_array_clean[:500]])
-train_array_clean = train_array_clean[500:]
+# fraction of data out of 0 and 1 range
+print('total pixels training = ' + str(len(train_array_clean.flatten())))
+print('pixels out of range (truth with wiener scale) = ' + \
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
+print('pixels out of range (wiener with wiener scale) = ' + \
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_wiener[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
+print('pixels out of range (truth with ks scale) = ' + \
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
+print('pixels out of range (ks with ks scale) = ' + \
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
 
-test_array_noisy = np.concatenate([test_array_noisy,train_array_noisy[:500]])
-train_array_noisy = train_array_noisy[500:]
 
-test_array_wiener = np.concatenate([test_array_wiener,train_array_wiener[:500]])
-train_array_wiener = train_array_wiener[500:]
 
 # plot data
 if plot_results:
@@ -159,7 +149,7 @@ if plot_results:
 
 print('training network KS \n')
 
-autoencoder_instance = cnn.simple_model_residual(map_size = map_size, learning_rate=learning_rate_ks)
+autoencoder_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_ks)
 autoencoder = autoencoder_instance.model()
 
 
@@ -185,7 +175,7 @@ autoencoder.save(str(output_dir) + '/' + str(output_model_file))
 
 print('training network wiener \n')
 
-autoencoder_instance_wiener = cnn.simple_model_residual(map_size = map_size, learning_rate=learning_rate_wiener)
+autoencoder_instance_wiener = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_wiener)
 autoencoder_wiener = autoencoder_instance_wiener.model()
 
 print(n_epoch, batch_size, learning_rate_wiener)

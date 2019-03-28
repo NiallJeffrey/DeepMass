@@ -66,19 +66,26 @@ def make_map(size, sigmasignal=None):
     return np.fft.ifft2(np.fft.fftshift(map_fourier)), power_map
 
 
-def rescale_map(array, scaling, shift, invert=False):
+def rescale_map(array, scaling, shift, invert=False, clip = False):
     """
     This rescales an array, usually do to make range between 0 and 1
     :param array: original array
     :param scaling: multiplicative factor to elements
     :param shift: additive shift to the elements
     :param invert: if invert is True, the inverse of the rescale_map function will be done
+    :param clip: if invert is True, the rescaled map is clipped between 0 and 1
     :return: rescaled array
     """
     if invert is True:
         shift = -shift / scaling
         scaling = 1.0 / scaling
-    return np.copy(array) * scaling + shift
+        return (np.copy(array) * scaling + shift)
+    else:
+        if clip==False:
+            return (np.copy(array) * scaling + shift)
+        else:
+            return (np.clip(np.copy(array) * scaling + shift, 0., 1.))
+        
 
 
 def rescale_unit_test():
@@ -95,3 +102,23 @@ def rescale_unit_test():
         print(new_array)
         print('Unit test failed: rescale_map')
         sys.exit()
+
+
+
+def downscale_images(image_array, new_size, correct_mask):
+    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
+
+    for i in range(len(image_array[:,0,0,0])):
+        image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
+
+    return image_array_new
+
+
+def mask_images(image_array, new_size, correct_mask):
+    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
+
+    for i in range(len(image_array[:,0,0,0])):
+        image_array_new[i,:,:,0] = image_array[i,:,:,0]*correct_mask
+
+    return image_array_new
+
