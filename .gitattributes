@@ -1,1 +1,13 @@
-misc_data/t* filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output3_KS.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output_kappa_true.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output_noisy_shear.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output1_kappa_true.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output1_KS.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output2_KS.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output2_wiener.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output3_kappa_true.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output1_wiener.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output2_kappa_true.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output3_wiener.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output_KS.npy filter=lfs diff=lfs merge=lfs -text
+picola_training/test_outputs/output_wiener.npy filter=lfs diff=lfs merge=lfs -text
