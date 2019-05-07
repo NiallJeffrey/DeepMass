@@ -3,6 +3,10 @@ import matplotlib
 matplotlib.use('pdf')
 import matplotlib.pyplot as plt
 from skimage.transform import resize
+import sys
+
+sys.path = ['../'] + sys.path
+
 from deepmass import map_functions as mf
 from deepmass import cnn_keras as cnn
 
