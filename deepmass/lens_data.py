@@ -51,3 +51,10 @@ def shape_noise_realisation(ra, dec, e1_orig, e2_orig, nside):
     e2_noise = make_healpix_map(ra, dec, gamma2_shuffle, nside)
     return e1_noise, e2_noise
 
+
+def KS_fourier_matrix:
+
+def KS(shear, fourier_forward_matrix):
+
+
+def KS_inv(kappa, fourier_forward_matrix):
