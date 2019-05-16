@@ -3,6 +3,7 @@ import numpy as np
 import healpy as hp
 import random
 import matplotlib.pyplot as plt
+from scipy import fftpack
 
 def random_map(masked_kappa, reso =4.5, size = 256, verbose=False):
     """
@@ -52,7 +53,27 @@ def shape_noise_realisation(ra, dec, e1_orig, e2_orig, nside):
     return e1_noise, e2_noise
 
 
-def KS_fourier_matrix:
+def KS_fourier_matrix(size):
+    """
+
+    :param size: size of square image
+    :return: diagonal of forward (kappa to shear) Fourier operator
+    """
+
+    k_modes = fftpack.fftfreq(size)
+    k1_grid = np.dstack(np.meshgrid(k_modes, k_modes))[:, :, 0]
+    k2_grid = k1_grid.T
+
+    k1_vector = np.reshape(k1_grid, -1)
+    k2_vector = np.reshape(k2_grid, -1)
+
+    k_squared = k1_vector * k1_vector + k2_vector * k2_vector
+    k_squared2 = np.where(k_squared == 0, 1e-18, k_squared)
+d
+
+    A_ft_diagonal = (k1_vector ** 2 - k2_vector ** 2 + 1j * 2.0 * k1_vector * k2_vector) / k_squared2
+    return np.where(k_squared != 0.0, A_ft_diagonal, 1.0)
+
 
 def KS(shear, fourier_forward_matrix):
 
