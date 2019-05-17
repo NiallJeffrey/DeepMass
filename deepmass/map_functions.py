@@ -122,3 +122,41 @@ def mask_images(image_array, new_size, correct_mask):
 
     return image_array_new
 
+
+
+
+
+# # function to compute the power spectrum of a 2d image
+def radial_profile(data):
+    center = data.shape[0]/2
+    y, x = np.indices((data.shape))
+    r = np.sqrt((x - center)**2 + (y - center)**2)
+    r = r.astype(np.int)
+
+    tbin = np.bincount(r.ravel(), data.ravel())
+    nr = np.bincount(r.ravel())
+    radialprofile = tbin / nr
+    return radialprofile / data.shape[0]**2
+
+
+def compute_spectrum_map(Px,size):
+    """
+    takes 1D power spectrum and makes it an isotropic 2D map
+    """
+    power_map = np.zeros((size, size), dtype = float)
+    k_map =  np.zeros((size, size), dtype = float)
+
+    for (i,j), val in np.ndenumerate(power_map):
+
+        k1 = i - size/2.0
+        k2 = j - size/2.0
+        k_map[i, j] = (np.sqrt(k1*k1 + k2*k2))
+
+        if k_map[i,j]==0:
+            #print(i,j)
+            power_map[i, j] = 1e-15
+        else:
+            #print(k_map[i, j])
+            power_map[i, j] = Px[int(k_map[i, j])]
+    return power_map
+
