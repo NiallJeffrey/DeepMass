@@ -2,6 +2,13 @@
 
 import numpy as np
 import sys
+import healpy as hp
+from astropy.io import fits
+import time
+import matplotlib.pyplot as plt
+
+from deepmass import lens_data as ld
+from deepmass import wiener
 
 
 def power_function(k, sigmasignal = 17.5, amplitude = 1e6 ):
@@ -159,4 +166,117 @@ def compute_spectrum_map(Px,size):
             #print(k_map[i, j])
             power_map[i, j] = Px[int(k_map[i, j])]
     return power_map
+
+
+
+def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power, Ncov,
+                     size=256, mask=None, fast_noise=True, sigma_eps=0.25, wiener_iter=30, reso=4.5):
+    """
+
+    :param healpix_fits_file: fits file location of true kappa healpix map
+    :param data_file: catalogue of galaxies to match properties
+    :param output_base: output location and file base
+    :param n_outputs: number of patch realisations
+    :param power: power spectrum for Wiener
+    :param Ncov: Noise covariance diagonal for Wiener
+    :param size: map size
+    :param mask: healpix mask (optional)
+    :param fast_noise: boolean. fast_noise==True means gaussian shape noise
+    :param sigma_eps: default 0.25 for stdev of ellipticity
+    :param wiener_iter: number of iterations (default 30)
+    :param reso: resolution of projected map
+    """
+
+
+    kappa_map = hp.read_map(healpix_fits_file)
+    nside = hp.npix2nside(len(kappa_map))
+
+    if mask is None:
+        print('mask calc')
+        mask = np.zeros(hp.nside2npix(nside))
+        th, ph = hp.pix2ang(nside, np.arange(hp.nside2npix(nside)))
+        ph[np.where(ph > np.pi)[0]] -= 2 * np.pi
+        mask[np.where((th < np.pi * 0.5) & (ph > 0) & (ph < np.pi * 0.5))[0]] = 1.
+
+    kappa_map = np.where(mask > 0.5, kappa_map, hp.UNSEEN)
+
+    A_ft_diagonal = ld.ks_fourier_matrix(256)
+
+    # read in data
+    hdu_data = fits.open(data_file)
+    data_cat = hdu_data[1].data
+
+    if fast_noise==True:
+        pixels = hp.ang2pix(nside, theta=0.5 * np.pi - np.deg2rad(data_cat.field('dec_gal')),
+                            phi=np.deg2rad(data_cat.field('ra_gal')))
+        count_map = np.bincount(pixels, minlength=hp.nside2npix(nside))
+
+        count_gnomview = hp.gnomview(count_map, rot=[+75.0, -52.5], title='Mask',
+                                     min=0, max=50, reso=reso, xsize=size, ysize=size,
+                                     flip='geo', return_projected_map=True)
+        _ = plt.close()
+
+        std_map = np.where(count_gnomview > 0, sigma_eps / np.sqrt(count_gnomview), 0.)
+
+    output_kappa_array = np.empty((n_outputs, size, size, 1), dtype=np.float32)
+    output_ks_array = np.empty((n_outputs, size, size, 1), dtype=np.float32)
+
+    if wiener_iter>0:
+        output_wiener_array = np.empty((n_outputs, size, size, 1), dtype=np.float32)
+
+    t = time.time()
+    for i in range(n_outputs):
+
+        if i % 10 == 0:
+            print(str(i))
+
+        patch = ld.random_map(kappa_map)
+
+        shear = ld.ks_inv(patch, A_ft_diagonal)
+
+        if fast_noise == True:
+            e1_noise_map = np.random.normal(0.0, std_map)
+            e2_noise_map = np.random.normal(0.0, std_map)
+
+            e1_noisy = np.where(std_map != 0., e1_noise_map + shear.real, 0.)
+            e2_noisy = np.where(std_map != 0., e2_noise_map + shear.imag, 0.)
+
+
+        else:
+            e1_des_noise, e2_des_noise = ld.shape_noise_realisation(data_cat.field('ra_gal'),
+                                                                    data_cat.field('dec_gal'),
+                                                                    data_cat.field('e1_gal_sens'),
+                                                                    data_cat.field('e2_gal_sens'),
+                                                                    nside)
+
+            e1_noise_map = hp.gnomview(e1_des_noise, rot=[+75.0, -52.5], title='Mask',
+                                       min=-.2, max=.2, reso=reso, xsize=256, ysize=256, flip='geo',
+                                       return_projected_map=True)
+            _ = plt.close()
+
+            e2_noise_map = hp.gnomview(e2_des_noise, rot=[+75.0, -52.5], title='Mask',
+                                       min=-.2, max=.2, reso=reso, xsize=256, ysize=256, flip='geo',
+                                       return_projected_map=True)
+            _ = plt.close()
+
+            e1_noisy = np.where(e1_noise_map.mask == False,
+                                e1_noise_map + shear.real, 0.)
+            e2_noisy = np.where(e2_noise_map.mask == False,
+                                e2_noise_map + shear.imag, 0.)
+
+        output_kappa_array[i, :, :, 0] = np.real(np.array(patch))
+        output_ks_array[i, :, :, 0] = np.real(ld.ks(e1_noisy + 1j * e2_noisy, A_ft_diagonal))
+
+        if wiener_iter>0:
+            output_wiener_array[i, :, :, 0], _ = wiener.filtering(e1_noisy, e2_noisy,
+                                                                     power, Ncov, n_iter=wiener_iter)
+
+    print('\n' + 'saving outputs \n')
+    np.save(str(output_base + '_kappa_true'), output_kappa_array)
+    np.save(str(output_base + '_KS'), output_ks_array)
+
+    if wiener_iter>0:
+        np.save(str(output_base + '_wiener'), output_wiener_array)
+
+
 
