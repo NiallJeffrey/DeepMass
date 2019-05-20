@@ -2,6 +2,7 @@
 #PBS -S /bin/bash
 #PBS -q compute
 #PBS -N training_data
+#PBS -o /share/splinter/ucapnje/DeepMass/run_scripts/bash_outputs/training_data
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=100:00:00
 

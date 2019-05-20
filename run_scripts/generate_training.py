@@ -15,10 +15,10 @@ kappa_dir = '/share/splinter/ucapnje/picola_for_peaks/l-picola_peak_statistics/k
 
 list_kappa = os.listdir(kappa_dir)
 
-print(len(list_kappa))
-
-print(int(command_line_index))
 
 print(list_kappa[int(command_line_index)])
 
-print(kappa_dir + str(list_kappa[command_line_index]))
+
+picola_file = kappa_dir + str(list_kappa[int(command_line_index)])
+
+print(picola_file)
