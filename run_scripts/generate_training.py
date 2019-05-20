@@ -31,7 +31,7 @@ t = time.time()
 mf.generate_sv_maps(picola_file,
                     '../mice_mock/cat_DES_SV_zmean_final.fits',
                     output_file_base,
-                    n_outputs = 40, power = power_spectrum, Ncov=Ncov,  sigma_eps=0.286)
+                    n_outputs = 4000, power = power_spectrum, Ncov=Ncov,  sigma_eps=0.286)
 
 print(time.time() -t)
 
