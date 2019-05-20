@@ -5,7 +5,12 @@ Using CNNs from Keras with Tensorflow to reconstruct weak lensing mass maps from
 
 ### Installation
 ```
-python setup.py install
+python setup.py install 
+```
+or for a cluster:
+
+```
+python setup.py install --user
 ```
 
 ### Prerequisites
