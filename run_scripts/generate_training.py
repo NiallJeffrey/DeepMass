@@ -17,6 +17,8 @@ list_kappa = os.listdir(kappa_dir)
 
 print(len(list_kappa))
 
-print(list_kappa[command_line_index])
+print(int(command_line_index))
+
+print(list_kappa[int(command_line_index)])
 
 print(kappa_dir + str(list_kappa[command_line_index]))
