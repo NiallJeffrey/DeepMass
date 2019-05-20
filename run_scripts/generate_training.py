@@ -20,11 +20,11 @@ picola_file = kappa_dir + str(list_kappa[command_line_index])
 print(picola_file)
 
 # Load power spectrum and covariance matrix
-power_spectrum = np.load('../picola_training/temp_wiener_power_fiducial.py')
+power_spectrum = np.load('../picola_training/temp_wiener_power_fiducial.npy')
 Ncov = np.load('../picola_training/Ncov.npy')
 
 # make training data
-output_file_base = '../picola_training/nicaea_rescaled/training_data' + str(command_line_index) + '/sv_training_'
+output_file_base = '../picola_training/nicaea_rescaled/training_data' + str(command_line_index).zfill(2) + '/sv_training'
 
 
 t = time.time()
