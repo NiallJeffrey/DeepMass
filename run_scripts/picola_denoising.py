@@ -28,10 +28,10 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 10
+n_epoch = 5
 batch_size = 30
-learning_rate_ks = None #1e-4
-learning_rate_wiener = None #1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+learning_rate_ks = 1e-4
+learning_rate_wiener =1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
 sigma_smooth = 0.7
 
