@@ -94,7 +94,6 @@ def rescale_map(array, scaling, shift, invert=False, clip = False):
             return (np.clip(np.copy(array) * scaling + shift, 0., 1.))
         
 
-
 def rescale_unit_test():
     """
     this checks the invert option works
@@ -111,23 +110,21 @@ def rescale_unit_test():
         sys.exit()
 
 
+# def downscale_images(image_array, new_size, correct_mask):
+#     image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
+#
+#     for i in range(len(image_array[:,0,0,0])):
+#         image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
+#
+#     return image_array_new
 
-def downscale_images(image_array, new_size, correct_mask):
-    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
 
-    for i in range(len(image_array[:,0,0,0])):
-        image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
-
-    return image_array_new
-
-
-def mask_images(image_array, new_size, correct_mask):
-    image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
+def mask_images(image_array, correct_mask):
 
     for i in range(len(image_array[:,0,0,0])):
-        image_array_new[i,:,:,0] = image_array[i,:,:,0]*correct_mask
+        image_array[i,:,:,0] = image_array[i,:,:,0]*correct_mask
 
-    return image_array_new
+    return image_array
 
 
 
