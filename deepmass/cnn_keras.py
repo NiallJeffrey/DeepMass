@@ -123,7 +123,8 @@ class autoencoder_model:
                             activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = BatchNormalization()(x)
         # x = UpSampling2D((2, 2))(x)
-        decoded = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
+
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()

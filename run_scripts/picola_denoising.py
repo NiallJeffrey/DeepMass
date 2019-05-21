@@ -30,10 +30,10 @@ h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
 n_epoch = 5
 batch_size = 30
-learning_rate_ks = 1e-5
-learning_rate_wiener =1e-5  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+learning_rate_ks = 4e-5
+learning_rate_wiener =4e-5  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
-sigma_smooth = 0.7
+sigma_smooth = 1.0
 
 # rescaling quantities
 scale_ks = 1.7
