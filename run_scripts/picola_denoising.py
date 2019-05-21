@@ -23,21 +23,21 @@ import script_functions
 print(os.getcwd())
 
 map_size = 256
-n_test = int(2500)
+n_test = int(2000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
 n_epoch = 5
 batch_size = 30
-learning_rate_ks = 1e-4
-learning_rate_wiener =1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+learning_rate_ks = 1e-5
+learning_rate_wiener =1e-5  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
 sigma_smooth = 0.7
 
 # rescaling quantities
 scale_ks = 1.7
-scale_wiener = 10.
+scale_wiener = 9.
 
 # make SV mask
 
@@ -53,10 +53,12 @@ clean_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_kappa_true.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_kappa_true.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_kappa_true.npy']
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_kappa_true.npy']
 
 train_array_clean = script_functions.load_data(list(clean_files[:]))
 
@@ -67,10 +69,12 @@ noisy_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_KS.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_KS.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_KS.npy']
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_KS.npy']
 
 train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 
@@ -82,10 +86,12 @@ wiener_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_wiener.npy',
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_wiener.npy',
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_wiener.npy']
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_wiener.npy']
 
 
 train_array_wiener = script_functions.load_data(list(wiener_files[:]))
@@ -191,14 +197,15 @@ print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-cnn_ks.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
-                mf.rescale_map(train_array_clean, scale_ks, 0.5),
+cnn_ks.fit(np.clip(mf.rescale_map(train_array_noisy, scale_ks, 0.5),0.,1.0),
+           np.clip(mf.rescale_map(train_array_clean, scale_ks, 0.5), 0.0,1.0),
                 epochs=n_epoch,
                 batch_size=batch_size,
                 shuffle=True,
-                validation_data=(mf.rescale_map(test_array_noisy, scale_ks, 0.5),
-                                 mf.rescale_map(test_array_clean, scale_ks, 0.5)),
+                validation_data=(np.clip(mf.rescale_map(test_array_noisy, scale_ks, 0.5),0.,1.),
+                                np.clip(mf.rescale_map(test_array_clean, scale_ks, 0.5), 0., 1.)),
                 callbacks=[history_ks])
+
 
 #print(history_ks.losses)
 # save network
@@ -216,13 +223,13 @@ print(n_epoch, batch_size, learning_rate_wiener)
 
 history_wiener = cnn.LossHistory()
 
-cnn_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
-                mf.rescale_map(train_array_clean, scale_wiener, 0.5),
+cnn_wiener.fit(np.clip(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),0.,1.0),
+               np.clip(mf.rescale_map(train_array_clean, scale_wiener, 0.5),0.,1.),
                 epochs=n_epoch,
                 batch_size=batch_size,
                 shuffle=True,
-                validation_data=(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),
-                                 mf.rescale_map(test_array_clean, scale_wiener, 0.5)),
+                validation_data=(np.clip(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),0.,1.),
+                                 np.clip(mf.rescale_map(test_array_clean, scale_wiener, 0.5),0.,1.)),
                 callbacks=[history_wiener])
 
 #print(history_ks.losses)
@@ -237,7 +244,7 @@ if plot_results:
     print('plotting result \n')
     n_images = 6
 
-    test_output = autoencoder.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
+    test_output = cnn_wiener.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
 
 
@@ -269,7 +276,7 @@ if plot_results:
     print('plotting result wiener \n')
     n_images = 6
 
-    test_output = autoencoder_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
+    test_output = cnn_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
     test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
 
 
@@ -295,7 +302,7 @@ if plot_results:
 
     n_images = 6
 
-    test_output = autoencoder_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
+    test_output = cnn_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
     test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
 
 
