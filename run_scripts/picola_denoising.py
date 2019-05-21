@@ -23,14 +23,15 @@ import script_functions
 print(os.getcwd())
 
 map_size = 256
+n_test = int(2500)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
 n_epoch = 10
-batch_size = 30 
-learning_rate_ks = 1e-4
-learning_rate_wiener = 1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+batch_size = 30
+learning_rate_ks = None #1e-4
+learning_rate_wiener = None #1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
 sigma_smooth = 0.7
 
@@ -125,14 +126,14 @@ train_array_wiener = train_array_wiener[random_indices]
 
 # split a validation set
 
-test_array_clean = train_array_clean[:1000]
-train_array_clean = train_array_clean[1000:]
+test_array_clean = train_array_clean[:n_test]
+train_array_clean = train_array_clean[n_test:]
 
-test_array_noisy = train_array_noisy[:1000]
-train_array_noisy = train_array_noisy[1000:]
+test_array_noisy = train_array_noisy[:n_test]
+train_array_noisy = train_array_noisy[n_test:]
 
-test_array_wiener = train_array_wiener[:1000]
-train_array_wiener = train_array_wiener[1000:]
+test_array_wiener = train_array_wiener[:n_test]
+train_array_wiener = train_array_wiener[n_test:]
 
 
 # fraction of data out of 0 and 1 range
@@ -182,15 +183,15 @@ if plot_results:
 
 print('training network KS \n')
 
-autoencoder_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_ks)
-autoencoder = autoencoder_instance.model()
+cnn_instance = cnn.autoencoder_model(map_size = map_size, learning_rate=learning_rate_ks)
+cnn_ks = cnn_instance.model()
 
 
 print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
+cnn_ks.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
                 mf.rescale_map(train_array_clean, scale_ks, 0.5),
                 epochs=n_epoch,
                 batch_size=batch_size,
@@ -201,21 +202,21 @@ autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
 
 #print(history_ks.losses)
 # save network
-autoencoder.save(str(h5_output_dir) + '/' + str(output_model_file))
+cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
 #autoencoder = load_model(str(output_dir) + '/' + str(output_model_file))
 
 # Load encoder and train
 
 print('training network wiener \n')
 
-autoencoder_instance_wiener = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_wiener)
-autoencoder_wiener = autoencoder_instance_wiener.model()
+cnn_instance_wiener = cnn.autoencoder_model(map_size = map_size, learning_rate=learning_rate_wiener)
+cnn_wiener = cnn_instance_wiener.model()
 
 print(n_epoch, batch_size, learning_rate_wiener)
 
 history_wiener = cnn.LossHistory()
 
-autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
+cnn_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
                 mf.rescale_map(train_array_clean, scale_wiener, 0.5),
                 epochs=n_epoch,
                 batch_size=batch_size,
@@ -227,7 +228,7 @@ autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
 #print(history_ks.losses)
 
 # save network
-autoencoder_wiener.save(str(h5_output_dir) + '/wiener_' + str(output_model_file))
+cnn_wiener.save(str(h5_output_dir) + '/wiener_' + str(output_model_file))
 #autoencoder_wiener = load_model(str(output_dir) + '/wiener_' + str(output_model_file))
 
 # plot result

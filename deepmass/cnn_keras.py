@@ -2,7 +2,7 @@
 
 import numpy as np
 from keras import backend as K
-from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, add
+from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, add, BatchNormalization, Conv2DTranspose
 from keras.models import Model
 from keras.callbacks import Callback
 from keras.optimizers import Adam
@@ -105,22 +105,33 @@ class autoencoder_model:
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
 
-        filters = 32
+        filters = [32, 64]
 
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
-        x = MaxPooling2D((2, 2), padding='same')(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        encoded = MaxPooling2D((2, 2), padding='same')(x)
+        x = Conv2D(filters[0], (3, 3), strides=2,
+                   activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
+        # x = MaxPooling2D((2, 2), padding='same')(x)
+        x = Conv2D(filters[1], (3, 3), strides=2,
+                   activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        encoded = BatchNormalization()(x)
 
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(encoded)
-        x = UpSampling2D((2, 2))(x)
-        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        x = UpSampling2D((2, 2))(x)
+        # encoded = MaxPooling2D((2, 2), padding='same')(x)
+
+        x = Conv2DTranspose(filters[1], (3, 3), strides=2,
+                            activation='relu', padding='same', kernel_initializer='he_normal')(encoded)
+        # x = UpSampling2D((2, 2))(x)
+        x = Conv2DTranspose(filters[0], (3, 3), strides=2,
+                            activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        x = BatchNormalization()(x)
+        # x = UpSampling2D((2, 2))(x)
         decoded = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
 
         autoencoder = Model(input_img, decoded)
         autoencoder.summary()
-        autoencoder.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+
+        if self.learning_rate is None:
+            autoencoder.compile(optimizer='adam', loss='mse')
+        else:
+            autoencoder.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return autoencoder
 
