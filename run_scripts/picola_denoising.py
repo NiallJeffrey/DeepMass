@@ -24,8 +24,9 @@ print(os.getcwd())
 
 map_size = 256
 plot_results = True
-output_dir = '../outputs/'
-output_model_file = 'h5_files/210519.h5'
+plot_output_dir = '../outputs/picola_script_outputs'
+h5_output_dir = '../outputs/h5_files'
+output_model_file = '210519.h5'
 n_epoch = 5
 batch_size = 50
 learning_rate_ks = 1e-4
@@ -162,7 +163,7 @@ if plot_results:
                    origin='lower', cmap='inferno', clim=(0.3,0.7))
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
-    plt.savefig(str(output_dir) + '/picola_script_outputs/picola_data.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/picola_data.png'), plt.close()
 
 
 #Load encoder and train
@@ -188,7 +189,7 @@ autoencoder.fit(mf.rescale_map(train_array_noisy, scale_ks, 0.5),
 
 #print(history_ks.losses)
 # save network
-autoencoder.save(str(output_dir) + '/' + str(output_model_file))
+autoencoder.save(str(h5_output_dir) + '/' + str(output_model_file))
 #autoencoder = load_model(str(output_dir) + '/' + str(output_model_file))
 
 # Load encoder and train
@@ -214,7 +215,7 @@ autoencoder_wiener.fit(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),
 #print(history_ks.losses)
 
 # save network
-autoencoder_wiener.save(str(output_dir) + '/picola_script_outputs/wiener_' + str(output_model_file))
+autoencoder_wiener.save(str(h5_output_dir) + '/wiener_' + str(output_model_file))
 #autoencoder_wiener = load_model(str(output_dir) + '/wiener_' + str(output_model_file))
 
 # plot result
@@ -246,7 +247,7 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(output_dir) + '/picola_script_outputs/picola_output.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/picola_output.png'), plt.close()
 
 
 # plot result
@@ -277,7 +278,7 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(output_dir) + '/picola_script_outputs/picola_output_wiener.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/picola_output_wiener.png'), plt.close()
 
     n_images = 6
 
@@ -304,4 +305,4 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(output_dir) + '/picola_script_outputs/picola_output_wiener2.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/picola_output_wiener2.png'), plt.close()
