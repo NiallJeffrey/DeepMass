@@ -189,7 +189,7 @@ if plot_results:
 
 print('training network KS \n')
 
-cnn_instance = cnn.autoencoder_model(map_size = map_size, learning_rate=learning_rate_ks)
+cnn_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_ks)
 cnn_ks = cnn_instance.model()
 
 
@@ -216,7 +216,7 @@ cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
 
 print('training network wiener \n')
 
-cnn_instance_wiener = cnn.autoencoder_model(map_size = map_size, learning_rate=learning_rate_wiener)
+cnn_instance_wiener = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_wiener)
 cnn_wiener = cnn_instance_wiener.model()
 
 print(n_epoch, batch_size, learning_rate_wiener)
