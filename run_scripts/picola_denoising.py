@@ -27,12 +27,12 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 5
-batch_size = 50
+n_epoch = 10
+batch_size = 30 
 learning_rate_ks = 1e-4
 learning_rate_wiener = 1e-4  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
-sigma_smooth = 0.5
+sigma_smooth = 0.7
 
 # rescaling quantities
 scale_ks = 1.7
@@ -53,7 +53,7 @@ clean_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_kappa_true.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy',]
 
-train_array_clean = script_functions.load_data(list(clean_files[:1]))
+train_array_clean = script_functions.load_data(list(clean_files[:]))
 
 train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
@@ -63,7 +63,7 @@ noisy_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_KS.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy']
 
-train_array_noisy = script_functions.load_data(list(noisy_files[:1]))
+train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 
 train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
@@ -75,7 +75,7 @@ wiener_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_wiener.npy']
 
 
-train_array_wiener = script_functions.load_data(list(wiener_files[:1]))
+train_array_wiener = script_functions.load_data(list(wiener_files[:]))
 train_array_wiener= ndimage.gaussian_filter(train_array_wiener, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 #
