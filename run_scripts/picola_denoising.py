@@ -51,7 +51,11 @@ print('- loading clean training')
 clean_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_kappa_true.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_kappa_true.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy',]
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_kappa_true.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_kappa_true.npy']
 
 train_array_clean = script_functions.load_data(list(clean_files[:]))
 
@@ -61,7 +65,11 @@ print('- loading ks training')
 noisy_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_KS.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_KS.npy',
                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy']
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_KS.npy',
+               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_KS.npy']
 
 train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 
@@ -72,7 +80,11 @@ print('- loading wiener training')
 wiener_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_wiener.npy',
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_wiener.npy',
                 str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_wiener.npy']
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data20/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data21/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data22/sv_training_wiener.npy',
+                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data23/sv_training_wiener.npy']
 
 
 train_array_wiener = script_functions.load_data(list(wiener_files[:]))
