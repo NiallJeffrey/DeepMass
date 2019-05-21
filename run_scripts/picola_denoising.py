@@ -24,8 +24,8 @@ print(os.getcwd())
 
 map_size = 256
 plot_results = True
-output_dir = '../outputs/picola_script_outputs'
-output_model_file = '../outputs/h5_files/210519.h5'
+output_dir = '../outputs/h5_files'
+output_model_file = '210519.h5'
 n_epoch = 10
 batch_size = 50
 learning_rate_ks = 1e-4
