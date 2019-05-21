@@ -165,7 +165,7 @@ if plot_results:
     plt.savefig(str(output_dir) + '/picola_data.pdf'), plt.close()
 
 
-Load encoder and train
+#Load encoder and train
 
 print('training network KS \n')
 
