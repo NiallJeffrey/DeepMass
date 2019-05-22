@@ -28,10 +28,10 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 5
+n_epoch = 20
 batch_size = 30
-learning_rate_ks = 4e-5
-learning_rate_wiener =4e-5  # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+learning_rate_ks = 5e-5
+learning_rate_wiener = 5e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
 sigma_smooth = 1.0
 
@@ -49,62 +49,27 @@ print(mask.shape)
 
 print('loading data:')
 print('- loading clean training')
-clean_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_kappa_true.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_kappa_true.npy']
-
-train_array_clean = script_functions.load_data(list(clean_files[:]))
-
+clean_files = list(np.genfromtxt('clean_data_files.txt', dtype ='str'))
+train_array_clean = script_functions.load_data(list(clean_files[10:40]))
 train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 print('- loading ks training')
-noisy_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_KS.npy',
-               str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_KS.npy']
-
-train_array_noisy = script_functions.load_data(list(noisy_files[:]))
-
+noisy_files = list(np.genfromtxt('noisy_data_files.txt', dtype ='str'))
+train_array_noisy = script_functions.load_data(list(noisy_files[10:40]))
 train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 
 print('- loading wiener training')
-wiener_files = [str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data00/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data01/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data02/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data03/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data04/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data05/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data06/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data07/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data08/sv_training_wiener.npy',
-                str(os.getcwd()) + '/../picola_training/nicaea_rescaled/training_data09/sv_training_wiener.npy']
-
-
-train_array_wiener = script_functions.load_data(list(wiener_files[:]))
+wiener_files = list(np.genfromtxt('wiener_data_files.txt', dtype ='str'))
+train_array_wiener = script_functions.load_data(list(wiener_files[10:40]))
 train_array_wiener= ndimage.gaussian_filter(train_array_wiener, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
-#
+# set masked regions to zero
 train_array_clean = mf.mask_images(train_array_clean, mask)
 train_array_noisy = mf.mask_images(train_array_noisy, mask)
 train_array_wiener = mf.mask_images(train_array_wiener, mask)
 
-
 # remove maps where numerical errors give really low numbers (seem to occasionally happen - need to look into this)
-
 x = np.where(np.sum(np.abs(train_array_noisy[:,:,:,:]), axis = (1,2,3)) > 1e18)
 mask_bad_data = np.ones(train_array_noisy[:,0,0,0].shape,dtype=np.bool)
 print('\nNumber of bad files = ' + str(len(x[0])) + '\n')
@@ -131,7 +96,6 @@ train_array_wiener = train_array_wiener[random_indices]
 
 
 # split a validation set
-
 test_array_clean = train_array_clean[:n_test]
 train_array_clean = train_array_clean[n_test:]
 

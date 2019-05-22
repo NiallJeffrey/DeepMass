@@ -2,7 +2,7 @@
 
 import numpy as np
 from keras import backend as K
-from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, add, BatchNormalization, Conv2DTranspose
+from keras.layers import Input, Dropout, Conv2D, MaxPooling2D, UpSampling2D, add, BatchNormalization, Conv2DTranspose
 from keras.models import Model
 from keras.callbacks import Callback
 from keras.optimizers import Adam
@@ -41,14 +41,20 @@ class simple_model:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = BatchNormalization()(x)
+        x = Dropout(0.2)(x)
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = BatchNormalization()(x)
-#        x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        final = Conv2D(1, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
+        x = Dropout(0.2)(x)
+        final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
         simple = Model(input_img, final)
         simple.summary()
-        simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+
+        if self.learning_rate is None:
+            simple.compile(optimizer='adam', loss='mse')
+        else:
+            simple.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return simple
 
