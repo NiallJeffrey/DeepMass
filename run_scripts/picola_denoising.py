@@ -158,7 +158,7 @@ if plot_results:
 
 print('training network KS \n')
 
-cnn_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_ks)
+cnn_instance = cnn.unet_simple(map_size = map_size, learning_rate=learning_rate_ks)
 cnn_ks = cnn_instance.model()
 
 
@@ -218,7 +218,7 @@ if plot_results:
 
 print('training network wiener \n')
 
-cnn_instance_wiener = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_wiener)
+cnn_instance_wiener = cnn.unet_simple(map_size = map_size, learning_rate=learning_rate_wiener)
 cnn_wiener = cnn_instance_wiener.model()
 
 print(n_epoch, batch_size, learning_rate_wiener)
