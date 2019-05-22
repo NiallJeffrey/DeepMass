@@ -42,11 +42,11 @@ class simple_model:
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = BatchNormalization()(x)
-        x = Dropout(0.2)(x)
+        # x = Dropout(0.2)(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = Conv2D(filters, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal')(x)
         x = BatchNormalization()(x)
-        x = Dropout(0.2)(x)
+        # x = Dropout(0.2)(x)
         final = Conv2D(1, (3, 3), activation='sigmoid', padding='same', kernel_initializer='he_normal')(x)
 
         simple = Model(input_img, final)
@@ -209,40 +209,40 @@ class unet_model:
         input_img = Input(shape=(self.map_size, self.map_size, 1))
 
 
-        x1 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
-        x1 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x1)
+        x1 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
+        x1 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x1)
         pool1 = MaxPooling2D(pool_size=(2, 2))(x1)
-        x2 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool1)
-        x2 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x2)
+        x2 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool1)
+        x2 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x2)
         pool2 = MaxPooling2D(pool_size=(2, 2))(x2)
-        x3 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool2)
-        x3 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x3)
+        x3 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool2)
+        x3 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x3)
         drop3 = Dropout(0.2)(x3)
         pool3 = MaxPooling2D(pool_size=(2, 2))(drop3)
 
 
-        x4 = Conv2D(512, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool3)
-        x4 = Conv2D(512, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x4)
+        x4 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool3)
+        x4 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x4)
         drop4 = Dropout(0.5)(x4)
 
-        up5 = Conv2D(256, 2, activation='relu', padding='same',
+        up5 = Conv2D(128, 2, activation='relu', padding='same',
                      kernel_initializer='he_normal')(UpSampling2D(size=(2, 2))(drop4))
         merge5 = concatenate([drop3, up5], axis=3)
-        x5 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
-        x5 = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x5)
+        x5 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
+        x5 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x5)
 
 
-        up6 = Conv2D(128, 2, activation='relu', padding='same', kernel_initializer='he_normal')(
+        up6 = Conv2D(64, 2, activation='relu', padding='same', kernel_initializer='he_normal')(
             UpSampling2D(size=(2, 2))(x5))
         merge6 = concatenate([x2, up6], axis=3)
-        x6 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge6)
-        x6 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x6)
+        x6 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge6)
+        x6 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x6)
 
-        up7 = Conv2D(64, 2, activation='relu', padding='same', kernel_initializer='he_normal')(
+        up7 = Conv2D(32, 2, activation='relu', padding='same', kernel_initializer='he_normal')(
             UpSampling2D(size=(2, 2))(x6))
         merge7 = concatenate([x1, up7], axis=3)
-        x7 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
-        x7 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x7)
+        x7 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
+        x7 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x7)
         x7 = Conv2D(2, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x7)
         output = Conv2D(1, 1, activation='sigmoid')(x7)
 

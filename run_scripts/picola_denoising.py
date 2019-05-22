@@ -28,16 +28,16 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 20
+n_epoch = 10
 batch_size = 30
 learning_rate_ks = 5e-5
-learning_rate_wiener = 5e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
 sigma_smooth = 1.0
 
 # rescaling quantities
-scale_ks = 1.7
-scale_wiener = 9.
+scale_ks = 1.6
+scale_wiener = 8.5
 
 # make SV mask
 
@@ -51,23 +51,24 @@ print('loading data:')
 print('- loading clean training')
 clean_files = list(np.genfromtxt('clean_data_files.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[20:30]))
+train_array_clean = script_functions.load_data(list(clean_files[22:28]))
 train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 print('- loading ks training')
 noisy_files = list(np.genfromtxt('noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
+train_array_noisy = script_functions.load_data(list(noisy_files[22:28]))
 train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 
 print('- loading wiener training')
 wiener_files = list(np.genfromtxt('wiener_data_files.txt', dtype ='str'))
 wiener_files = [str(os.getcwd()) + s for s in wiener_files]
-train_array_wiener = script_functions.load_data(list(wiener_files[20:30]))
+train_array_wiener = script_functions.load_data(list(wiener_files[22:28]))
 train_array_wiener= ndimage.gaussian_filter(train_array_wiener, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 # set masked regions to zero
+print('\nApply mask')
 train_array_clean = mf.mask_images(train_array_clean, mask)
 train_array_noisy = mf.mask_images(train_array_noisy, mask)
 train_array_wiener = mf.mask_images(train_array_wiener, mask)
@@ -179,6 +180,39 @@ cnn_ks.fit(np.clip(mf.rescale_map(train_array_noisy, scale_ks, 0.5),0.,1.0),
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
 #autoencoder = load_model(str(output_dir) + '/' + str(output_model_file))
 
+
+
+# plot result
+
+if plot_results:
+    print('plotting result \n')
+    n_images = 6
+
+    test_output = cnn_ks.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
+    test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
+
+
+    plt.figure(figsize=(30, 15))
+    for i in range(n_images):
+        # display original
+        plt.subplot(3, n_images, i + 1)
+#        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + n_images)
+        #plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower', clim = (-0.1,0.1), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+
+        plt.subplot(3, n_images, i + 1 + 2 * n_images)
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.axis('off')
+    plt.savefig(str(plot_output_dir) + '/picola_output.png'), plt.close()
+
 # Load encoder and train
 
 print('training network wiener \n')
@@ -205,36 +239,6 @@ cnn_wiener.fit(np.clip(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),0.,
 cnn_wiener.save(str(h5_output_dir) + '/wiener_' + str(output_model_file))
 #autoencoder_wiener = load_model(str(output_dir) + '/wiener_' + str(output_model_file))
 
-# plot result
-
-if plot_results:
-    print('plotting result \n')
-    n_images = 6
-
-    test_output = cnn_wiener.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
-    test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
-
-
-    plt.figure(figsize=(30, 15))
-    for i in range(n_images):
-        # display original
-        plt.subplot(3, n_images, i + 1)
-#        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_ks, 0.5), origin='lower')
-        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
-        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
-
-        plt.subplot(3, n_images, i + 1 + n_images)
-        #plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_ks, 0.5), origin='lower')
-        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower', clim = (-0.1,0.1), cmap ='inferno')
-        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
-
-
-        plt.subplot(3, n_images, i + 1 + 2 * n_images)
-        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
-        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
-
-        plt.axis('off')
-    plt.savefig(str(plot_output_dir) + '/picola_output.png'), plt.close()
 
 
 # plot result
