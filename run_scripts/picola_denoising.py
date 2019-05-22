@@ -51,20 +51,20 @@ print('loading data:')
 print('- loading clean training')
 clean_files = list(np.genfromtxt('clean_data_files.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[22:28]))
+train_array_clean = script_functions.load_data(list(clean_files[20:30]))
 train_array_clean = ndimage.gaussian_filter(train_array_clean, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 print('- loading ks training')
 noisy_files = list(np.genfromtxt('noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[22:28]))
+train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
 train_array_noisy = ndimage.gaussian_filter(train_array_noisy, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 
 print('- loading wiener training')
 wiener_files = list(np.genfromtxt('wiener_data_files.txt', dtype ='str'))
 wiener_files = [str(os.getcwd()) + s for s in wiener_files]
-train_array_wiener = script_functions.load_data(list(wiener_files[22:28]))
+train_array_wiener = script_functions.load_data(list(wiener_files[20:30]))
 train_array_wiener= ndimage.gaussian_filter(train_array_wiener, sigma=(0,sigma_smooth,sigma_smooth, 0))
 
 # set masked regions to zero
@@ -90,6 +90,7 @@ train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]#- np.mean(train_array
 #       np.max(np.abs(train_array_wiener.flatten())))
 
 
+print('\nShuffle and take fraction of test data')
 # random order
 random_indices = np.arange(len(train_array_clean[:, 0, 0, 0]))
 random.shuffle(random_indices)
