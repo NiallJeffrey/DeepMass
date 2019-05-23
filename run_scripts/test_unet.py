@@ -23,21 +23,20 @@ import script_functions
 print(os.getcwd())
 
 map_size = 256
-n_test = int(2000)
+n_test = int(5000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
-output_model_file = '210519.h5'
-n_epoch = 10
+n_epoch = 20
 batch_size = 30
-learning_rate_ks = 5e-5
-learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
+# learning_rate_ks = 1e-5
+# learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
-sigma_smooth = 1.0
+sigma_smooth = 0.01
 
 # rescaling quantities
-scale_ks = 1.6
-scale_wiener = 8.5
+scale_ks = 1.
+scale_wiener = 2.5
 
 # make SV mask
 
@@ -80,14 +79,9 @@ print('\nNumber of bad files = ' + str(len(x[0])) + '\n')
 mask_bad_data[x] = False
 
 
-train_array_clean=train_array_clean[mask_bad_data,:,:,:] #- np.mean(train_array_clean[mask_bad_data,:,:,:].flatten())
-train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]#- np.mean(train_array_noisy[mask_bad_data,:,:,:].flatten())
-train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]#- np.mean(train_array_wiener[mask_bad_data,:,:,:].flatten())
-
-# print(np.mean(train_array_clean), np.mean(train_array_noisy), np.mean(train_array_wiener))
-# print(np.max(np.abs(train_array_clean.flatten())),
-#       np.max(np.abs(train_array_noisy.flatten())),
-#       np.max(np.abs(train_array_wiener.flatten())))
+train_array_clean=train_array_clean[mask_bad_data,:,:,:]
+train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]
+train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
 
 
 print('\nShuffle and take fraction of test data')
@@ -109,18 +103,6 @@ train_array_noisy = train_array_noisy[n_test:]
 
 test_array_wiener = train_array_wiener[:n_test]
 train_array_wiener = train_array_wiener[n_test:]
-
-
-# fraction of data out of 0 and 1 range
-# print('Number of pixels total = ' + str(len(train_array_clean.flatten())))
-# print('pixels out of range (truth with wiener scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (wiener with wiener scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_wiener[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (truth with ks scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (ks with ks scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
 
 
 
@@ -154,15 +136,13 @@ if plot_results:
     plt.savefig(str(plot_output_dir) + '/picola_data.png'), plt.close()
 
 
-#Load encoder and train
+# First do the unet network
 
-print('training network KS \n')
+print('\n Training unet network learning rate = 1e-5, no smoothing')
 
-cnn_instance = cnn.unet_simple(map_size = map_size, learning_rate=learning_rate_ks)
+cnn_instance = cnn.unet_simple(map_size = map_size, learning_rate=1e-5)
 cnn_ks = cnn_instance.model()
-
-
-print(n_epoch, batch_size, learning_rate_ks)
+print(n_epoch, batch_size, 1e-5)
 
 history_ks = cnn.LossHistory()
 
@@ -173,17 +153,10 @@ cnn_ks.fit(np.clip(mf.rescale_map(train_array_noisy, scale_ks, 0.5),0.,1.0),
                 shuffle=True,
                 validation_data=(np.clip(mf.rescale_map(test_array_noisy, scale_ks, 0.5),0.,1.),
                                 np.clip(mf.rescale_map(test_array_clean, scale_ks, 0.5), 0., 1.)),
-                callbacks=[history_ks])
+                callbacks=[history_ks], verbose=2)
 
+cnn_ks.save(str(h5_output_dir) + '/unet_simple_KS_1e5')
 
-#print(history_ks.losses)
-# save network
-cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
-#autoencoder = load_model(str(output_dir) + '/' + str(output_model_file))
-
-
-
-# plot result
 
 if plot_results:
     print('plotting result \n')
@@ -212,16 +185,65 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(plot_output_dir) + '/picola_output.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/unet_simple_KS_1e5.png'), plt.close()
 
-# Load encoder and train
 
-print('training network wiener \n')
 
-cnn_instance_wiener = cnn.unet_simple(map_size = map_size, learning_rate=learning_rate_wiener)
+print('\n Training KS unet network learning rate = 1e-4')
+
+cnn_instance = cnn.unet_simple(map_size = map_size, learning_rate=1e-4)
+cnn_ks = cnn_instance.model()
+print(n_epoch, batch_size, 1e-4)
+
+history_ks = cnn.LossHistory()
+
+cnn_ks.fit(np.clip(mf.rescale_map(train_array_noisy, scale_ks, 0.5),0.,1.0),
+           np.clip(mf.rescale_map(train_array_clean, scale_ks, 0.5), 0.0,1.0),
+                epochs=n_epoch,
+                batch_size=batch_size,
+                shuffle=True,
+                validation_data=(np.clip(mf.rescale_map(test_array_noisy, scale_ks, 0.5),0.,1.),
+                                np.clip(mf.rescale_map(test_array_clean, scale_ks, 0.5), 0., 1.)),
+                callbacks=[history_ks])
+
+cnn_ks.save(str(h5_output_dir) + '/unet_simple_KS_1e4')
+
+
+if plot_results:
+    print('plotting result \n')
+    n_images = 6
+
+    test_output = cnn_ks.predict(mf.rescale_map(test_array_noisy[:n_images, :, :, :], scale_ks, 0.5))
+    test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
+
+
+    plt.figure(figsize=(30, 15))
+    for i in range(n_images):
+        # display original
+        plt.subplot(3, n_images, i + 1)
+#        plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + n_images)
+        #plt.imshow(mf.rescale_map(test_array_noisy[i, :, :, 0], scale_ks, 0.5), origin='lower')
+        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower', clim = (-0.1,0.1), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+
+        plt.subplot(3, n_images, i + 1 + 2 * n_images)
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.axis('off')
+    plt.savefig(str(plot_output_dir) + '/unet_simple_KS_1e4.png'), plt.close()
+
+
+print('\n Training Wiener unet network learning rate = 1e-5, no smoothing')
+
+cnn_instance_wiener = cnn.unet_simple(map_size = map_size, learning_rate=1e-5)
 cnn_wiener = cnn_instance_wiener.model()
-
-print(n_epoch, batch_size, learning_rate_wiener)
+print(n_epoch, batch_size, 1e-5)
 
 history_wiener = cnn.LossHistory()
 
@@ -234,23 +256,17 @@ cnn_wiener.fit(np.clip(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),0.,
                                  np.clip(mf.rescale_map(test_array_clean, scale_wiener, 0.5),0.,1.)),
                 callbacks=[history_wiener])
 
-#print(history_ks.losses)
 
 # save network
-cnn_wiener.save(str(h5_output_dir) + '/wiener_' + str(output_model_file))
-#autoencoder_wiener = load_model(str(output_dir) + '/wiener_' + str(output_model_file))
-
-
+cnn_wiener.save(str(h5_output_dir) + '/unet_simpler_wiener_1e5')
 
 # plot result
-
 if plot_results:
     print('plotting result wiener \n')
     n_images = 6
 
     test_output = cnn_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
     test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
-
 
     plt.figure(figsize=(30, 15))
     for i in range(n_images):
@@ -270,7 +286,7 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(plot_output_dir) + '/picola_output_wiener.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/uent_simple_wiener_1e5.png'), plt.close()
 
     n_images = 6
 
@@ -297,4 +313,82 @@ if plot_results:
         plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
 
         plt.axis('off')
-    plt.savefig(str(plot_output_dir) + '/picola_output_wiener2.png'), plt.close()
+    plt.savefig(str(plot_output_dir) + '/unet_simple_wiener2_1e5.png'), plt.close()
+
+
+
+print('\n Training Wiener unet network learning rate = 1e-4, no smoothing')
+
+cnn_instance_wiener = cnn.unet_simple(map_size = map_size, learning_rate=1e-4)
+cnn_wiener = cnn_instance_wiener.model()
+print(n_epoch, batch_size, 1e-4)
+
+history_wiener = cnn.LossHistory()
+
+cnn_wiener.fit(np.clip(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),0.,1.0),
+               np.clip(mf.rescale_map(train_array_clean, scale_wiener, 0.5),0.,1.),
+                epochs=n_epoch,
+                batch_size=batch_size,
+                shuffle=True,
+                validation_data=(np.clip(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),0.,1.),
+                                 np.clip(mf.rescale_map(test_array_clean, scale_wiener, 0.5),0.,1.)),
+                callbacks=[history_wiener])
+
+
+# save network
+cnn_wiener.save(str(h5_output_dir) + '/unet_simple_wiener_1e4')
+
+# plot result
+if plot_results:
+    print('plotting result wiener \n')
+    n_images = 6
+
+    test_output = cnn_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
+    test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
+
+    plt.figure(figsize=(30, 15))
+    for i in range(n_images):
+        # display original
+        plt.subplot(3, n_images, i + 1)
+        #plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + n_images)
+        #plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+        plt.imshow(test_array_wiener[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + 2 * n_images)
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.axis('off')
+    plt.savefig(str(plot_output_dir) + '/unet_simple_wiener_1e4.png'), plt.close()
+
+    n_images = 6
+
+    test_output = cnn_wiener.predict(mf.rescale_map(test_array_wiener[:n_images, :, :, :], scale_wiener, 0.5))
+    test_output = mf.rescale_map(test_output, scale_wiener, 0.5, True)
+
+
+    plt.figure(figsize=(30, 15))
+    for i in range(n_images):
+        # display original
+        plt.subplot(3, n_images, i + 1)
+        #plt.imshow(mf.rescale_map(test_array_clean[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+        plt.imshow(test_array_clean[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + n_images)
+        #plt.imshow(mf.rescale_map(test_array_wiener[i, :, :, 0], scale_wiener, 0.5), origin='lower')
+#        plt.imshow(test_array_wiener[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.imshow(test_array_noisy[i, :, :, 0], origin='lower', clim = (-0.1,0.1), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.subplot(3, n_images, i + 1 + 2 * n_images)
+        plt.imshow(test_output[i, :, :, 0], origin='lower', clim = (-0.02,0.02), cmap ='inferno')
+        plt.axis('off'), plt.colorbar(fraction=0.046, pad=0.04)
+
+        plt.axis('off')
+    plt.savefig(str(plot_output_dir) + '/unet_simple_wiener2_1e4.png'), plt.close()
