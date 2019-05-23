@@ -172,7 +172,7 @@ cnn_ks.fit(np.clip(mf.rescale_map(train_array_noisy, scale_ks, 0.5),0.,1.0),
                 shuffle=True,
                 validation_data=(np.clip(mf.rescale_map(test_array_noisy, scale_ks, 0.5),0.,1.),
                                 np.clip(mf.rescale_map(test_array_clean, scale_ks, 0.5), 0., 1.)),
-                callbacks=[history_ks])
+                callbacks=[history_ks], verbose=2)
 
 
 #print(history_ks.losses)
@@ -231,7 +231,7 @@ cnn_wiener.fit(np.clip(mf.rescale_map(train_array_wiener, scale_wiener, 0.5),0.,
                 shuffle=True,
                 validation_data=(np.clip(mf.rescale_map(test_array_wiener, scale_wiener, 0.5),0.,1.),
                                  np.clip(mf.rescale_map(test_array_clean, scale_wiener, 0.5),0.,1.)),
-                callbacks=[history_wiener])
+                callbacks=[history_wiener], verbose=2)
 
 #print(history_ks.losses)
 

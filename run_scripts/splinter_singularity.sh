@@ -8,7 +8,7 @@
 
 cd /share/splinter/ucapnje/DeepMass/run_scripts
 
-singularity exec --nv -B /share/splinter/ucapnje/DeepMass:/home/ucapnje/DeepMass /share/data1/eme/ubuntu_tf_keras.img  ./DeepMass/run_scripts/submit_training.sh
+singularity exec --nv -B /share/splinter/ucapnje:/home/ucapnje/share /share/data1/eme/ubuntu_tf_keras.img /home/ucapnje/share/DeepMass/run_scripts/submit_training.sh  &> /share/splinter/ucapnje/DeepMass/run_scripts/splinter_output.txt
 
 #source activate tensorflow
 
