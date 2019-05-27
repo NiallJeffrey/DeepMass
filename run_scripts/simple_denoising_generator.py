@@ -185,8 +185,7 @@ if plot_results:
 
     # Apply trained CNN to test data
     random_index = int(np.random.uniform(0,len(test_array_noisy[:, 0, 0, 0])-1000))
-    test_output = cnn_ks.predict(mf.rescale_map(test_array_noisy[random_index:(random_index+1000), :, :, :],
-                                                scale_ks, 0.5))
+    test_output = cnn_ks.predict(test_array_noisy[random_index:(random_index+1000)])
     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
 
     script_functions.plot_cnn(mf.rescale_map(test_array_clean[random_index:(random_index+1000)],
