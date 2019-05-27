@@ -82,14 +82,14 @@ train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
 
 # fraction of data out of 0 and 1 range
 print('Number of pixels total = ' + str(len(train_array_clean.flatten())))
-print('pixels out of range (truth with wiener scale) = ' + \
-str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-print('pixels out of range (wiener with wiener scale) = ' + \
-str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_wiener[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-print('pixels out of range (truth with ks scale) = ' + \
-str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
-print('pixels out of range (ks with ks scale) = ' + \
-str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
+# print('pixels out of range (truth with wiener scale) = ' + \
+# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
+# print('pixels out of range (wiener with wiener scale) = ' + \
+# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_wiener[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
+# print('pixels out of range (truth with ks scale) = ' + \
+# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
+# print('pixels out of range (ks with ks scale) = ' + \
+# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
 
 
 
