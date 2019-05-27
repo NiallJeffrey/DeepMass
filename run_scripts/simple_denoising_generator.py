@@ -210,8 +210,16 @@ if plot_results:
                                                 scale_ks, 0.5))
     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
 
-    script_functions.plot_cnn(mf.rescale_map(test_array_clean[random_index:(random_index+1000)], scale_ks, 0.5, True),
-                              mf.rescale_map(test_array_noisy[random_index:(random_index+1000)], scale_ks, 0.5, True),
+    # script_functions.plot_cnn(mf.rescale_map(test_array_clean[random_index:(random_index+1000)], scale_ks, 0.5, True),
+    #                           mf.rescale_map(test_array_noisy[random_index:(random_index+1000)], scale_ks, 0.5, True),
+    #                           test_output,
+    #                           str(plot_output_dir) + '/picola_output.png',
+    #                           -0.025,0.025)
+    #
+
+    script_functions.plot_cnn(test_array_clean[random_index:(random_index+1000)],
+                              test_array_noisy[random_index:(random_index+1000)],
                               test_output,
                               str(plot_output_dir) + '/picola_output.png',
                               -0.025,0.025)
+
