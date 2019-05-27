@@ -162,22 +162,24 @@ print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-# cnn_ks.fit(train_array_noisy, train_array_clean,
-#            epochs=n_epoch, batch_size=batch_size, shuffle=True,
-#            validation_data=(test_array_noisy,test_array_clean),
-#            callbacks=[history_ks], verbose=2)
+cnn_ks.fit(train_array_noisy, train_array_clean,
+           epochs=n_epoch, batch_size=batch_size, shuffle=True,
+           validation_data=(test_array_noisy,test_array_clean),
+           callbacks=[history_ks], verbose=1)
+
+cnn_ks2 = cnn_instance.model()
 
 print(train_gen)
 print(train_array_noisy.shape)
 print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
-cnn_ks.fit_generator(generator=train_gen,
+cnn_ks2.fit_generator(generator=train_gen,
                      epochs=n_epoch,
                      steps_per_epoch=train_array_noisy.shape[0] // 32,
                      validation_data=test_gen,
-                     validation_steps=test_array_noisy.shape[0] // 32)
-                     # callbacks=[history_ks], verbose=1)
+                     validation_steps=test_array_noisy.shape[0] // 32, use_multiprocessing=True,
+                     callbacks=[history_ks], verbose=1)
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
