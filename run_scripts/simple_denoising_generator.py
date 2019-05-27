@@ -150,6 +150,8 @@ def batch_generator(noisy_array, clean_array, gen_batch_size=32):
 train_gen = batch_generator(train_array_noisy, train_array_clean, gen_batch_size=32)
 test_gen = batch_generator(test_array_noisy, test_array_clean, gen_batch_size=32)
 
+
+
 #Load encoder and train
 print('training network KS \n')
 
@@ -165,12 +167,14 @@ history_ks = cnn.LossHistory()
 #            validation_data=(test_array_noisy,test_array_clean),
 #            callbacks=[history_ks], verbose=2)
 
+print(train_gen)
+
 cnn_ks.fit_generator(generator=train_gen,
                      epochs=1,
                      steps_per_epoch=train_array_noisy.shape[0] // 32,
                      validation_data=test_gen,
-                     validation_steps=test_array_noisy.shape[0] // 32,
-                     callbacks=[history_ks], verbose=1)
+                     validation_steps=test_array_noisy.shape[0] // 32)
+                     # callbacks=[history_ks], verbose=1)
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
