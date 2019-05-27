@@ -140,25 +140,17 @@ if plot_results:
 
 
 # Make batch generator
+def batch_generator(noisy_array, clean_array, gen_batch_size=32):
 
-# def batch_generator(data_array, batch_generator_size=32):
-#
-#     while True:
-#         index = np.random.randint(0, data_array.shape[0], batch_generator_size)
-#
-#         yield data_array[index]
+    while True:
+        index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
+        yield (noisy_array[index], clean_array[index])
 
-#
-# clean_train_gen = batch_generator(train_array_clean, batch_generator_size=32)
-# noisy_train_gen = batch_generator(train_array_noisy, batch_generator_size=32)
-# wiener_train_gen = batch_generator(train_array_wiener, batch_generator_size=32)
-# clean_test_gen = batch_generator(test_array_clean, batch_generator_size=32)
-# noisy_test_gen = batch_generator(test_array_noisy, batch_generator_size=32)
-# wiener_test_gen = batch_generator(test_array_wiener, batch_generator_size=32)
 
+train_gen = batch_generator(train_array_noisy, train_array_clean, gen_batch_size=32)
+test_gen = batch_generator(test_array_noisy, test_array_clean, gen_batch_size=32)
 
 #Load encoder and train
-
 print('training network KS \n')
 
 cnn_instance = cnn.simple_model(map_size = map_size, learning_rate=learning_rate_ks)
@@ -168,10 +160,17 @@ print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-cnn_ks.fit(train_array_noisy, train_array_clean,
-           epochs=n_epoch, batch_size=batch_size, shuffle=True,
-           validation_data=(test_array_noisy,test_array_clean),
-           callbacks=[history_ks], verbose=2)
+# cnn_ks.fit(train_array_noisy, train_array_clean,
+#            epochs=n_epoch, batch_size=batch_size, shuffle=True,
+#            validation_data=(test_array_noisy,test_array_clean),
+#            callbacks=[history_ks], verbose=2)
+
+cnn_ks.fit_generator(generator=train_gen,
+                     epochs=1,
+                     steps_per_epoch=train_array_noisy.shape[0] // 32,
+                     validation_data=test_gen,
+                     validation_steps=test_array_noisy.shape[0] // 32,
+                     callbacks=[history_ks], verbose=1)
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
