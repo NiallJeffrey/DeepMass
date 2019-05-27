@@ -213,5 +213,5 @@ if plot_results:
     script_functions.plot_cnn(mf.rescale_map(test_array_clean[random_index:(random_index+1000)], scale_ks, 0.5, True),
                               mf.rescale_map(test_array_noisy[random_index:(random_index+1000)], scale_ks, 0.5, True),
                               test_output,
-                              -0.025,0.025,
-                              str(plot_output_dir) + '/picola_output.png')
+                              str(plot_output_dir) + '/picola_output.png',
+                              -0.025,0.025)
