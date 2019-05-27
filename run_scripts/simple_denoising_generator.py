@@ -28,7 +28,7 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 5
+n_epoch = 0
 batch_size = 30
 learning_rate_ks = 5e-5
 learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
@@ -48,15 +48,15 @@ print(mask.shape)
 print('loading data:')
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[20:30]))
+train_array_clean = script_functions.load_data(list(clean_files[20:21]))
 
 noisy_files = list(np.genfromtxt('data_file_lists/noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
+train_array_noisy = script_functions.load_data(list(noisy_files[20:21]))
 
 wiener_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype ='str'))
 wiener_files = [str(os.getcwd()) + s for s in wiener_files]
-train_array_wiener = script_functions.load_data(list(wiener_files[20:30]))
+train_array_wiener = script_functions.load_data(list(wiener_files[20:21]))
 
 # set masked regions to zero
 print('\nApply mask')
@@ -136,7 +136,7 @@ if plot_results:
     print('Plotting data. Saving to: ' + str(plot_output_dir) + '/picola_data.png')
     script_functions.plot_noisy_clean(test_array_clean,
                                       test_array_noisy,
-                                      output_file=str(plot_output_dir) + '/picola_output.png')
+                                      output_file=str(plot_output_dir) + '/picola_data.png')
 
 
 # Make batch generator
