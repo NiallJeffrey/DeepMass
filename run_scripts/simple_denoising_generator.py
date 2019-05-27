@@ -28,7 +28,7 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 0
+n_epoch = 1
 batch_size = 30
 learning_rate_ks = 5e-5
 learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
@@ -170,7 +170,7 @@ history_ks = cnn.LossHistory()
 print(train_gen)
 
 cnn_ks.fit_generator(generator=train_gen,
-                     epochs=1,
+                     epochs=n_epoch,
                      steps_per_epoch=train_array_noisy.shape[0] // 32,
                      validation_data=test_gen,
                      validation_steps=test_array_noisy.shape[0] // 32)
