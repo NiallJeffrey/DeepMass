@@ -48,15 +48,15 @@ print(mask.shape)
 print('loading data:')
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[20:21]))
+train_array_clean = script_functions.load_data(list(clean_files[20:30]))
 
 noisy_files = list(np.genfromtxt('data_file_lists/noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[20:21]))
+train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
 
 wiener_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype ='str'))
 wiener_files = [str(os.getcwd()) + s for s in wiener_files]
-train_array_wiener = script_functions.load_data(list(wiener_files[20:21]))
+train_array_wiener = script_functions.load_data(list(wiener_files[20:30]))
 
 # set masked regions to zero
 print('\nApply mask')
@@ -175,10 +175,11 @@ print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
 cnn_ks2.fit_generator(generator=train_gen,
-                     epochs=n_epoch,
-                     steps_per_epoch=train_array_noisy.shape[0] // 32,
+                      epochs=n_epoch,
+                     steps_per_epoch= np.ceil(train_array_noisy.shape[0] / 32),
                      validation_data=test_gen,
-                     validation_steps=test_array_noisy.shape[0] // 32, use_multiprocessing=True,
+                      validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
+                      use_multiprocessing=True,
                      callbacks=[history_ks], verbose=1)
 
 # save network
