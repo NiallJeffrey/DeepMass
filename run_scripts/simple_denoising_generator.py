@@ -97,16 +97,8 @@ if plot_results:
                                       output_file=str(plot_output_dir) + '/picola_data.png')
 
 
-# Make batch generator
-def batch_generator(noisy_array, clean_array, gen_batch_size=32):
-
-    while True:
-        index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
-        yield (noisy_array[index], clean_array[index])
-
-
-train_gen = batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size)
-test_gen = batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size)
+train_gen = cnn.batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size)
+test_gen = cnn.batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size)
 
 
 
