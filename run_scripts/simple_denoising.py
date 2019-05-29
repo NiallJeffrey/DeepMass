@@ -33,11 +33,11 @@ batch_size = 30
 learning_rate_ks = 5e-5
 learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
 
-sigma_smooth = 1.0
+sigma_smooth = .1
 
 # rescaling quantities
-scale_ks = 1.6
-scale_wiener = 8.5
+scale_ks = 1.
+scale_wiener = 3.
 
 # make SV mask
 

@@ -29,7 +29,7 @@ def load_data(file_list, verbose=True):
     if verbose:
         print('Loading ' + str(file_list[0]))
 
-    data_array = np.load(file_list[0])
+    data_array = np.array(np.load(file_list[0]), dtype='float32')
 
     for i in range(len(file_list) - 1):
 
@@ -37,10 +37,10 @@ def load_data(file_list, verbose=True):
             print('Loading ' + str(file_list[i+1]))
 
         data_array = np.concatenate([data_array,
-                                            np.load(file_list[i+1])])
+                                            np.array(np.load(file_list[i+1]), dtype='float32')])
 
 
-    return data_array
+    return np.array(data_array, dtype='float32')
 
 
 def plot_cnn(clean, noisy, reconstructed, output_file, vmin=0.3, vmax=0.7):

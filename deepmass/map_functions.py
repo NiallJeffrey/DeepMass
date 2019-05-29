@@ -86,12 +86,12 @@ def rescale_map(array, scaling, shift, invert=False, clip = False):
     if invert is True:
         shift = -shift / scaling
         scaling = 1.0 / scaling
-        return (np.copy(array) * scaling + shift)
+        return array * scaling + shift
     else:
         if clip==False:
-            return (np.copy(array) * scaling + shift)
+            return array * scaling + shift
         else:
-            return (np.clip(np.copy(array) * scaling + shift, 0., 1.))
+            return np.clip(array * scaling + shift, 0., 1.)
         
 
 def rescale_unit_test():

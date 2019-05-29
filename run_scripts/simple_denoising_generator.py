@@ -23,21 +23,17 @@ import script_functions
 print(os.getcwd())
 
 map_size = 256
-n_test = int(50)
+n_test = int(4000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 5
+n_epoch = 10
 batch_size = 32
-learning_rate_ks = 5e-5
-learning_rate_wiener = 1e-5 # roughly 10-5 for 5 conv layers or 10-4 for 4 conv layers without bottleneck
-
-sigma_smooth = 1.0
+learning_rate_ks = 1e-5
 
 # rescaling quantities
 scale_ks = 1.
-scale_wiener = 5.
 
 # make SV mask
 print('loading mask \n')
@@ -48,21 +44,16 @@ print(mask.shape)
 print('loading data:')
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[20:30]))
+train_array_clean = script_functions.load_data(list(clean_files[:]))
 
 noisy_files = list(np.genfromtxt('data_file_lists/noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
-
-wiener_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype ='str'))
-wiener_files = [str(os.getcwd()) + s for s in wiener_files]
-train_array_wiener = script_functions.load_data(list(wiener_files[20:30]))
+train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 
 # set masked regions to zero
 print('\nApply mask')
 train_array_clean = mf.mask_images(train_array_clean, mask)
 train_array_noisy = mf.mask_images(train_array_noisy, mask)
-train_array_wiener = mf.mask_images(train_array_wiener, mask)
 
 # remove maps where numerical errors give really low numbers (seem to occasionally happen - need to look into this)
 x = np.where(np.sum(np.abs(train_array_noisy[:,:,:,:]), axis = (1,2,3)) > 1e18)
@@ -72,64 +63,31 @@ mask_bad_data[x] = False
 
 train_array_clean=train_array_clean[mask_bad_data,:,:,:]
 train_array_noisy=train_array_noisy[mask_bad_data,:,:,:]
-train_array_wiener=train_array_wiener[mask_bad_data,:,:,:]
-
-# print(np.mean(train_array_clean), np.mean(train_array_noisy), np.mean(train_array_wiener))
-# print(np.max(np.abs(train_array_clean.flatten())),
-#       np.max(np.abs(train_array_noisy.flatten())),
-#       np.max(np.abs(train_array_wiener.flatten())))
-
-
-# fraction of data out of 0 and 1 range
-print('Number of pixels total = ' + str(len(train_array_clean.flatten())))
-# print('pixels out of range (truth with wiener scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (wiener with wiener scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_wiener[:, :, :, 0], scale_wiener, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (truth with ks scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
-# print('pixels out of range (ks with ks scale) = ' + \
-# str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:, :, :, 0], scale_ks, 0.5).flatten()) > 0.5)[0])))
-
-
-
-test_array_clean = train_array_clean[:n_test]
-train_array_clean = train_array_clean[n_test:]
-
-test_array_noisy = train_array_noisy[:n_test]
-train_array_noisy = train_array_noisy[n_test:]
-
-test_array_wiener = train_array_wiener[:n_test]
-train_array_wiener = train_array_wiener[n_test:]
-
-
 
 print('\nShuffle and take fraction of test data')
-# random order
 random_indices = np.arange(len(train_array_clean[:, 0, 0, 0]))
 random.shuffle(random_indices)
 train_array_clean=train_array_clean[random_indices]
 train_array_noisy=train_array_noisy[random_indices]
-train_array_wiener = train_array_wiener[random_indices]
 
+print('Number of pixels sample = ' + str(len(train_array_clean[:2000].flatten())))
+print('pixels out of range (truth) = ' +
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:2000], scale_ks, 0.5).flatten()) > 0.5)[0])))
+print('pixels out of range (input/noisy) = ' + \
+str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:2000], scale_ks, 0.5).flatten()) > 0.5)[0])))
 
-# split a validation set
+print('clean array bytes = ' + str(train_array_clean.nbytes))
+print('noisy array bytes = ' + str(train_array_noisy.nbytes))
 
-test_array_clean = mf.rescale_map(train_array_clean, scale_ks, 0.5, clip=True)
 train_array_clean = mf.rescale_map(train_array_clean, scale_ks, 0.5, clip=True)
-test_array_noisy = mf.rescale_map(train_array_noisy, scale_ks, 0.5, clip=True)
 train_array_noisy = mf.rescale_map(train_array_noisy, scale_ks, 0.5, clip=True)
 
-
+# split a validation set
 test_array_clean = train_array_clean[:n_test]
 train_array_clean = train_array_clean[n_test:]
 
 test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
-
-# test_array_wiener = train_array_wiener[:n_test]
-# train_array_wiener = train_array_wiener[n_test:]
-
 
 
 if plot_results:
@@ -147,8 +105,8 @@ def batch_generator(noisy_array, clean_array, gen_batch_size=32):
         yield (noisy_array[index], clean_array[index])
 
 
-train_gen = batch_generator(train_array_noisy, train_array_clean, gen_batch_size=32)
-test_gen = batch_generator(test_array_noisy, test_array_clean, gen_batch_size=32)
+train_gen = batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size)
+test_gen = batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size)
 
 
 
@@ -162,25 +120,25 @@ print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-cnn_ks.fit(train_array_noisy, train_array_clean,
-           epochs=n_epoch, batch_size=batch_size, shuffle=True,
-           validation_data=(test_array_noisy,test_array_clean),
-           callbacks=[history_ks], verbose=1)
+#cnn_ks.fit(train_array_noisy, train_array_clean,
+#           epochs=n_epoch, batch_size=batch_size, shuffle=True,
+#           validation_data=(test_array_noisy,test_array_clean),
+#           callbacks=[history_ks], verbose=1)
 
-cnn_ks2 = cnn_instance.model()
+#cnn_ks = cnn_instance.model()
 
 print(train_gen)
 print(train_array_noisy.shape)
 print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
-cnn_ks2.fit_generator(generator=train_gen,
+cnn_ks.fit_generator(generator=train_gen,
                       epochs=n_epoch,
                      steps_per_epoch= np.ceil(train_array_noisy.shape[0] / 32),
                      validation_data=test_gen,
                       validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
                       use_multiprocessing=True,
-                     callbacks=[history_ks], verbose=1)
+                     callbacks=[history_ks], verbose=2)
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
