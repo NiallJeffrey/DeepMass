@@ -89,6 +89,10 @@ train_array_clean = train_array_clean[n_test:]
 test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
 
+
+print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+
+
 if plot_results:
     print('Plotting data. Saving to: ' + str(plot_output_dir) + '/picola_data.png')
     script_functions.plot_noisy_clean(test_array_clean,
@@ -106,7 +110,7 @@ print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
 # Load encoder and train
-print('training network KS \n')
+print('training network wiener (no dropout) \n')
 
 for learning_rate_ks in learning_rates:
     print('unet_simple lr = ' + str(learning_rate_ks))

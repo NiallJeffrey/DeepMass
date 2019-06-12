@@ -89,6 +89,8 @@ train_array_clean = train_array_clean[n_test:]
 test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
 
+print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+
 if plot_results:
     print('Plotting data. Saving to: ' + str(plot_output_dir) + '/picola_data.png')
     script_functions.plot_noisy_clean(test_array_clean,

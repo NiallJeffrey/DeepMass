@@ -277,3 +277,5 @@ def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power
 
 
 
+def mean_square_error(y_true, y_pred):
+    return np.mean((y_pred.flatten() - y_true.flatten())**2.)

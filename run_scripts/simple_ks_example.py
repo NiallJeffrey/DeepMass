@@ -22,8 +22,6 @@ import os
 import script_functions
 
 
-def mean_square_error(y_true, y_pred):
-    return np.mean((y_pred.flatten() - y_true.flatten())**2.)
 
 print(os.getcwd())
 
@@ -96,7 +94,7 @@ train_array_clean = train_array_clean[n_test:]
 test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
 
-print('Test loss = ' + str(mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
 
 if plot_results:
     print('Plotting data. Saving to: ' + str(plot_output_dir) + '/picola_data.png')

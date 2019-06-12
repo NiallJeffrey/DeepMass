@@ -158,14 +158,25 @@ class unet:
 
         up4 = UpSampling2D((2,2))(x3)
         merge4 = concatenate([x2, up4], axis=3)
-        merge4 = Dropout(0.2)(merge4)
+
+        if self.dropout_val is None:
+            merge4 = BatchNormalization()(merge4)
+        else:
+            merge4 = Dropout(self.dropout_val)(merge4)
+
         x4 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge4)
         x4 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x4)
 
 
         up5 = UpSampling2D((2,2))(x4)
         merge5 = concatenate([x1, up5], axis=3)
-        merge5 = Dropout(0.2)(merge5)
+
+
+        if self.dropout_val is None:
+            merge4 = BatchNormalization()(merge5)
+        else:
+            merge4 = Dropout(self.dropout_val)(merge5)
+
         x5 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
         x5 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x5)
         output = Conv2D(1, 1, activation='sigmoid')(x5)
@@ -215,17 +226,32 @@ class unet_simple_deep:
 
         up5 = UpSampling2D((2, 2))(x4)
         merge5 = concatenate([x3, up5], axis=3)
-        merge5 = Dropout(0.2)(merge5)
+
+        if self.dropout_val is None:
+            merge5 = BatchNormalization()(merge5)
+        else:
+            merge5 = Dropout(self.dropout_val)(merge5)
+
         x5 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
 
         up6 = UpSampling2D((2, 2))(x5)
         merge6 = concatenate([x2, up6], axis=3)
-        merge6 = Dropout(0.2)(merge6)
+
+        if self.dropout_val is None:
+            merge6 = BatchNormalization()(merge6)
+        else:
+            merge6 = Dropout(self.dropout_val)(merge6)
+
         x6 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge6)
 
         up7 = UpSampling2D((2, 2))(x6)
         merge7 = concatenate([x1, up7], axis=3)
-        merge7 = Dropout(0.2)(merge7)
+
+        if self.dropout_val is None:
+            merge7 = BatchNormalization()(merge7)
+        else:
+            merge7 = Dropout(self.dropout_val)(merge7)
+
         x7 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
         output = Conv2D(1, 1, activation='sigmoid')(x7)
 
@@ -246,7 +272,7 @@ class unet_simple:
     Dropout (not batch norm) on the decoder: http://cs230.stanford.edu/files_winter_2018/projects/6937642.pdf
     """
 
-    def __init__(self, map_size, learning_rate):
+    def __init__(self, map_size, learning_rate, dropout_val=None):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
@@ -254,6 +280,7 @@ class unet_simple:
         """
         self.map_size = map_size
         self.learning_rate = learning_rate
+        self.dropout_val = dropout_val
 
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
@@ -271,12 +298,18 @@ class unet_simple:
 
         up4 = UpSampling2D((2, 2))(x3)
         merge4 = concatenate([x2, up4], axis=3)
-        merge4 = Dropout(0.2)(merge4)
+        if self.dropout_val is None:
+            merge4 = BatchNormalization()(merge4)
+        else:
+            merge4 = Dropout(self.dropout_val)(merge4)
         x4 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge4)
 
         up5 = UpSampling2D((2, 2))(x4)
         merge5 = concatenate([x1, up5], axis=3)
-        merge5 = Dropout(0.2)(merge5)
+        if self.dropout_val is None:
+            merge5 = BatchNormalization()(merge5)
+        else:
+            merge5 = Dropout(self.dropout_val)(merge5)
         x5 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
         output = Conv2D(1, 1, activation='sigmoid')(x5)
 
