@@ -30,7 +30,7 @@ h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
 n_epoch = 10
 batch_size = 32
-learning_rates = [1e-4, 3e-5, 1e-5, 3e-6]
+learning_rates = [1e-4, 1e-5]
 
 # rescaling quantities
 scale_ks = 1.
@@ -46,7 +46,7 @@ clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype='
 clean_files = [str(os.getcwd()) + s for s in clean_files]
 train_array_clean = script_functions.load_data(list(clean_files[:]))
 
-noisy_files = list(np.genfromtxt('data_file_lists/noisy_data_files.txt', dtype='str'))
+noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
 train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 

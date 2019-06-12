@@ -1,0 +1,1071 @@
+/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading data:
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data00/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data01/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data02/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data03/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data04/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data05/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data06/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data07/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data08/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data09/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data10/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data11/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data12/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data13/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data14/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data15/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data16/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data17/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data18/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data19/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data21/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data22/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data23/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data24/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data25/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data26/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data27/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data28/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data29/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data30/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data31/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data32/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data33/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data34/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data35/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data36/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data37/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data38/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data39/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data40/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data41/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data42/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data43/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data44/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data45/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data46/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data47/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data48/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data49/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data50/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data51/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data52/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data53/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data54/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data55/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data56/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data57/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data00/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data01/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data02/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data03/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data04/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data05/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data06/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data07/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data08/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data09/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data10/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data11/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data12/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data13/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data14/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data15/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data16/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data17/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data18/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data19/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data20/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data21/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data22/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data23/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data24/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data25/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data26/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data27/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data28/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data29/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data30/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data31/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data32/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data33/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data34/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data35/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data36/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data37/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data38/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data39/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data40/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data41/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data42/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data43/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data44/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data45/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data46/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data47/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data48/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data49/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data50/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data51/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data52/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data53/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data54/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data55/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data56/sv_training_KS.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled/training_data57/sv_training_KS.npy
+
+Apply mask
+
+Number of bad files = 503
+
+
+Shuffle and take fraction of test data
+Number of pixels sample = 131072000
+pixels out of range (truth) = 6
+pixels out of range (input/noisy) = 58
+clean array bytes = 60685549568
+noisy array bytes = 60685549568
+Plotting data. Saving to: ../outputs/picola_script_outputs/picola_data.png
+<generator object batch_generator at 0x2b55446e5728>
+(227497, 256, 256, 1)
+(4000, 256, 256, 1)
+7109
+training network KS 
+
+unet_simple lr = 0.0001
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 256, 256, 32) 320         input_1[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_1 (BatchNor (None, 256, 256, 32) 128         conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_1 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_1[0][0]      
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 128, 128, 64) 18496       average_pooling2d_1[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_2 (BatchNor (None, 128, 128, 64) 256         conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_2 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_2[0][0]      
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 64, 64, 128)  73856       average_pooling2d_2[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_3 (BatchNor (None, 64, 64, 128)  512         conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+up_sampling2d_1 (UpSampling2D)  (None, 128, 128, 128 0           batch_normalization_3[0][0]      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 128, 128, 192 0           batch_normalization_2[0][0]      
+                                                                 up_sampling2d_1[0][0]            
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 128, 128, 192 0           concatenate_1[0][0]              
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 128, 128, 64) 110656      dropout_1[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_2 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_1[0][0]      
+                                                                 up_sampling2d_2[0][0]            
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 256, 256, 96) 0           concatenate_2[0][0]              
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 256, 256, 32) 27680       dropout_2[0][0]                  
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 256, 256, 1)  33          conv2d_5[0][0]                   
+==================================================================================================
+Total params: 231,937
+Trainable params: 231,489
+Non-trainable params: 448
+__________________________________________________________________________________________________
+10 32 0.0001
+Epoch 1/10
+ - 1191s - loss: 4.3684e-04 - val_loss: 5.6401e-05
+Epoch 2/10
+ - 1183s - loss: 5.4531e-05 - val_loss: 5.0255e-05
+Epoch 3/10
+ - 1183s - loss: 5.0522e-05 - val_loss: 4.9305e-05
+Epoch 4/10
+ - 1183s - loss: 4.9884e-05 - val_loss: 4.9369e-05
+Epoch 5/10
+ - 1183s - loss: 4.9723e-05 - val_loss: 5.0591e-05
+Epoch 6/10
+ - 1183s - loss: 4.9752e-05 - val_loss: 4.9027e-05
+Epoch 7/10
+ - 1184s - loss: 4.9650e-05 - val_loss: 4.9757e-05
+Epoch 8/10
+ - 1184s - loss: 4.9615e-05 - val_loss: 4.9988e-05
+Epoch 9/10
+ - 1183s - loss: 4.9631e-05 - val_loss: 4.9682e-05
+Epoch 10/10
+ - 1183s - loss: 4.9593e-05 - val_loss: 4.9573e-05
+unet_simple lr = 3e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_2 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 256, 256, 32) 320         input_2[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_4 (BatchNor (None, 256, 256, 32) 128         conv2d_7[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_3 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_4[0][0]      
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 128, 128, 64) 18496       average_pooling2d_3[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_5 (BatchNor (None, 128, 128, 64) 256         conv2d_8[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_4 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_5[0][0]      
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 64, 64, 128)  73856       average_pooling2d_4[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_6 (BatchNor (None, 64, 64, 128)  512         conv2d_9[0][0]                   
+__________________________________________________________________________________________________
+up_sampling2d_3 (UpSampling2D)  (None, 128, 128, 128 0           batch_normalization_6[0][0]      
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 128, 128, 192 0           batch_normalization_5[0][0]      
+                                                                 up_sampling2d_3[0][0]            
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 128, 128, 192 0           concatenate_3[0][0]              
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 128, 128, 64) 110656      dropout_3[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_4 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_10[0][0]                  
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_4[0][0]      
+                                                                 up_sampling2d_4[0][0]            
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 256, 256, 96) 0           concatenate_4[0][0]              
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 256, 256, 32) 27680       dropout_4[0][0]                  
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 256, 256, 1)  33          conv2d_11[0][0]                  
+==================================================================================================
+Total params: 231,937
+Trainable params: 231,489
+Non-trainable params: 448
+__________________________________________________________________________________________________
+10 32 3e-05
+Epoch 1/10
+ - 1187s - loss: 8.2614e-04 - val_loss: 5.6415e-05
+Epoch 2/10
+ - 1185s - loss: 5.6380e-05 - val_loss: 5.5107e-05
+Epoch 3/10
+ - 1186s - loss: 5.5963e-05 - val_loss: 5.5478e-05
+Epoch 4/10
+ - 1185s - loss: 5.6078e-05 - val_loss: 5.5774e-05
+Epoch 5/10
+ - 1185s - loss: 5.6001e-05 - val_loss: 5.7061e-05
+Epoch 6/10
+ - 1185s - loss: 5.6101e-05 - val_loss: 5.5287e-05
+Epoch 7/10
+ - 1185s - loss: 5.6007e-05 - val_loss: 5.6248e-05
+Epoch 8/10
+ - 1185s - loss: 5.5971e-05 - val_loss: 5.6638e-05
+Epoch 9/10
+ - 1185s - loss: 5.6041e-05 - val_loss: 5.6213e-05
+Epoch 10/10
+ - 1185s - loss: 5.5991e-05 - val_loss: 5.6114e-05
+Epoch 1/10
+unet_simple lr = 1e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 256, 256, 32) 320         input_3[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_7 (BatchNor (None, 256, 256, 32) 128         conv2d_13[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_5 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_7[0][0]      
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_5[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_8 (BatchNor (None, 128, 128, 64) 256         conv2d_14[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_6 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_8[0][0]      
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_6[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_9 (BatchNor (None, 64, 64, 128)  512         conv2d_15[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_5 (UpSampling2D)  (None, 128, 128, 128 0           batch_normalization_9[0][0]      
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 128, 128, 192 0           batch_normalization_8[0][0]      
+                                                                 up_sampling2d_5[0][0]            
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 128, 128, 192 0           concatenate_5[0][0]              
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 128, 128, 64) 110656      dropout_5[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_6 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_16[0][0]                  
+__________________________________________________________________________________________________
+concatenate_6 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_7[0][0]      
+                                                                 up_sampling2d_6[0][0]            
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 256, 256, 96) 0           concatenate_6[0][0]              
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 256, 256, 32) 27680       dropout_6[0][0]                  
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 256, 256, 1)  33          conv2d_17[0][0]                  
+==================================================================================================
+Total params: 231,937
+Trainable params: 231,489
+Non-trainable params: 448
+__________________________________________________________________________________________________
+10 32 1e-05
+Epoch 1/10
+ - 1188s - loss: 0.0016 - val_loss: 5.6375e-05
+Epoch 2/10
+ - 1183s - loss: 5.6608e-05 - val_loss: 5.5077e-05
+Epoch 3/10
+ - 1183s - loss: 5.5972e-05 - val_loss: 5.5529e-05
+Epoch 4/10
+ - 1183s - loss: 5.6081e-05 - val_loss: 5.5785e-05
+Epoch 5/10
+ - 1183s - loss: 5.6001e-05 - val_loss: 5.7043e-05
+Epoch 6/10
+ - 1183s - loss: 5.6103e-05 - val_loss: 5.5258e-05
+Epoch 7/10
+ - 1183s - loss: 5.6007e-05 - val_loss: 5.6268e-05
+Epoch 8/10
+ - 1181s - loss: 5.5973e-05 - val_loss: 5.6616e-05
+Epoch 9/10
+ - 1180s - loss: 5.6040e-05 - val_loss: 5.6190e-05
+Epoch 10/10
+ - 1180s - loss: 5.5991e-05 - val_loss: 5.6131e-05
+unet_simple lr = 3e-06
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_4 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 256, 256, 32) 320         input_4[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_10 (BatchNo (None, 256, 256, 32) 128         conv2d_19[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_7 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_10[0][0]     
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_7[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_11 (BatchNo (None, 128, 128, 64) 256         conv2d_20[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_8 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_11[0][0]     
+__________________________________________________________________________________________________
+conv2d_21 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_8[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_12 (BatchNo (None, 64, 64, 128)  512         conv2d_21[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_7 (UpSampling2D)  (None, 128, 128, 128 0           batch_normalization_12[0][0]     
+__________________________________________________________________________________________________
+concatenate_7 (Concatenate)     (None, 128, 128, 192 0           batch_normalization_11[0][0]     
+                                                                 up_sampling2d_7[0][0]            
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 128, 128, 192 0           concatenate_7[0][0]              
+__________________________________________________________________________________________________
+conv2d_22 (Conv2D)              (None, 128, 128, 64) 110656      dropout_7[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_8 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_22[0][0]                  
+__________________________________________________________________________________________________
+concatenate_8 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_10[0][0]     
+                                                                 up_sampling2d_8[0][0]            
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 256, 256, 96) 0           concatenate_8[0][0]              
+__________________________________________________________________________________________________
+conv2d_23 (Conv2D)              (None, 256, 256, 32) 27680       dropout_8[0][0]                  
+__________________________________________________________________________________________________
+conv2d_24 (Conv2D)              (None, 256, 256, 1)  33          conv2d_23[0][0]                  
+==================================================================================================
+Total params: 231,937
+Trainable params: 231,489
+Non-trainable params: 448
+__________________________________________________________________________________________________
+10 32 3e-06
+Epoch 1/10
+ - 1193s - loss: 0.0064 - val_loss: 6.3206e-05
+Epoch 2/10
+ - 1190s - loss: 6.9804e-05 - val_loss: 5.5264e-05
+Epoch 3/10
+ - 1191s - loss: 5.6472e-05 - val_loss: 5.5542e-05
+Epoch 4/10
+ - 1191s - loss: 5.6137e-05 - val_loss: 5.5727e-05
+Epoch 5/10
+ - 1190s - loss: 5.6020e-05 - val_loss: 5.7062e-05
+Epoch 6/10
+ - 1190s - loss: 5.6113e-05 - val_loss: 5.5227e-05
+Epoch 7/10
+ - 1190s - loss: 5.6015e-05 - val_loss: 5.6269e-05
+Epoch 8/10
+ - 1190s - loss: 5.5977e-05 - val_loss: 5.6641e-05
+Epoch 9/10
+ - 1190s - loss: 5.6045e-05 - val_loss: 5.6183e-05
+Epoch 10/10
+ - 1191s - loss: 5.5994e-05 - val_loss: 5.6123e-05
+unet lr = 0.0001
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_5 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_25 (Conv2D)              (None, 256, 256, 32) 320         input_5[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_13 (BatchNo (None, 256, 256, 32) 128         conv2d_25[0][0]                  
+__________________________________________________________________________________________________
+conv2d_26 (Conv2D)              (None, 256, 256, 32) 9248        batch_normalization_13[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_14 (BatchNo (None, 256, 256, 32) 128         conv2d_26[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_9 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_14[0][0]     
+__________________________________________________________________________________________________
+conv2d_27 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_9[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_15 (BatchNo (None, 128, 128, 64) 256         conv2d_27[0][0]                  
+__________________________________________________________________________________________________
+conv2d_28 (Conv2D)              (None, 128, 128, 64) 36928       batch_normalization_15[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_16 (BatchNo (None, 128, 128, 64) 256         conv2d_28[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_10 (AveragePo (None, 64, 64, 64)   0           batch_normalization_16[0][0]     
+__________________________________________________________________________________________________
+conv2d_29 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_10[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_17 (BatchNo (None, 64, 64, 128)  512         conv2d_29[0][0]                  
+__________________________________________________________________________________________________
+conv2d_30 (Conv2D)              (None, 64, 64, 128)  147584      batch_normalization_17[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_18 (BatchNo (None, 64, 64, 128)  512         conv2d_30[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_9 (UpSampling2D)  (None, 128, 128, 128 0           batch_normalization_18[0][0]     
+__________________________________________________________________________________________________
+concatenate_9 (Concatenate)     (None, 128, 128, 192 0           batch_normalization_16[0][0]     
+                                                                 up_sampling2d_9[0][0]            
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 128, 128, 192 0           concatenate_9[0][0]              
+__________________________________________________________________________________________________
+conv2d_31 (Conv2D)              (None, 128, 128, 64) 110656      dropout_9[0][0]                  
+__________________________________________________________________________________________________
+conv2d_32 (Conv2D)              (None, 128, 128, 64) 36928       conv2d_31[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_10 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_32[0][0]                  
+__________________________________________________________________________________________________
+concatenate_10 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_14[0][0]     
+                                                                 up_sampling2d_10[0][0]           
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 256, 256, 96) 0           concatenate_10[0][0]             
+__________________________________________________________________________________________________
+conv2d_33 (Conv2D)              (None, 256, 256, 32) 27680       dropout_10[0][0]                 
+__________________________________________________________________________________________________
+conv2d_34 (Conv2D)              (None, 256, 256, 32) 9248        conv2d_33[0][0]                  
+__________________________________________________________________________________________________
+conv2d_35 (Conv2D)              (None, 256, 256, 1)  33          conv2d_34[0][0]                  
+==================================================================================================
+Total params: 472,769
+Trainable params: 471,873
+Non-trainable params: 896
+__________________________________________________________________________________________________
+10 32 0.0001
+Epoch 1/10
+ - 1686s - loss: 2.0183e-04 - val_loss: 5.6287e-05
+Epoch 2/10
+ - 1681s - loss: 5.6154e-05 - val_loss: 5.5207e-05
+Epoch 3/10
+ - 1682s - loss: 5.5957e-05 - val_loss: 5.5521e-05
+Epoch 4/10
+ - 1682s - loss: 5.6078e-05 - val_loss: 5.5748e-05
+Epoch 5/10
+ - 1683s - loss: 5.5999e-05 - val_loss: 5.7049e-05
+Epoch 6/10
+ - 1683s - loss: 5.6102e-05 - val_loss: 5.5180e-05
+Epoch 7/10
+ - 1683s - loss: 5.6008e-05 - val_loss: 5.6249e-05
+Epoch 8/10
+ - 1683s - loss: 5.5971e-05 - val_loss: 5.6673e-05
+Epoch 9/10
+ - 1682s - loss: 5.6041e-05 - val_loss: 5.6156e-05
+Epoch 10/10
+ - 1683s - loss: 5.5990e-05 - val_loss: 5.6143e-05
+unet lr = 3e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_6 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_36 (Conv2D)              (None, 256, 256, 32) 320         input_6[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_19 (BatchNo (None, 256, 256, 32) 128         conv2d_36[0][0]                  
+__________________________________________________________________________________________________
+conv2d_37 (Conv2D)              (None, 256, 256, 32) 9248        batch_normalization_19[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_20 (BatchNo (None, 256, 256, 32) 128         conv2d_37[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_11 (AveragePo (None, 128, 128, 32) 0           batch_normalization_20[0][0]     
+__________________________________________________________________________________________________
+conv2d_38 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_11[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_21 (BatchNo (None, 128, 128, 64) 256         conv2d_38[0][0]                  
+__________________________________________________________________________________________________
+conv2d_39 (Conv2D)              (None, 128, 128, 64) 36928       batch_normalization_21[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_22 (BatchNo (None, 128, 128, 64) 256         conv2d_39[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_12 (AveragePo (None, 64, 64, 64)   0           batch_normalization_22[0][0]     
+__________________________________________________________________________________________________
+conv2d_40 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_12[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_23 (BatchNo (None, 64, 64, 128)  512         conv2d_40[0][0]                  
+__________________________________________________________________________________________________
+conv2d_41 (Conv2D)              (None, 64, 64, 128)  147584      batch_normalization_23[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_24 (BatchNo (None, 64, 64, 128)  512         conv2d_41[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_11 (UpSampling2D) (None, 128, 128, 128 0           batch_normalization_24[0][0]     
+__________________________________________________________________________________________________
+concatenate_11 (Concatenate)    (None, 128, 128, 192 0           batch_normalization_22[0][0]     
+                                                                 up_sampling2d_11[0][0]           
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 128, 128, 192 0           concatenate_11[0][0]             
+__________________________________________________________________________________________________
+conv2d_42 (Conv2D)              (None, 128, 128, 64) 110656      dropout_11[0][0]                 
+__________________________________________________________________________________________________
+conv2d_43 (Conv2D)              (None, 128, 128, 64) 36928       conv2d_42[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_12 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_43[0][0]                  
+__________________________________________________________________________________________________
+concatenate_12 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_20[0][0]     
+                                                                 up_sampling2d_12[0][0]           
+__________________________________________________________________________________________________
+dropout_12 (Dropout)            (None, 256, 256, 96) 0           concatenate_12[0][0]             
+__________________________________________________________________________________________________
+conv2d_44 (Conv2D)              (None, 256, 256, 32) 27680       dropout_12[0][0]                 
+__________________________________________________________________________________________________
+conv2d_45 (Conv2D)              (None, 256, 256, 32) 9248        conv2d_44[0][0]                  
+__________________________________________________________________________________________________
+conv2d_46 (Conv2D)              (None, 256, 256, 1)  33          conv2d_45[0][0]                  
+==================================================================================================
+Total params: 472,769
+Trainable params: 471,873
+Non-trainable params: 896
+__________________________________________________________________________________________________
+10 32 3e-05
+Epoch 1/10
+ - 1687s - loss: 6.9698e-04 - val_loss: 5.6290e-05
+Epoch 2/10
+ - 1682s - loss: 5.6184e-05 - val_loss: 5.5222e-05
+Epoch 3/10
+ - 1682s - loss: 5.5957e-05 - val_loss: 5.5484e-05
+Epoch 4/10
+ - 1682s - loss: 5.6079e-05 - val_loss: 5.5769e-05
+Epoch 5/10
+ - 1683s - loss: 5.5999e-05 - val_loss: 5.6968e-05
+Epoch 6/10
+ - 1683s - loss: 5.6102e-05 - val_loss: 5.5188e-05
+Epoch 7/10
+ - 1682s - loss: 5.6008e-05 - val_loss: 5.6245e-05
+Epoch 8/10
+ - 1682s - loss: 5.5971e-05 - val_loss: 5.6718e-05
+Epoch 9/10
+ - 1683s - loss: 5.6041e-05 - val_loss: 5.6116e-05
+Epoch 10/10
+ - 1683s - loss: 5.5991e-05 - val_loss: 5.6174e-05
+unet lr = 1e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_7 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_47 (Conv2D)              (None, 256, 256, 32) 320         input_7[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_25 (BatchNo (None, 256, 256, 32) 128         conv2d_47[0][0]                  
+__________________________________________________________________________________________________
+conv2d_48 (Conv2D)              (None, 256, 256, 32) 9248        batch_normalization_25[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_26 (BatchNo (None, 256, 256, 32) 128         conv2d_48[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_13 (AveragePo (None, 128, 128, 32) 0           batch_normalization_26[0][0]     
+__________________________________________________________________________________________________
+conv2d_49 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_13[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_27 (BatchNo (None, 128, 128, 64) 256         conv2d_49[0][0]                  
+__________________________________________________________________________________________________
+conv2d_50 (Conv2D)              (None, 128, 128, 64) 36928       batch_normalization_27[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_28 (BatchNo (None, 128, 128, 64) 256         conv2d_50[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_14 (AveragePo (None, 64, 64, 64)   0           batch_normalization_28[0][0]     
+__________________________________________________________________________________________________
+conv2d_51 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_14[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_29 (BatchNo (None, 64, 64, 128)  512         conv2d_51[0][0]                  
+__________________________________________________________________________________________________
+conv2d_52 (Conv2D)              (None, 64, 64, 128)  147584      batch_normalization_29[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_30 (BatchNo (None, 64, 64, 128)  512         conv2d_52[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_13 (UpSampling2D) (None, 128, 128, 128 0           batch_normalization_30[0][0]     
+__________________________________________________________________________________________________
+concatenate_13 (Concatenate)    (None, 128, 128, 192 0           batch_normalization_28[0][0]     
+                                                                 up_sampling2d_13[0][0]           
+__________________________________________________________________________________________________
+dropout_13 (Dropout)            (None, 128, 128, 192 0           concatenate_13[0][0]             
+__________________________________________________________________________________________________
+conv2d_53 (Conv2D)              (None, 128, 128, 64) 110656      dropout_13[0][0]                 
+__________________________________________________________________________________________________
+conv2d_54 (Conv2D)              (None, 128, 128, 64) 36928       conv2d_53[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_14 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_54[0][0]                  
+__________________________________________________________________________________________________
+concatenate_14 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_26[0][0]     
+                                                                 up_sampling2d_14[0][0]           
+__________________________________________________________________________________________________
+dropout_14 (Dropout)            (None, 256, 256, 96) 0           concatenate_14[0][0]             
+__________________________________________________________________________________________________
+conv2d_55 (Conv2D)              (None, 256, 256, 32) 27680       dropout_14[0][0]                 
+__________________________________________________________________________________________________
+conv2d_56 (Conv2D)              (None, 256, 256, 32) 9248        conv2d_55[0][0]                  
+__________________________________________________________________________________________________
+conv2d_57 (Conv2D)              (None, 256, 256, 1)  33          conv2d_56[0][0]                  
+==================================================================================================
+Total params: 472,769
+Trainable params: 471,873
+Non-trainable params: 896
+__________________________________________________________________________________________________
+10 32 1e-05
+Epoch 1/10
+ - 1690s - loss: 0.0010 - val_loss: 5.6187e-05
+Epoch 2/10
+ - 1684s - loss: 5.6256e-05 - val_loss: 5.5298e-05
+Epoch 3/10
+ - 1683s - loss: 5.5960e-05 - val_loss: 5.5440e-05
+Epoch 4/10
+ - 1684s - loss: 5.6080e-05 - val_loss: 5.5804e-05
+Epoch 5/10
+ - 1684s - loss: 5.5999e-05 - val_loss: 5.6962e-05
+Epoch 6/10
+ - 1684s - loss: 5.6103e-05 - val_loss: 5.5170e-05
+Epoch 7/10
+ - 1684s - loss: 5.6008e-05 - val_loss: 5.6220e-05
+Epoch 8/10
+ - 1684s - loss: 5.5972e-05 - val_loss: 5.6774e-05
+Epoch 9/10
+ - 1684s - loss: 5.6040e-05 - val_loss: 5.6031e-05
+Epoch 10/10
+ - 1683s - loss: 5.5990e-05 - val_loss: 5.6199e-05
+unet lr = 3e-06
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_8 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_58 (Conv2D)              (None, 256, 256, 32) 320         input_8[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_31 (BatchNo (None, 256, 256, 32) 128         conv2d_58[0][0]                  
+__________________________________________________________________________________________________
+conv2d_59 (Conv2D)              (None, 256, 256, 32) 9248        batch_normalization_31[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_32 (BatchNo (None, 256, 256, 32) 128         conv2d_59[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_15 (AveragePo (None, 128, 128, 32) 0           batch_normalization_32[0][0]     
+__________________________________________________________________________________________________
+conv2d_60 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_15[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_33 (BatchNo (None, 128, 128, 64) 256         conv2d_60[0][0]                  
+__________________________________________________________________________________________________
+conv2d_61 (Conv2D)              (None, 128, 128, 64) 36928       batch_normalization_33[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_34 (BatchNo (None, 128, 128, 64) 256         conv2d_61[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_16 (AveragePo (None, 64, 64, 64)   0           batch_normalization_34[0][0]     
+__________________________________________________________________________________________________
+conv2d_62 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_16[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_35 (BatchNo (None, 64, 64, 128)  512         conv2d_62[0][0]                  
+__________________________________________________________________________________________________
+conv2d_63 (Conv2D)              (None, 64, 64, 128)  147584      batch_normalization_35[0][0]     
+__________________________________________________________________________________________________
+batch_normalization_36 (BatchNo (None, 64, 64, 128)  512         conv2d_63[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_15 (UpSampling2D) (None, 128, 128, 128 0           batch_normalization_36[0][0]     
+__________________________________________________________________________________________________
+concatenate_15 (Concatenate)    (None, 128, 128, 192 0           batch_normalization_34[0][0]     
+                                                                 up_sampling2d_15[0][0]           
+__________________________________________________________________________________________________
+dropout_15 (Dropout)            (None, 128, 128, 192 0           concatenate_15[0][0]             
+__________________________________________________________________________________________________
+conv2d_64 (Conv2D)              (None, 128, 128, 64) 110656      dropout_15[0][0]                 
+__________________________________________________________________________________________________
+conv2d_65 (Conv2D)              (None, 128, 128, 64) 36928       conv2d_64[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_16 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_65[0][0]                  
+__________________________________________________________________________________________________
+concatenate_16 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_32[0][0]     
+                                                                 up_sampling2d_16[0][0]           
+__________________________________________________________________________________________________
+dropout_16 (Dropout)            (None, 256, 256, 96) 0           concatenate_16[0][0]             
+__________________________________________________________________________________________________
+conv2d_66 (Conv2D)              (None, 256, 256, 32) 27680       dropout_16[0][0]                 
+__________________________________________________________________________________________________
+conv2d_67 (Conv2D)              (None, 256, 256, 32) 9248        conv2d_66[0][0]                  
+__________________________________________________________________________________________________
+conv2d_68 (Conv2D)              (None, 256, 256, 1)  33          conv2d_67[0][0]                  
+==================================================================================================
+Total params: 472,769
+Trainable params: 471,873
+Non-trainable params: 896
+__________________________________________________________________________________________________
+10 32 3e-06
+Epoch 1/10
+ - 1685s - loss: 0.0034 - val_loss: 6.7019e-05
+Epoch 2/10
+ - 1678s - loss: 7.5657e-05 - val_loss: 5.4708e-05
+Epoch 3/10
+ - 1678s - loss: 5.4068e-05 - val_loss: 5.1302e-05
+Epoch 4/10
+ - 1679s - loss: 5.2178e-05 - val_loss: 5.1090e-05
+Epoch 5/10
+ - 1678s - loss: 5.1477e-05 - val_loss: 5.1746e-05
+Epoch 6/10
+ - 1679s - loss: 5.1196e-05 - val_loss: 4.9851e-05
+Epoch 7/10
+ - 1678s - loss: 5.0894e-05 - val_loss: 5.0794e-05
+Epoch 8/10
+ - 1678s - loss: 5.0714e-05 - val_loss: 5.0934e-05
+Epoch 9/10
+ - 1678s - loss: 5.0635e-05 - val_loss: 5.0413e-05
+Epoch 10/10
+ - 1678s - loss: 5.0515e-05 - val_loss: 5.0428e-05
+unet_simple_deep lr = 0.0001
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_9 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_69 (Conv2D)              (None, 256, 256, 32) 320         input_9[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_37 (BatchNo (None, 256, 256, 32) 128         conv2d_69[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_17 (AveragePo (None, 128, 128, 32) 0           batch_normalization_37[0][0]     
+__________________________________________________________________________________________________
+conv2d_70 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_17[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_38 (BatchNo (None, 128, 128, 64) 256         conv2d_70[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_18 (AveragePo (None, 64, 64, 64)   0           batch_normalization_38[0][0]     
+__________________________________________________________________________________________________
+conv2d_71 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_18[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_39 (BatchNo (None, 64, 64, 128)  512         conv2d_71[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_19 (AveragePo (None, 32, 32, 128)  0           batch_normalization_39[0][0]     
+__________________________________________________________________________________________________
+conv2d_72 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_19[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_40 (BatchNo (None, 32, 32, 128)  512         conv2d_72[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_17 (UpSampling2D) (None, 64, 64, 128)  0           batch_normalization_40[0][0]     
+__________________________________________________________________________________________________
+concatenate_17 (Concatenate)    (None, 64, 64, 256)  0           batch_normalization_39[0][0]     
+                                                                 up_sampling2d_17[0][0]           
+__________________________________________________________________________________________________
+dropout_17 (Dropout)            (None, 64, 64, 256)  0           concatenate_17[0][0]             
+__________________________________________________________________________________________________
+conv2d_73 (Conv2D)              (None, 64, 64, 64)   147520      dropout_17[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_18 (UpSampling2D) (None, 128, 128, 64) 0           conv2d_73[0][0]                  
+__________________________________________________________________________________________________
+concatenate_18 (Concatenate)    (None, 128, 128, 128 0           batch_normalization_38[0][0]     
+                                                                 up_sampling2d_18[0][0]           
+__________________________________________________________________________________________________
+dropout_18 (Dropout)            (None, 128, 128, 128 0           concatenate_18[0][0]             
+__________________________________________________________________________________________________
+conv2d_74 (Conv2D)              (None, 128, 128, 64) 73792       dropout_18[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_19 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_74[0][0]                  
+__________________________________________________________________________________________________
+concatenate_19 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_37[0][0]     
+                                                                 up_sampling2d_19[0][0]           
+__________________________________________________________________________________________________
+dropout_19 (Dropout)            (None, 256, 256, 96) 0           concatenate_19[0][0]             
+__________________________________________________________________________________________________
+conv2d_75 (Conv2D)              (None, 256, 256, 32) 27680       dropout_19[0][0]                 
+__________________________________________________________________________________________________
+conv2d_76 (Conv2D)              (None, 256, 256, 1)  33          conv2d_75[0][0]                  
+==================================================================================================
+Total params: 490,689
+Trainable params: 489,985
+Non-trainable params: 704
+__________________________________________________________________________________________________
+10 32 0.0001
+Epoch 1/10
+ - 1220s - loss: 3.1641e-04 - val_loss: 5.1170e-05
+Epoch 2/10
+ - 1216s - loss: 5.0807e-05 - val_loss: 4.9535e-05
+Epoch 3/10
+ - 1216s - loss: 5.0057e-05 - val_loss: 4.9349e-05
+Epoch 4/10
+ - 1216s - loss: 4.9975e-05 - val_loss: 4.9518e-05
+Epoch 5/10
+ - 1216s - loss: 4.9768e-05 - val_loss: 5.0292e-05
+Epoch 6/10
+ - 1218s - loss: 4.9680e-05 - val_loss: 4.8755e-05
+Epoch 7/10
+ - 1216s - loss: 4.9547e-05 - val_loss: 4.9687e-05
+Epoch 8/10
+ - 1217s - loss: 4.9489e-05 - val_loss: 4.9773e-05
+Epoch 9/10
+ - 1216s - loss: 4.9481e-05 - val_loss: 4.9380e-05
+Epoch 10/10
+ - 1217s - loss: 4.9429e-05 - val_loss: 4.9397e-05
+unet_simple_deep lr = 3e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_10 (InputLayer)           (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_77 (Conv2D)              (None, 256, 256, 32) 320         input_10[0][0]                   
+__________________________________________________________________________________________________
+batch_normalization_41 (BatchNo (None, 256, 256, 32) 128         conv2d_77[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_20 (AveragePo (None, 128, 128, 32) 0           batch_normalization_41[0][0]     
+__________________________________________________________________________________________________
+conv2d_78 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_20[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_42 (BatchNo (None, 128, 128, 64) 256         conv2d_78[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_21 (AveragePo (None, 64, 64, 64)   0           batch_normalization_42[0][0]     
+__________________________________________________________________________________________________
+conv2d_79 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_21[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_43 (BatchNo (None, 64, 64, 128)  512         conv2d_79[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_22 (AveragePo (None, 32, 32, 128)  0           batch_normalization_43[0][0]     
+__________________________________________________________________________________________________
+conv2d_80 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_22[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_44 (BatchNo (None, 32, 32, 128)  512         conv2d_80[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_20 (UpSampling2D) (None, 64, 64, 128)  0           batch_normalization_44[0][0]     
+__________________________________________________________________________________________________
+concatenate_20 (Concatenate)    (None, 64, 64, 256)  0           batch_normalization_43[0][0]     
+                                                                 up_sampling2d_20[0][0]           
+__________________________________________________________________________________________________
+dropout_20 (Dropout)            (None, 64, 64, 256)  0           concatenate_20[0][0]             
+__________________________________________________________________________________________________
+conv2d_81 (Conv2D)              (None, 64, 64, 64)   147520      dropout_20[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_21 (UpSampling2D) (None, 128, 128, 64) 0           conv2d_81[0][0]                  
+__________________________________________________________________________________________________
+concatenate_21 (Concatenate)    (None, 128, 128, 128 0           batch_normalization_42[0][0]     
+                                                                 up_sampling2d_21[0][0]           
+__________________________________________________________________________________________________
+dropout_21 (Dropout)            (None, 128, 128, 128 0           concatenate_21[0][0]             
+__________________________________________________________________________________________________
+conv2d_82 (Conv2D)              (None, 128, 128, 64) 73792       dropout_21[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_22 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_82[0][0]                  
+__________________________________________________________________________________________________
+concatenate_22 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_41[0][0]     
+                                                                 up_sampling2d_22[0][0]           
+__________________________________________________________________________________________________
+dropout_22 (Dropout)            (None, 256, 256, 96) 0           concatenate_22[0][0]             
+__________________________________________________________________________________________________
+conv2d_83 (Conv2D)              (None, 256, 256, 32) 27680       dropout_22[0][0]                 
+__________________________________________________________________________________________________
+conv2d_84 (Conv2D)              (None, 256, 256, 1)  33          conv2d_83[0][0]                  
+==================================================================================================
+Total params: 490,689
+Trainable params: 489,985
+Non-trainable params: 704
+__________________________________________________________________________________________________
+10 32 3e-05
+Epoch 1/10
+ - 1224s - loss: 3.4728e-04 - val_loss: 5.0654e-05
+Epoch 2/10
+ - 1222s - loss: 5.0591e-05 - val_loss: 4.9546e-05
+Epoch 3/10
+ - 1221s - loss: 4.9980e-05 - val_loss: 4.9291e-05
+Epoch 4/10
+ - 1221s - loss: 4.9911e-05 - val_loss: 4.9472e-05
+Epoch 5/10
+ - 1222s - loss: 4.9739e-05 - val_loss: 5.0408e-05
+Epoch 6/10
+ - 1222s - loss: 4.9727e-05 - val_loss: 4.8637e-05
+Epoch 7/10
+ - 1222s - loss: 4.9572e-05 - val_loss: 4.9703e-05
+Epoch 8/10
+ - 1222s - loss: 4.9499e-05 - val_loss: 4.9755e-05
+Epoch 9/10
+ - 1222s - loss: 4.9488e-05 - val_loss: 4.9431e-05
+Epoch 10/10
+ - 1222s - loss: 4.9433e-05 - val_loss: 4.9375e-05
+Epoch 1/10
+unet_simple_deep lr = 1e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_11 (InputLayer)           (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_85 (Conv2D)              (None, 256, 256, 32) 320         input_11[0][0]                   
+__________________________________________________________________________________________________
+batch_normalization_45 (BatchNo (None, 256, 256, 32) 128         conv2d_85[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_23 (AveragePo (None, 128, 128, 32) 0           batch_normalization_45[0][0]     
+__________________________________________________________________________________________________
+conv2d_86 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_23[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_46 (BatchNo (None, 128, 128, 64) 256         conv2d_86[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_24 (AveragePo (None, 64, 64, 64)   0           batch_normalization_46[0][0]     
+__________________________________________________________________________________________________
+conv2d_87 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_24[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_47 (BatchNo (None, 64, 64, 128)  512         conv2d_87[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_25 (AveragePo (None, 32, 32, 128)  0           batch_normalization_47[0][0]     
+__________________________________________________________________________________________________
+conv2d_88 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_25[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_48 (BatchNo (None, 32, 32, 128)  512         conv2d_88[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_23 (UpSampling2D) (None, 64, 64, 128)  0           batch_normalization_48[0][0]     
+__________________________________________________________________________________________________
+concatenate_23 (Concatenate)    (None, 64, 64, 256)  0           batch_normalization_47[0][0]     
+                                                                 up_sampling2d_23[0][0]           
+__________________________________________________________________________________________________
+dropout_23 (Dropout)            (None, 64, 64, 256)  0           concatenate_23[0][0]             
+__________________________________________________________________________________________________
+conv2d_89 (Conv2D)              (None, 64, 64, 64)   147520      dropout_23[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_24 (UpSampling2D) (None, 128, 128, 64) 0           conv2d_89[0][0]                  
+__________________________________________________________________________________________________
+concatenate_24 (Concatenate)    (None, 128, 128, 128 0           batch_normalization_46[0][0]     
+                                                                 up_sampling2d_24[0][0]           
+__________________________________________________________________________________________________
+dropout_24 (Dropout)            (None, 128, 128, 128 0           concatenate_24[0][0]             
+__________________________________________________________________________________________________
+conv2d_90 (Conv2D)              (None, 128, 128, 64) 73792       dropout_24[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_25 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_90[0][0]                  
+__________________________________________________________________________________________________
+concatenate_25 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_45[0][0]     
+                                                                 up_sampling2d_25[0][0]           
+__________________________________________________________________________________________________
+dropout_25 (Dropout)            (None, 256, 256, 96) 0           concatenate_25[0][0]             
+__________________________________________________________________________________________________
+conv2d_91 (Conv2D)              (None, 256, 256, 32) 27680       dropout_25[0][0]                 
+__________________________________________________________________________________________________
+conv2d_92 (Conv2D)              (None, 256, 256, 1)  33          conv2d_91[0][0]                  
+==================================================================================================
+Total params: 490,689
+Trainable params: 489,985
+Non-trainable params: 704
+__________________________________________________________________________________________________
+10 32 1e-05
+Epoch 1/10
+ - 1221s - loss: 0.0027 - val_loss: 5.6201e-05
+Epoch 2/10
+ - 1215s - loss: 5.6986e-05 - val_loss: 5.5370e-05
+Epoch 3/10
+ - 1216s - loss: 5.5982e-05 - val_loss: 5.5438e-05
+Epoch 4/10
+ - 1215s - loss: 5.6084e-05 - val_loss: 5.5807e-05
+Epoch 5/10
+ - 1216s - loss: 5.5997e-05 - val_loss: 5.7076e-05
+Epoch 6/10
+ - 1216s - loss: 5.6101e-05 - val_loss: 5.4966e-05
+Epoch 7/10
+ - 1216s - loss: 5.6010e-05 - val_loss: 5.6300e-05
+Epoch 8/10
+ - 1216s - loss: 5.5972e-05 - val_loss: 5.6601e-05
+Epoch 9/10
+ - 1216s - loss: 5.6039e-05 - val_loss: 5.6319e-05
+Epoch 10/10
+ - 1215s - loss: 5.4022e-05 - val_loss: 5.1066e-05
+unet_simple_deep lr = 3e-06
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_12 (InputLayer)           (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_93 (Conv2D)              (None, 256, 256, 32) 320         input_12[0][0]                   
+__________________________________________________________________________________________________
+batch_normalization_49 (BatchNo (None, 256, 256, 32) 128         conv2d_93[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_26 (AveragePo (None, 128, 128, 32) 0           batch_normalization_49[0][0]     
+__________________________________________________________________________________________________
+conv2d_94 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_26[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_50 (BatchNo (None, 128, 128, 64) 256         conv2d_94[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_27 (AveragePo (None, 64, 64, 64)   0           batch_normalization_50[0][0]     
+__________________________________________________________________________________________________
+conv2d_95 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_27[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_51 (BatchNo (None, 64, 64, 128)  512         conv2d_95[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_28 (AveragePo (None, 32, 32, 128)  0           batch_normalization_51[0][0]     
+__________________________________________________________________________________________________
+conv2d_96 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_28[0][0]       
+__________________________________________________________________________________________________
+batch_normalization_52 (BatchNo (None, 32, 32, 128)  512         conv2d_96[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_26 (UpSampling2D) (None, 64, 64, 128)  0           batch_normalization_52[0][0]     
+__________________________________________________________________________________________________
+concatenate_26 (Concatenate)    (None, 64, 64, 256)  0           batch_normalization_51[0][0]     
+                                                                 up_sampling2d_26[0][0]           
+__________________________________________________________________________________________________
+dropout_26 (Dropout)            (None, 64, 64, 256)  0           concatenate_26[0][0]             
+__________________________________________________________________________________________________
+conv2d_97 (Conv2D)              (None, 64, 64, 64)   147520      dropout_26[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_27 (UpSampling2D) (None, 128, 128, 64) 0           conv2d_97[0][0]                  
+__________________________________________________________________________________________________
+concatenate_27 (Concatenate)    (None, 128, 128, 128 0           batch_normalization_50[0][0]     
+                                                                 up_sampling2d_27[0][0]           
+__________________________________________________________________________________________________
+dropout_27 (Dropout)            (None, 128, 128, 128 0           concatenate_27[0][0]             
+__________________________________________________________________________________________________
+conv2d_98 (Conv2D)              (None, 128, 128, 64) 73792       dropout_27[0][0]                 
+__________________________________________________________________________________________________
+up_sampling2d_28 (UpSampling2D) (None, 256, 256, 64) 0           conv2d_98[0][0]                  
+__________________________________________________________________________________________________
+concatenate_28 (Concatenate)    (None, 256, 256, 96) 0           batch_normalization_49[0][0]     
+                                                                 up_sampling2d_28[0][0]           
+__________________________________________________________________________________________________
+dropout_28 (Dropout)            (None, 256, 256, 96) 0           concatenate_28[0][0]             
+__________________________________________________________________________________________________
+conv2d_99 (Conv2D)              (None, 256, 256, 32) 27680       dropout_28[0][0]                 
+__________________________________________________________________________________________________
+conv2d_100 (Conv2D)             (None, 256, 256, 1)  33          conv2d_99[0][0]                  
+==================================================================================================
+Total params: 490,689
+Trainable params: 489,985
+Non-trainable params: 704
+__________________________________________________________________________________________________
+10 32 3e-06
+Epoch 1/10
+ - 1222s - loss: 0.0035 - val_loss: 5.6242e-05
+Epoch 2/10
+ - 1217s - loss: 5.8597e-05 - val_loss: 5.5396e-05
+Epoch 3/10
+ - 1218s - loss: 5.5999e-05 - val_loss: 5.5059e-05
+Epoch 4/10
+ - 1218s - loss: 5.4123e-05 - val_loss: 5.1754e-05
+Epoch 5/10
+ - 1219s - loss: 5.1919e-05 - val_loss: 5.1739e-05
+Epoch 6/10
+ - 1218s - loss: 5.1222e-05 - val_loss: 4.9507e-05
+Epoch 7/10
+ - 1218s - loss: 5.0763e-05 - val_loss: 5.0548e-05
+Epoch 8/10
+ - 1218s - loss: 5.0525e-05 - val_loss: 5.0610e-05
+Epoch 9/10
+ - 1218s - loss: 5.0423e-05 - val_loss: 5.0321e-05
+Epoch 10/10
+ - 1218s - loss: 5.0293e-05 - val_loss: 4.9950e-05

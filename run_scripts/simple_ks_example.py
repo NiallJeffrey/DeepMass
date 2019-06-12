@@ -51,7 +51,7 @@ clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype =
 clean_files = [str(os.getcwd()) + s for s in clean_files]
 train_array_clean = script_functions.load_data(list(clean_files[15:30]))
 
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype ='str'))
+noisy_files = list(np.genfromtxt('data_file_lists/noisy_data_files.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
 train_array_noisy = script_functions.load_data(list(noisy_files[15:30]))
 
@@ -120,13 +120,6 @@ print(n_epoch, batch_size, learning_rate_ks)
 
 history_ks = cnn.LossHistory()
 
-#cnn_ks.fit(train_array_noisy, train_array_clean,
-#           epochs=n_epoch, batch_size=batch_size, shuffle=True,
-#           validation_data=(test_array_noisy,test_array_clean),
-#           callbacks=[history_ks], verbose=1)
-
-#cnn_ks = cnn_instance.model()
-
 print(train_gen)
 print(train_array_noisy.shape)
 print(test_array_clean.shape)
@@ -142,7 +135,6 @@ cnn_ks.fit_generator(generator=train_gen,
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
-#autoencoder = load_model(str(output_dir) + '/' + str(output_model_file))
 
 
 # plot result
