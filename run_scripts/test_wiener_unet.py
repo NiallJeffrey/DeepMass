@@ -23,7 +23,7 @@ import script_functions
 print(os.getcwd())
 
 map_size = 256
-n_test = int(4000)
+n_test = int(8000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
@@ -42,13 +42,18 @@ print(mask.shape)
 
 # Load the data
 print('loading data:')
+t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[:]))
+train_array_clean = script_functions.load_data_list(list(clean_files[:]))
+print(time.time()-t)
 
+t=time.time()
 noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[:]))
+train_array_noisy = script_functions.load_data_list(list(noisy_files[:]))
+print(time.time()-t)
+
 
 # set masked regions to zero
 print('\nApply mask')

@@ -1,6 +1,7 @@
 #!/bin/bash
 #PBS -S /bin/bash
 #PBS -q gpu
+#PBS -j oe
 #PBS -N training_network
 #PBS -l nodes=1:ppn=32
 #PBS -l walltime=100:00:00
