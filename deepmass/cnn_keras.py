@@ -126,7 +126,8 @@ class unet:
     Dropout (not batch norm) on the decoder: http://cs230.stanford.edu/files_winter_2018/projects/6937642.pdf
     """
 
-    def __init__(self, map_size, learning_rate):
+
+    def __init__(self, map_size, learning_rate, dropout_val=None):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
@@ -134,6 +135,8 @@ class unet:
         """
         self.map_size = map_size
         self.learning_rate = learning_rate
+        self.dropout_val = dropout_val
+
 
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
@@ -197,7 +200,7 @@ class unet_simple_deep:
     Dropout (not batch norm) on the decoder: http://cs230.stanford.edu/files_winter_2018/projects/6937642.pdf
     """
 
-    def __init__(self, map_size, learning_rate):
+    def __init__(self, map_size, learning_rate, dropout_val=None):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
@@ -205,6 +208,8 @@ class unet_simple_deep:
         """
         self.map_size = map_size
         self.learning_rate = learning_rate
+        self.dropout_val = dropout_val
+
 
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
