@@ -28,9 +28,9 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 10
+n_epoch = 20
 batch_size = 32
-learning_rates = [1e-4, 1e-5]
+#learning_rates = [1e-4, 1e-5]
 
 # rescaling quantities
 scale_ks = 1.
@@ -45,13 +45,15 @@ print('loading data:')
 t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data_list(list(clean_files[:]))
+train_array_clean = script_functions.load_data(list(clean_files[:]))
 print(time.time()-t)
+time.sleep(5)
 
+print('loading noisy data')
 t=time.time()
 noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data_list(list(noisy_files[:]))
+train_array_noisy = script_functions.load_data(list(noisy_files[:]))
 print(time.time()-t)
 
 
@@ -117,14 +119,14 @@ print(train_array_noisy.shape[0] // 32)
 # Load encoder and train
 print('training network wiener (no dropout) \n')
 
-for learning_rate_ks in learning_rates:
-    print('unet_simple lr = ' + str(learning_rate_ks))
-    cnn_instance = cnn.unet_simple(map_size=map_size, learning_rate=learning_rate_ks)
+for learning_rate in [1e-4, 3e-5]:
+    print('unet_simple lr = ' + str(learning_rate))
+    cnn_instance = cnn.unet_simple(map_size=map_size, learning_rate=learning_rate)
     cnn_ks = cnn_instance.model()
 
-    print(n_epoch, batch_size, learning_rate_ks)
+    print(n_epoch, batch_size, learning_rate)
 
-    history_ks = cnn.LossHistory()
+    history = cnn.LossHistory()
 
     cnn_ks.fit_generator(generator=train_gen,
                          epochs=n_epoch,
@@ -132,17 +134,19 @@ for learning_rate_ks in learning_rates:
                          validation_data=test_gen,
                          validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
                          use_multiprocessing=True,
-                         callbacks=[history_ks], verbose=2)
+                         callbacks=[history], verbose=2)
 
-for learning_rate_ks in learning_rates:
-    print('unet lr = ' + str(learning_rate_ks))
-    cnn_instance = cnn.unet(map_size=map_size, learning_rate=learning_rate_ks)
+    print(history.losses)
+
+
+for learning_rate in [1e-5, 3e-6]:
+    print('unet_simple_deep lr = ' + str(learning_rate))
+    cnn_instance = cnn.unet_simple_deep(map_size=map_size, learning_rate=learning_rate)
     cnn_ks = cnn_instance.model()
 
-    print(n_epoch, batch_size, learning_rate_ks)
+    print(n_epoch, batch_size, learning_rate)
 
-    history_ks = cnn.LossHistory()
-
+    history = cnn.LossHistory()
 
     cnn_ks.fit_generator(generator=train_gen,
                          epochs=n_epoch,
@@ -150,23 +154,6 @@ for learning_rate_ks in learning_rates:
                          validation_data=test_gen,
                          validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
                          use_multiprocessing=True,
-                         callbacks=[history_ks], verbose=2)
+                         callbacks=[history], verbose=2)
 
-
-
-for learning_rate_ks in learning_rates:
-    print('unet_simple_deep lr = ' + str(learning_rate_ks))
-    cnn_instance = cnn.unet_simple_deep(map_size=map_size, learning_rate=learning_rate_ks)
-    cnn_ks = cnn_instance.model()
-
-    print(n_epoch, batch_size, learning_rate_ks)
-
-    history_ks = cnn.LossHistory()
-
-    cnn_ks.fit_generator(generator=train_gen,
-                         epochs=n_epoch,
-                         steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
-                         validation_data=test_gen,
-                         validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
-                         use_multiprocessing=True,
-                         callbacks=[history_ks], verbose=2)
+    print(history.losses)

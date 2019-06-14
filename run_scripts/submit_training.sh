@@ -4,11 +4,10 @@
 
 source activate tensorflow
 
-echo 
 pwd
 
 cd share/DeepMass/run_scripts/
 
-python simple_denoising_generator.py
+python test_wiener_unet.py
 
 

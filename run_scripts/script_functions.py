@@ -38,7 +38,7 @@ def load_data(file_list, verbose=True):
 
         data_array = np.concatenate([data_array,
                                             np.array(np.load(file_list[i+1]), dtype='float32')])
-
+        data_array = np.array(data_array,dtype = 'float32')
 
     return np.array(data_array, dtype='float32')
 
@@ -46,9 +46,9 @@ def load_data(file_list, verbose=True):
 
 def load_data_list(file_list):
 
-    data_array = np.concatenate([np.load(f) for f in file_list])
+    data_array = np.concatenate([np.array(np.load(f), dtype = 'float32') for f in file_list])
 
-    return np.array(data_array, dtype='float32')
+    return data_array
 
 
 def plot_cnn(clean, noisy, reconstructed, output_file, vmin=0.3, vmax=0.7):
