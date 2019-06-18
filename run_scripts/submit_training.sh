@@ -8,6 +8,5 @@ pwd
 
 cd share/DeepMass/run_scripts/
 
-python test_wiener_unet.py
-
+python test_wiener_all.py
 
