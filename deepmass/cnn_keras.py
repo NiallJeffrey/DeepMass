@@ -28,6 +28,7 @@ class LossHistory(Callback):
 
 
 
+
 class simple_model:
     """
     A CNN class that creates a simple denoiser

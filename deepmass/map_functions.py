@@ -167,7 +167,7 @@ def compute_spectrum_map(Px,size):
 
 
 def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power, Ncov,
-                     size=256, mask=None, fast_noise=True, sigma_eps=0.25, wiener_iter=30, reso=4.5):
+                     size=256, mask=None, fast_noise=True, sigma_eps=0.2865, wiener_iter=30, reso=4.5):
     """
 
     :param healpix_fits_file: fits file location of true kappa healpix map
@@ -197,7 +197,7 @@ def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power
 
     kappa_map = np.where(mask > 0.5, kappa_map, hp.UNSEEN)
 
-    A_ft_diagonal = ld.ks_fourier_matrix(256)
+    A_ft_diagonal = ld.ks_fourier_matrix(size)
 
     # read in data
     hdu_data = fits.open(data_file)
@@ -227,7 +227,13 @@ def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power
         if i % 10 == 0:
             print(str(i))
 
+
+
         patch = ld.random_map(kappa_map)
+
+        # Randomly transpose signal with probability 0.5
+        if np.random.randint(2) == 1:
+            patch = patch.T
 
         shear = ld.ks_inv(patch, A_ft_diagonal)
 
@@ -247,12 +253,12 @@ def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power
                                                                     nside)
 
             e1_noise_map = hp.gnomview(e1_des_noise, rot=[+75.0, -52.5], title='Mask',
-                                       min=-.2, max=.2, reso=reso, xsize=256, ysize=256, flip='geo',
+                                       reso=reso, xsize=size, ysize=size, flip='geo',
                                        return_projected_map=True)
             _ = plt.close()
 
             e2_noise_map = hp.gnomview(e2_des_noise, rot=[+75.0, -52.5], title='Mask',
-                                       min=-.2, max=.2, reso=reso, xsize=256, ysize=256, flip='geo',
+                                       reso=reso, xsize=size, ysize=size, flip='geo',
                                        return_projected_map=True)
             _ = plt.close()
 

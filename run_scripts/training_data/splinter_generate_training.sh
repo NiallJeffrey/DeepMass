@@ -15,6 +15,6 @@ cd /share/splinter/ucapnje/DeepMass/run_scripts/training_data
 ## this jobfile should be called as a job array: e.g. qsub -t 0-58
 PARTNAME=`printf "%02d" ${PBS_ARRAYID}`
 
-mkdir ../../picola_training/nicaea_rescaled/training_data$PARTNAME
+mkdir ../../picola_training/nicaea_rescaled_nongauss_noise/training_data$PARTNAME
 
 python generate_training.py $PARTNAME
