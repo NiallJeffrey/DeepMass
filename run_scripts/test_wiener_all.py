@@ -12,20 +12,23 @@ from deepmass import cnn_keras as cnn
 import numpy as np
 import time
 import os
+from scipy.stats import pearsonr
 
 import script_functions
 
 print(os.getcwd())
 
+rescale_factor = 3.0
+
 map_size = 256
-n_test = int(8000)
+n_test = int(10000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
-n_epoch = 20
+n_epoch = 2
 batch_size = 32
 
-learning_rates = [3e-5, 1e-5]
+learning_rates = [1e-5, 3e-6]
 
 # make SV mask
 print('loading mask \n')
@@ -35,17 +38,17 @@ print(mask.shape)
 # Load the data
 print('loading data:')
 t=time.time()
-clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype='str'))
+clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[:]))
+train_array_clean = script_functions.load_data(list(clean_files[20:25]))
 print(time.time()-t)
 time.sleep(5)
 
 print('loading noisy data')
 t=time.time()
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype='str'))
+noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[:]))
+train_array_noisy = script_functions.load_data(list(noisy_files[20:25]))
 print(time.time()-t)
 
 
@@ -69,17 +72,17 @@ random.shuffle(random_indices)
 train_array_clean = train_array_clean[random_indices]
 train_array_noisy = train_array_noisy[random_indices]
 
-print('Number of pixels sample = ' + str(len(train_array_clean[:2000].flatten())))
+print('Number of pixels sample = ' + str(len(train_array_clean[:4000].flatten())))
 print('pixels out of range (truth) = ' +
-      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:2000], 1.0, 0.5).flatten()) > 0.5)[0])))
+      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
 print('pixels out of range (input/noisy) = ' + \
-      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:2000], 1.0, 0.5).flatten()) > 0.5)[0])))
+      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
 
 print('clean array bytes = ' + str(train_array_clean.nbytes))
 print('noisy array bytes = ' + str(train_array_noisy.nbytes))
 
-train_array_clean = mf.rescale_map(train_array_clean, 1., 0.5, clip=True)
-train_array_noisy = mf.rescale_map(train_array_noisy, 1., 0.5, clip=True)
+train_array_clean = mf.rescale_map(train_array_clean, rescale_factor, 0.5, clip=True)
+train_array_noisy = mf.rescale_map(train_array_noisy, rescale_factor, 0.5, clip=True)
 
 # split a validation set
 test_array_clean = train_array_clean[:n_test]
@@ -90,6 +93,8 @@ train_array_noisy = train_array_noisy[n_test:]
 
 
 print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
+
 
 
 if plot_results:
@@ -134,27 +139,15 @@ for learning_rate in learning_rates:
     cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
 
 
-for learning_rate in learning_rates:
-    print('\nunet simple lr = ' + str(learning_rate))
-    cnn_instance = cnn.unet_simple(map_size=map_size, learning_rate=learning_rate)
-    cnn_wiener = cnn_instance.model()
+    test_output = cnn_wiener.predict(test_array_noisy)
 
-    print(n_epoch, batch_size, learning_rate)
+    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+    print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
 
-    history = cnn.LossHistory()
 
-    cnn_wiener.fit_generator(generator=train_gen,
-                         epochs=n_epoch,
-                         steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
-                         validation_data=test_gen,
-                         validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
-                         use_multiprocessing=True,
-                         callbacks=[history], verbose=2)
+    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
+    print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())))
 
-    np.savetxt('losses_unet_simple_' + str(learning_rate) + '.txt', history.losses)
-
-    # save network
-    cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
 
 
 for learning_rate in learning_rates:
@@ -178,3 +171,11 @@ for learning_rate in learning_rates:
 
     # save network
     cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
+
+    test_output = cnn_wiener.predict(test_array_noisy)
+
+    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+    print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
+
+    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
+    print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())))
