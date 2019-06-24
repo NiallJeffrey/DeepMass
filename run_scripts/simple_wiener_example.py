@@ -10,6 +10,7 @@ sys.path = ['../'] + sys.path
 from deepmass import map_functions as mf
 from deepmass import cnn_keras as cnn
 
+from scipy.stats import pearsonr
 import scipy.ndimage as ndimage
 from keras.callbacks import TensorBoard
 from keras.models import load_model
@@ -30,12 +31,12 @@ plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
 output_model_file = '210519.h5'
-n_epoch = 20
+n_epoch = 15
 batch_size = 32
-learning_rate_ks = 3e-5
+learning_rate_ks = 1e-5
 
 # rescaling quantities
-scale_ks = 1.
+scale_ks = 4.
 
 # make SV mask
 print('loading mask \n')
@@ -44,13 +45,13 @@ print(mask.shape)
 
 # Load the data
 print('loading data:')
-clean_files = list(np.genfromtxt('data_file_lists/clean_data_files.txt', dtype ='str'))
+clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype ='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[15:30]))
+train_array_clean = script_functions.load_data(list(clean_files[20:30]))
 
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files.txt', dtype ='str'))
+noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype ='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[15:30]))
+train_array_noisy = script_functions.load_data(list(noisy_files[20:30]))
 
 # set masked regions to zero
 print('\nApply mask')
@@ -94,6 +95,7 @@ test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
 
 print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
 
 if plot_results:
     print('Plotting data. Saving to: ' + str(plot_output_dir) + '/picola_data.png')
@@ -128,7 +130,7 @@ cnn_ks.fit_generator(generator=train_gen,
                      validation_data=test_gen,
                       validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
                       use_multiprocessing=True,
-                     callbacks=[history_ks], verbose=2)
+                     callbacks=[history_ks])#, verbose=2)
 
 # save network
 cnn_ks.save(str(h5_output_dir) + '/' + str(output_model_file))
@@ -140,9 +142,22 @@ if plot_results:
     print('Plotting results. Saving to: ' + str(plot_output_dir) + '/picola_output.png')
 
     # Apply trained CNN to test data
-    random_index = int(np.random.uniform(0,len(test_array_noisy[:, 0, 0, 0])-1000))
-    test_output = cnn_ks.predict(test_array_noisy[random_index:(random_index+1000)])
+#    random_index = int(np.random.uniform(0,len(test_array_noisy[:, 0, 0, 0])-1000))
+#    test_output = cnn_ks.predict(test_array_noisy[random_index:(random_index+1000)])
+    random_index = 1
+    test_output = cnn_ks.predict(test_array_noisy)
+    
+    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+    print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
+   
+    
+    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
+    print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())))
+
+
     test_output = mf.rescale_map(test_output, scale_ks, 0.5, True)
+    
+    
 
     script_functions.plot_cnn(mf.rescale_map(test_array_clean[random_index:(random_index+1000)],
                                              scale_ks, 0.5, True),
