@@ -45,6 +45,11 @@ def load_data(file_list, verbose=True):
 
 
 def load_data_list(file_list):
+    """
+
+    :param file_list: list of data files
+    :return:
+    """
 
     data_array = np.concatenate([np.array(np.load(f), dtype = 'float32') for f in file_list])
 
@@ -52,6 +57,12 @@ def load_data_list(file_list):
 
 
 def load_data_preallocate(file_list):
+    """
+    This is the prefered function to load. It is much faster and memory efficient as it generates
+    an array of the correct size at the start
+    :param file_list: list of float32 data files
+    :return: data array
+    """
 
 
     first_file = np.array(np.load(file_list[0]), dtype='float32')
