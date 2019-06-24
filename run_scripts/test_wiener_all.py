@@ -21,11 +21,11 @@ print(os.getcwd())
 rescale_factor = 3.0
 
 map_size = 256
-n_test = int(10000)
+n_test = int(8000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
-n_epoch = 2
+n_epoch = 20
 batch_size = 32
 
 learning_rates = [1e-5, 3e-6]
@@ -40,7 +40,10 @@ print('loading data:')
 t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data(list(clean_files[20:25]))
+train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]))
+#train_array_clean2 = script_functions.load_data(list(clean_files[:5]))
+#print('Array equal = ' + str(np.array_equal(train_array_clean, train_array_clean2)))
+
 print(time.time()-t)
 time.sleep(5)
 
@@ -48,7 +51,7 @@ print('loading noisy data')
 t=time.time()
 noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data(list(noisy_files[20:25]))
+train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]))
 print(time.time()-t)
 
 
@@ -130,15 +133,17 @@ for learning_rate in learning_rates:
                          steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
                          validation_data=test_gen,
                          validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
-                         use_multiprocessing=True,
                          callbacks=[history], verbose=2)
+    
+    print('sleep')
+    time.sleep(10)
 
     np.savetxt('losses_cnn_simple_' + str(learning_rate) + '.txt', history.losses)
 
     # save network
     cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
 
-
+    history = None
     test_output = cnn_wiener.predict(test_array_noisy)
 
     print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
@@ -148,7 +153,7 @@ for learning_rate in learning_rates:
     print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
     print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())))
 
-
+    test_output = None
 
 for learning_rate in learning_rates:
     print('\nunet deep lr = ' + str(learning_rate))
@@ -164,11 +169,13 @@ for learning_rate in learning_rates:
                          steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
                          validation_data=test_gen,
                          validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
-                         use_multiprocessing=True,
                          callbacks=[history], verbose=2)
 
-    np.savetxt('losses_unet_deep_' + str(learning_rate) + '.txt', history.losses)
+    print('sleep')
+    time.sleep(10)
 
+    np.savetxt('losses_unet_deep_' + str(learning_rate) + '.txt', history.losses)
+    history = None
     # save network
     cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
 
@@ -179,3 +186,5 @@ for learning_rate in learning_rates:
 
     print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
     print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())))
+
+    test_output = None

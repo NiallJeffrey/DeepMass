@@ -51,6 +51,28 @@ def load_data_list(file_list):
     return data_array
 
 
+def load_data_preallocate(file_list):
+
+
+    first_file = np.array(np.load(file_list[0]), dtype='float32')
+    print('loaded first file: ' +str(file_list[0]), flush=True)
+
+    shape_tuple = first_file.shape
+    new_shape = (shape_tuple[0]*len(file_list), shape_tuple[1], shape_tuple[2], shape_tuple[3])
+
+    data_array = np.empty(new_shape, dtype = 'float32')
+
+    data_array[:shape_tuple[0]] = first_file
+
+    for i in range(len(file_list) - 1):
+
+        print('Loading ' + str(file_list[i+1]), flush=True)
+
+        data_array[(shape_tuple[0]*(i+1)):(shape_tuple[0]*(i+2))] = np.load(file_list[i+1])
+
+    return data_array
+
+
 def plot_cnn(clean, noisy, reconstructed, output_file, vmin=0.3, vmax=0.7):
     """
     plots the clean maps, noisy maps and reconstruction
