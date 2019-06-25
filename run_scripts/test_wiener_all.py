@@ -81,14 +81,21 @@ train_array_noisy = mf.rescale_map(train_array_noisy, rescale_factor, 0.5, clip=
 test_array_noisy = train_array_noisy[:n_test]
 train_array_noisy = train_array_noisy[n_test:]
 
+print('Saving test array', flush=True)
+t= time.time()
 np.save(temp_location + 'temp_test_array_noisy', test_array_noisy)
+print(time.time() - t)
+
+print('Saving train array', flush=True)
+t= time.time()
 np.save(temp_location + 'temp_train_array_noisy', train_array_noisy)
+print(time.time() - t)
 
 test_array_noisy = None
 train_array_noisy = None
 
 # Load the clean data
-print('loading data:')
+print('loading data:', flush = True)
 t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
