@@ -1,3 +1,5 @@
+
+
 import matplotlib
 
 matplotlib.use('agg')
@@ -30,12 +32,62 @@ batch_size = 32
 
 learning_rates = [1e-5, 3e-6]
 
+temp_location = '/state/partition1/ucapnje/'
+
 # make SV mask
 print('loading mask \n')
 mask = np.float32(np.real(np.where(np.load('../picola_training/Ncov.npy') > 1.0, 0.0, 1.0)))
 print(mask.shape)
 
-# Load the data
+
+print('loading noisy data', flush=True)
+t=time.time()
+noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
+noisy_files = [str(os.getcwd()) + s for s in noisy_files]
+train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]))
+
+print(time.time()-t)
+time.sleep(int(time.time()-t)/10)
+
+# set masked regions to zero
+print('\nApply mask', flush=True)
+train_array_noisy = mf.mask_images(train_array_noisy, mask)
+
+# remove maps where numerical errors give really high absolute values (seem to occasionally happen - need to look into this)
+where_too_big = np.where(np.abs(np.sum(train_array_noisy[:, :, :, :], axis=(1, 2, 3))) > 1e10)
+
+mask_bad_data = np.ones(train_array_noisy[:, 0, 0, 0].shape, dtype=np.bool)
+print('\nNumber of bad files = ' + str(len(where_too_big[0])) + '\n')
+mask_bad_data[where_too_big] = False
+
+train_array_noisy = train_array_noisy[mask_bad_data, :, :, :]
+
+print('\nShuffle and take fraction of test data')
+random_indices = np.arange(len(train_array_noisy[:, 0, 0, 0]))
+random.shuffle(random_indices)
+
+train_array_noisy = train_array_noisy[random_indices]
+
+print('Number of pixels sample = ' + str(len(train_array_noisy[:4000].flatten())))
+
+print('pixels out of range (input/noisy) = ' +
+      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
+
+print('noisy array bytes = ' + str(train_array_noisy.nbytes))
+
+train_array_noisy = mf.rescale_map(train_array_noisy, rescale_factor, 0.5, clip=True)
+
+# split a validation set
+test_array_noisy = train_array_noisy[:n_test]
+train_array_noisy = train_array_noisy[n_test:]
+
+np.save(temp_location + 'temp_test_array_noisy', test_array_noisy)
+np.save(temp_location + 'temp_train_array_noisy', train_array_noisy)
+
+test_array_noisy = None
+train_array_noisy = None
+
+# Load the clean data
 print('loading data:')
 t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
@@ -47,60 +99,37 @@ train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]))
 print(time.time()-t)
 time.sleep(int(time.time()-t)/10)
 
-print('loading noisy data', flush=True)
-t=time.time()
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
-noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]))
-print(time.time()-t)
-
-
 # set masked regions to zero
 print('\nApply mask', flush=True)
 train_array_clean = mf.mask_images(train_array_clean, mask)
-train_array_noisy = mf.mask_images(train_array_noisy, mask)
 
 # remove maps where numerical errors give really high absolute values (seem to occasionally happen - need to look into this)
-where_too_big = np.where(np.abs(np.sum(train_array_noisy[:, :, :, :], axis=(1, 2, 3))) > 1e10)
-
-mask_bad_data = np.ones(train_array_noisy[:, 0, 0, 0].shape, dtype=np.bool)
-print('\nNumber of bad files = ' + str(len(where_too_big[0])) + '\n')
-mask_bad_data[where_too_big] = False
-
-#train_array_clean = train_array_clean[mask_bad_data, :, :, :]
-#train_array_noisy = train_array_noisy[mask_bad_data, :, :, :]
-train_array_clean[where_too_big, :, :, :] = 0. #np.nan
-train_array_noisy[where_too_big, :, :, :] =  0. #np.nan
+train_array_clean = train_array_clean[mask_bad_data, :, :, :]
 
 print('\nShuffle and take fraction of test data')
-random_indices = np.arange(len(train_array_clean[:, 0, 0, 0]))
-random.shuffle(random_indices)
 train_array_clean = train_array_clean[random_indices]
-train_array_noisy = train_array_noisy[random_indices]
 
 print('Number of pixels sample = ' + str(len(train_array_clean[:4000].flatten())))
-print('pixels out of range (truth) = ' +
+print('pixels out of range (clean) = ' + \
       str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
-print('pixels out of range (input/noisy) = ' + \
-      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
 
 print('clean array bytes = ' + str(train_array_clean.nbytes))
-print('noisy array bytes = ' + str(train_array_noisy.nbytes))
 
 train_array_clean = mf.rescale_map(train_array_clean, rescale_factor, 0.5, clip=True)
-train_array_noisy = mf.rescale_map(train_array_noisy, rescale_factor, 0.5, clip=True)
 
 # split a validation set
 test_array_clean = train_array_clean[:n_test]
 train_array_clean = train_array_clean[n_test:]
 
-test_array_noisy = train_array_noisy[:n_test]
-train_array_noisy = train_array_noisy[n_test:]
 
+test_array_noisy = np.load(temp_location + 'temp_test_array_noisy.npy')
+train_array_noisy = np.load(temp_location + 'temp_train_array_noisy.npy')
+
+os.remove(temp_location + 'temp_test_array_noisy.npy')
+os.remove(temp_location + 'temp_train_array_noisy.npy')
 
 print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
 print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())), flush=True)
-
 
 
 if plot_results:
