@@ -45,9 +45,9 @@ train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]))
 #print('Array equal = ' + str(np.array_equal(train_array_clean, train_array_clean2)))
 
 print(time.time()-t)
-time.sleep(5)
+time.sleep(int(time.time()-t)/10)
 
-print('loading noisy data')
+print('loading noisy data', flush=True)
 t=time.time()
 noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
@@ -56,18 +56,21 @@ print(time.time()-t)
 
 
 # set masked regions to zero
-print('\nApply mask')
+print('\nApply mask', flush=True)
 train_array_clean = mf.mask_images(train_array_clean, mask)
 train_array_noisy = mf.mask_images(train_array_noisy, mask)
 
-# remove maps where numerical errors give really low numbers (seem to occasionally happen - need to look into this)
-x = np.where(np.sum(np.abs(train_array_noisy[:, :, :, :]), axis=(1, 2, 3)) > 1e18)
-mask_bad_data = np.ones(train_array_noisy[:, 0, 0, 0].shape, dtype=np.bool)
-print('\nNumber of bad files = ' + str(len(x[0])) + '\n')
-mask_bad_data[x] = False
+# remove maps where numerical errors give really high absolute values (seem to occasionally happen - need to look into this)
+where_too_big = np.where(np.abs(np.sum(train_array_noisy[:, :, :, :], axis=(1, 2, 3))) > 1e10)
 
-train_array_clean = train_array_clean[mask_bad_data, :, :, :]
-train_array_noisy = train_array_noisy[mask_bad_data, :, :, :]
+mask_bad_data = np.ones(train_array_noisy[:, 0, 0, 0].shape, dtype=np.bool)
+print('\nNumber of bad files = ' + str(len(where_too_big[0])) + '\n')
+mask_bad_data[where_too_big] = False
+
+#train_array_clean = train_array_clean[mask_bad_data, :, :, :]
+#train_array_noisy = train_array_noisy[mask_bad_data, :, :, :]
+train_array_clean[where_too_big, :, :, :] = 0. #np.nan
+train_array_noisy[where_too_big, :, :, :] =  0. #np.nan
 
 print('\nShuffle and take fraction of test data')
 random_indices = np.arange(len(train_array_clean[:, 0, 0, 0]))
@@ -96,7 +99,7 @@ train_array_noisy = train_array_noisy[n_test:]
 
 
 print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
-print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
+print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())), flush=True)
 
 
 
