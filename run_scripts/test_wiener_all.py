@@ -57,8 +57,8 @@ train_array_noisy = mf.mask_images(train_array_noisy, mask)
 print('complete ' + str(time.time() - t) + 's \n', flush=True)
 
 
-# remove maps where numerical errors give really high absolute values (seem to occasionally happen - need to look into this)
-
+# remove maps where numerical errors give high absolute values due to error
+# (seems to occasionally happen - need to look into this)
 print('\nTest loaded files', flush = True)
 t=time.time()
 where_too_big = np.where(np.abs(np.sum(train_array_noisy[:, :, :, :], axis=(1, 2, 3))) > 1e10)
@@ -112,9 +112,7 @@ test_array_noisy = None
 train_array_noisy = None
 del test_array_noisy
 del train_array_noisy
-
 print('Deleted arrays from memory', flush=True)
-time.sleep(1)
 
 collected = gc.collect() 
 print('Garbage collect: ' + str(collected), flush=True)
@@ -198,7 +196,6 @@ for learning_rate in learning_rates:
                          validation_data=test_gen,
                          validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
                          callbacks=[history], verbose=2)
-    
 
     print('Saving losses', flush=True)
     np.savetxt('losses_cnn_simple_' + str(learning_rate) + '.txt', history.losses)
@@ -214,12 +211,10 @@ for learning_rate in learning_rates:
     print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
     print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
 
-
     print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
-    print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())), flush=True)
+    print('Result pearson = '+str(pearsonr(test_array_clean.flatten(), test_output.flatten())), flush=True)
 
     test_output = None
-
     collected = gc.collect()
     print('Garbage collect: ' + str(collected), flush=True)
 
