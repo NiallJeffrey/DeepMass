@@ -241,7 +241,7 @@ for learning_rate in learning_rates:
 
     # save network
     print('Save network', flush=True)
-    cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
+    cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_unet_' + str(learning_rate) + '.h5')
 
     test_output = cnn_wiener.predict(test_array_noisy)
 
