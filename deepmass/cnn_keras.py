@@ -195,6 +195,7 @@ class unet:
 
         return unet
 
+
 class unet_simple_deep:
     """
     A CNN class that creates a denoising U-NET
@@ -261,6 +262,161 @@ class unet_simple_deep:
             merge7 = Dropout(self.dropout_val)(merge7)
 
         x7 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
+        output = Conv2D(1, 1, activation='sigmoid')(x7)
+
+        unet = Model(input_img, output)
+        unet.summary()
+
+        if self.learning_rate is None:
+            unet.compile(optimizer='adam', loss='mse')
+        else:
+            unet.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+
+        return unet
+
+
+class unet_simplest_deeper:
+    """
+    A CNN class that creates a denoising U-NET
+    Dropout (not batch norm) on the decoder: http://cs230.stanford.edu/files_winter_2018/projects/6937642.pdf
+    """
+
+    def __init__(self, map_size, learning_rate, dropout_val=None):
+        """
+        Initialisation
+        :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
+        """
+        self.map_size = map_size
+        self.learning_rate = learning_rate
+        self.dropout_val = dropout_val
+        if dropout_val is not None:
+            print('using dropout: ' + str(dropout_val))
+
+
+    def model(self):
+        input_img = Input(shape=(self.map_size, self.map_size, 1))
+
+        x1 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
+        x1 = BatchNormalization()(x1)
+
+        pool1 = AveragePooling2D(pool_size=(2, 2))(x1)
+        x2 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool1)
+        x2 = BatchNormalization()(x2)
+
+        pool2 = AveragePooling2D(pool_size=(2, 2))(x2)
+        x3 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool2)
+        x3 = BatchNormalization()(x3)
+
+        pool3 = AveragePooling2D(pool_size=(2, 2))(x3)
+        x4 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool3)
+        x4 = BatchNormalization()(x4)
+
+        pool_deep = AveragePooling2D(pool_size=(2, 2))(x4)
+        xdeep = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool_deep)
+        xdeep = BatchNormalization()(xdeep)
+
+        updeep = UpSampling2D((2, 2))(xdeep)
+        mergedeep = concatenate([x4, updeep], axis=3)
+
+        xdeep2 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(mergedeep)
+        xdeep2 = BatchNormalization()(xdeep2)
+
+        up5 = UpSampling2D((2, 2))(xdeep2)
+        merge5 = concatenate([x3, up5], axis=3)
+        merge5 = BatchNormalization()(merge5)
+
+        x5 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
+
+        up6 = UpSampling2D((2, 2))(x5)
+        merge6 = concatenate([x2, up6], axis=3)
+        merge6 = BatchNormalization()(merge6)
+
+        x6 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge6)
+
+        up7 = UpSampling2D((2, 2))(x6)
+        merge7 = concatenate([x1, up7], axis=3)
+        merge7 = BatchNormalization()(merge7)
+
+        x7 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
+        output = Conv2D(1, 1, activation='sigmoid')(x7)
+
+        unet = Model(input_img, output)
+        unet.summary()
+
+        if self.learning_rate is None:
+            unet.compile(optimizer='adam', loss='mse')
+        else:
+            unet.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
+
+        return unet
+
+
+
+class unet_simple_deeper:
+    """
+    A CNN class that creates a denoising U-NET
+    Dropout (not batch norm) on the decoder: http://cs230.stanford.edu/files_winter_2018/projects/6937642.pdf
+    """
+
+    def __init__(self, map_size, learning_rate, dropout_val=None):
+        """
+        Initialisation
+        :param map_size: size of square image (there are map_size**2 pixels)
+        :param learning_rate: learning rate for the optimizer
+        """
+        self.map_size = map_size
+        self.learning_rate = learning_rate
+        self.dropout_val = dropout_val
+        if dropout_val is not None:
+            print('using dropout: ' + str(dropout_val))
+
+
+    def model(self):
+        input_img = Input(shape=(self.map_size, self.map_size, 1))
+
+        x1 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
+        x1 = BatchNormalization()(x1)
+
+        pool1 = AveragePooling2D(pool_size=(2, 2))(x1)
+        x2 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool1)
+        x2 = BatchNormalization()(x2)
+
+        pool2 = AveragePooling2D(pool_size=(2, 2))(x2)
+        x3 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool2)
+        x3 = BatchNormalization()(x3)
+
+        pool3 = AveragePooling2D(pool_size=(2, 2))(x3)
+        x4 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool3)
+        x4 = BatchNormalization()(x4)
+
+        pool_deep = AveragePooling2D(pool_size=(2, 2))(x4)
+        xdeep = Conv2D(256, 3, activation='relu', padding='same', kernel_initializer='he_normal')(pool_deep)
+        xdeep = BatchNormalization()(xdeep)
+
+        updeep = UpSampling2D((2, 2))(xdeep)
+        mergedeep = concatenate([x4, updeep], axis=3)
+
+        xdeep2 = Conv2D(128, 3, activation='relu', padding='same', kernel_initializer='he_normal')(mergedeep)
+        xdeep2 = BatchNormalization()(xdeep2)
+
+        up5 = UpSampling2D((2, 2))(xdeep2)
+        merge5 = concatenate([x3, up5], axis=3)
+        merge5 = BatchNormalization()(merge5)
+
+        x5 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge5)
+
+        up6 = UpSampling2D((2, 2))(x5)
+        merge6 = concatenate([x2, up6], axis=3)
+        merge6 = BatchNormalization()(merge6)
+
+        x6 = Conv2D(32, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge6)
+
+        up7 = UpSampling2D((2, 2))(x6)
+        merge7 = concatenate([x1, up7], axis=3)
+        merge7 = BatchNormalization()(merge7)
+
+        x7 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
         output = Conv2D(1, 1, activation='sigmoid')(x7)
 
         unet = Model(input_img, output)

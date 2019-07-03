@@ -177,55 +177,13 @@ print(train_array_noisy.shape)
 print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
-# Load encoder and train
-print('training network wiener (no dropout) \n')
 
-'''
+learning_rate=[None,1e-5,3e-6]
+
 for learning_rate in learning_rates:
-    print('\nsimple lr = ' + str(learning_rate))
-    cnn_instance = cnn.simple_model(map_size=map_size, learning_rate=learning_rate)
-    cnn_wiener = cnn_instance.model()
 
-    print(n_epoch, batch_size, learning_rate)
-
-    history = cnn.LossHistory()
-
-    cnn_wiener.fit_generator(generator=train_gen,
-                         epochs=n_epoch,
-                         steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
-                         validation_data=test_gen,
-                         validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
-                         callbacks=[history], verbose=2)
-
-    print('Saving losses', flush=True)
-    np.savetxt('losses_cnn_simple_' + str(learning_rate) + '.txt', history.losses)
-
-    # save network
-    print('Save network', flush=True)
-    cnn_wiener.save(str(h5_output_dir) + '/losses_cnn_simple_' + str(learning_rate) + '.h5')
-
-    history = None
-    print('Predict results', flush=True)
-    test_output = cnn_wiener.predict(test_array_noisy)
-
-    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
-    print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
-
-    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
-    print('Result pearson = '+str(pearsonr(test_array_clean.flatten(), test_output.flatten())), flush=True)
-
-    test_output = None
-    collected = gc.collect()
-    print('Garbage collect: ' + str(collected), flush=True)
-'''
-
-dropouts = [0.15,0.35,0.5,0.6]
-learning_rate=1e-5
-#for learning_rate in learning_rates:
-for dropout_val in dropouts:
-    print('\nDropout = '+str(dropout_val))
-    print('unet deep lr = ' + str(learning_rate))
-    cnn_instance = cnn.unet_simple_deep(map_size=map_size, learning_rate=1e-5, dropout_val=dropout_val)#learning_rate)
+    print('unet simplest deeeper lr = ' + str(learning_rate))
+    cnn_instance = cnn.unet_simplest_deeper(map_size=map_size, learning_rate=learning_rate)
     cnn_wiener = cnn_instance.model()
 
     print(n_epoch, batch_size, learning_rate)
@@ -260,3 +218,42 @@ for dropout_val in dropouts:
     collected = gc.collect()
     print('Garbage collect: ' + str(collected), flush=True)
 
+
+
+for learning_rate in learning_rates:
+
+    print('unet deeeper lr = ' + str(learning_rate))
+    cnn_instance = cnn.unet_simple_deeper(map_size=map_size, learning_rate=learning_rate)
+    cnn_wiener = cnn_instance.model()
+
+    print(n_epoch, batch_size, learning_rate)
+
+    history = cnn.LossHistory()
+
+    cnn_wiener.fit_generator(generator=train_gen,
+                         epochs=n_epoch,
+                         steps_per_epoch=np.ceil(train_array_noisy.shape[0] / 32),
+                         validation_data=test_gen,
+                         validation_steps=np.ceil(test_array_noisy.shape[0] / 32),
+                         callbacks=[history], verbose=2)
+
+    print('Saving losses', flush=True)
+#    np.savetxt('losses_unet_deep_' + str(learning_rate) + '.txt', history.losses)
+    history = None
+
+    # save network
+    print('Save network', flush=True)
+    cnn_wiener.save(str(h5_output_dir) + '/losses_droput_unet_' + str(learning_rate) + '.h5')
+
+    test_output = cnn_wiener.predict(test_array_noisy)
+
+    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+    print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
+
+    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
+    print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())), flush=True)
+
+    test_output = None
+
+    collected = gc.collect()
+    print('Garbage collect: ' + str(collected), flush=True)
