@@ -210,6 +210,8 @@ class unet_simple_deep:
         self.map_size = map_size
         self.learning_rate = learning_rate
         self.dropout_val = dropout_val
+        if dropout_val is not None:
+            print('using dropout: ' + str(dropout_val))
 
 
     def model(self):
