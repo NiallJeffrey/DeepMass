@@ -56,32 +56,51 @@ def load_data_list(file_list):
     return data_array
 
 
-def load_data_preallocate(file_list):
+def load_data_preallocate(file_list, n_images_per_file=None):
     """
     This is the prefered function to load. It is much faster and memory efficient as it generates
     an array of the correct size at the start
     :param file_list: list of float32 data files
+    :param n_images_per_file: number of images in each file of the file list in order
     :return: data array
     """
 
-
     first_file = np.array(np.load(file_list[0]), dtype='float32')
-    print('loaded first file: ' +str(file_list[0]), flush=True)
+    print('loaded first file: ' + str(file_list[0]), flush=True)
 
     shape_tuple = first_file.shape
-    new_shape = (shape_tuple[0]*len(file_list), shape_tuple[1], shape_tuple[2], shape_tuple[3])
 
-    data_array = np.empty(new_shape, dtype = 'float32')
+    if n_images_per_file is None:
+        new_shape = (shape_tuple[0]*len(file_list), shape_tuple[1], shape_tuple[2], shape_tuple[3])
 
-    data_array[:shape_tuple[0]] = first_file
+        data_array = np.empty(new_shape, dtype = 'float32')
 
-    for i in range(len(file_list) - 1):
+        data_array[:shape_tuple[0]] = first_file
 
-        print('Loading ' + str(file_list[i+1]), flush=True)
+        for i in range(len(file_list) - 1):
 
-        data_array[(shape_tuple[0]*(i+1)):(shape_tuple[0]*(i+2))] = np.load(file_list[i+1])
+            print('Loading ' + str(file_list[i+1]), flush=True)
 
-    return data_array
+            data_array[(shape_tuple[0]*(i+1)):(shape_tuple[0]*(i+2))] = np.load(file_list[i+1])
+
+        return data_array
+
+    else:
+        new_shape = (np.sum(n_images_per_file), shape_tuple[1], shape_tuple[2], shape_tuple[3])
+        data_array = np.empty(new_shape, dtype='float32')
+
+        data_array[:n_images_per_file[0]] = first_file
+
+        position_counter = n_images_per_file[0]
+
+        for i in range(len(file_list) - 1):
+            i+=1
+            print('Loading ' + str(file_list[i]), flush=True)
+            data_array[position_counter:(position_counter+n_images_per_file[i])] = np.load(file_list[i])
+            position_counter += n_images_per_file[i]
+
+        return data_array
+
 
 
 def plot_cnn(clean, noisy, reconstructed, output_file, vmin=0.3, vmax=0.7):
