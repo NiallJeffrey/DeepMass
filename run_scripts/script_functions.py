@@ -90,14 +90,17 @@ def load_data_preallocate(file_list, n_images_per_file=None):
         new_shape = (np.sum(n_images_per_file), shape_tuple[1], shape_tuple[2], shape_tuple[3])
         data_array = np.empty(new_shape, dtype='float32')
 
-        data_array[:n_images_per_file[0]] = first_file
+        data_array[:n_images_per_file[0]] = first_file[:n_images_per_file[0]]
 
         position_counter = n_images_per_file[0]
 
         for i in range(len(file_list) - 1):
             i+=1
             print('Loading ' + str(file_list[i]), flush=True)
-            data_array[position_counter:(position_counter+n_images_per_file[i])] = np.load(file_list[i])
+
+            data_array[position_counter:(position_counter+n_images_per_file[i])] = \
+                np.load(file_list[i])[:n_images_per_file[i]]
+
             position_counter += n_images_per_file[i]
 
         return data_array
