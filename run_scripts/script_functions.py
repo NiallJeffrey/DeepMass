@@ -65,6 +65,7 @@ def load_data_preallocate(file_list, n_images_per_file=None):
     :return: data array
     """
 
+    n_images_per_file = np.array(n_images_per_file, dtype='int')
     first_file = np.array(np.load(file_list[0]), dtype='float32')
     print('loaded first file: ' + str(file_list[0]), flush=True)
 
