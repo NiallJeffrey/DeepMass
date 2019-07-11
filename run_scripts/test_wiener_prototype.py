@@ -28,10 +28,8 @@ n_test = int(8000)
 plot_results = True
 plot_output_dir = '../outputs/picola_script_outputs'
 h5_output_dir = '../outputs/h5_files'
-n_epoch = 10
+n_epoch = 20
 batch_size = 32
-
-learning_rates = [1e-5]
 
 temp_location = '/home/ucapnje/partition_mount/'
 
@@ -151,6 +149,10 @@ np.clip(train_array_clean, 0.0, 1.0, out=train_array_clean)
 test_array_clean = train_array_clean[:n_test]
 train_array_clean = train_array_clean[n_test:]
 
+#np.save(temp_location + 'temp_test_array_clean.npy', test_array_clean)
+#np.save(temp_location + 'temp_train_array_clean.npy', train_array_clean)
+
+
 print('Reloading noisy data', flush=True)
 test_array_noisy = np.load(temp_location + 'temp_test_array_noisy.npy')
 train_array_noisy = np.load(temp_location + 'temp_train_array_noisy.npy')
@@ -178,7 +180,7 @@ print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
 
-learning_rate=[None,1e-5,3e-6]
+learning_rates=[None,1e-5,3e-6]
 
 for learning_rate in learning_rates:
 
