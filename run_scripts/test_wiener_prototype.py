@@ -68,8 +68,8 @@ if plot_results:
                                       output_file=str(plot_output_dir) + '/picola_data.png')
 
 
-train_gen = cnn.batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size, sample_weights=True)
-test_gen = cnn.batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size, sample_weights=True)
+train_gen = cnn.batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size)
+test_gen = cnn.batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size)
 
 print(train_gen)
 print(train_array_noisy.shape)
@@ -82,7 +82,7 @@ learning_rates=[1e-5,3e-6]
 for learning_rate in learning_rates:
 
     print('unet simplest deeeper lr = ' + str(learning_rate))
-    cnn_instance = cnn.unet_simplest_deeper(map_size=map_size, learning_rate=learning_rate)
+    cnn_instance = cnn.unet_simplest_deeper2(map_size=map_size, learning_rate=learning_rate)
     cnn_wiener = cnn_instance.model()
 
     print(n_epoch, batch_size, learning_rate)
@@ -102,7 +102,7 @@ for learning_rate in learning_rates:
 
     # save network
     print('Save network', flush=True)
-    cnn_wiener.save(str(h5_output_dir) + '/model_unet_weights_simplest' + str(learning_rate) + '.h5')
+    cnn_wiener.save(str(h5_output_dir) + '/model_unet_simplest2' + str(learning_rate) + '.h5')
 
     test_output = cnn_wiener.predict(test_array_noisy)
 
