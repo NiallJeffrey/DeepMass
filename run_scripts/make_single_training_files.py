@@ -27,12 +27,13 @@ n_images_per_file[central_indices] = 6500
 print('nuber of expected files = ' + str(np.sum(n_images_per_file)))
 
 
-rescale_factor = 3.
+rescale_factor = 1.
 
 map_size = 256
 n_test = int(8000)
 
-output_location = '/share/testde/ucapnje/training_data/wiener/'
+#output_location = '/home/ucapnje/testde_mount/ucapnje/training_data/ks/'
+output_location = '/share/testde/ucapnje/training_data/ks/'
 
 # make SV mask
 print('loading mask \n')
@@ -42,9 +43,9 @@ print(mask.shape)
 
 print('loading noisy/input data', flush=True)
 t=time.time()
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
+noisy_files = list(np.genfromtxt('data_file_lists/ks_files_nongauss_noise.txt', dtype='str'))
 noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]), n_images_per_file)
+train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]), n_images_per_file[:])
 
 print(time.time()-t)
 time.sleep(int(time.time()-t)/10)
@@ -99,12 +100,12 @@ train_array_noisy = train_array_noisy[n_test:]
 
 print('Saving test array', flush=True)
 t= time.time()
-np.save(output_location + 'test_array_wiener', test_array_noisy)
+np.save(output_location + 'test_array_ks', test_array_noisy)
 print(time.time() - t)
 
 print('Saving train array', flush=True)
 t= time.time()
-np.save(output_location + 'test_array_wiener', train_array_noisy)
+np.save(output_location + 'train_array_ks', train_array_noisy)
 print(time.time() - t)
 
 test_array_noisy = None
@@ -122,10 +123,9 @@ print('loading data:', flush = True)
 t=time.time()
 clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
 clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]), n_images_per_file)
+train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]), n_images_per_file[:])
 
 print(time.time()-t)
-time.sleep(int(time.time()-t)/10)
 
 # set masked regions to zero
 print('\nApply mask', flush=True)

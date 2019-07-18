@@ -1,0 +1,18 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+Loading input data
+849.0535032749176
+Loading clean data
+1360.5619473457336
+Using TensorFlow backend.
+Traceback (most recent call last):
+  File "test_wiener_prototype.py", line 56, in <module>
+    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+NameError: name 'test_array_clean' is not defined

@@ -1,0 +1,69 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading data:
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_kappa_true.npy
+155.28017473220825
+loading noisy data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_wiener.npy
+Using TensorFlow backend.
+/anaconda/envs/tensorflow/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/anaconda/envs/tensorflow/lib/python3.6/site-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in true_divide
+  ret = ret.dtype.type(ret / rcount)
+/anaconda/envs/tensorflow/lib/python3.6/site-packages/scipy/stats/stats.py:3005: RuntimeWarning: Mean of empty slice.
+  mx = x.mean()
+/anaconda/envs/tensorflow/lib/python3.6/site-packages/scipy/stats/stats.py:3006: RuntimeWarning: Mean of empty slice.
+  my = y.mean()
+/anaconda/envs/tensorflow/lib/python3.6/site-packages/scipy/stats/stats.py:3010: RuntimeWarning: invalid value encountered in float_scalars
+  r = r_num / r_den
+155.72905564308167
+
+Apply mask
+
+Number of bad files = 65000
+
+
+Shuffle and take fraction of test data
+Number of pixels sample = 0
+pixels out of range (truth) = 0
+pixels out of range (input/noisy) = 0
+clean array bytes = 0
+noisy array bytes = 0
+Test loss = nan
+Test pearson = (nan, nan)
+Plotting data. Saving to: ../outputs/picola_script_outputs/picola_data.png
+Traceback (most recent call last):
+  File "test_wiener_all.py", line 109, in <module>
+    output_file=str(plot_output_dir) + '/picola_data.png')
+  File "/home/ucapnje/share/DeepMass/run_scripts/script_functions.py", line 135, in plot_noisy_clean
+    random_image_index = random.randint(0, n_images - 6)
+  File "/anaconda/envs/tensorflow/lib/python3.6/random.py", line 221, in randint
+    return self.randrange(a, b+1)
+  File "/anaconda/envs/tensorflow/lib/python3.6/random.py", line 199, in randrange
+    raise ValueError("empty range for randrange() (%d,%d, %d)" % (istart, istop, width))
+ValueError: empty range for randrange() (0,-5, -5)

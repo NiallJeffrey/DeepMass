@@ -1,0 +1,279 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+Loading input data
+848.6118154525757
+Loading clean data
+971.3451664447784
+Test loss = 1840.2904
+Test pearson = (0.34128594, 0.0)
+2019-07-15 23:09:29.170656: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2019-07-15 23:09:30.311581: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: Tesla V100-PCIE-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.38
+pciBusID: 0000:3b:00.0
+totalMemory: 15.75GiB freeMemory: 15.44GiB
+2019-07-15 23:09:30.311678: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2019-07-15 23:09:33.399963: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-07-15 23:09:33.400018: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2019-07-15 23:09:33.400026: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2019-07-15 23:09:33.400150: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 14941 MB memory) -> physical GPU (device: 0, name: Tesla V100-PCIE-16GB, pci bus id: 0000:3b:00.0, compute capability: 7.0)
+Plotting data. Saving to: ../outputs/picola_script_outputs/picola_data.png
+<generator object batch_generator at 0x2bcb4d75fe60>
+(368684, 256, 256, 1)
+(8000, 256, 256, 1)
+11521
+unet simplest deeeper lr = 1e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 256, 256, 16) 160         input_1[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_1 (BatchNor (None, 256, 256, 16) 64          conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_1 (AveragePoo (None, 128, 128, 16) 0           batch_normalization_1[0][0]      
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 128, 128, 32) 4640        average_pooling2d_1[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_2 (BatchNor (None, 128, 128, 32) 128         conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_2 (AveragePoo (None, 64, 64, 32)   0           batch_normalization_2[0][0]      
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 64, 64, 64)   18496       average_pooling2d_2[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_3 (BatchNor (None, 64, 64, 64)   256         conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_3 (AveragePoo (None, 32, 32, 64)   0           batch_normalization_3[0][0]      
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 32, 32, 64)   36928       average_pooling2d_3[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_4 (BatchNor (None, 32, 32, 64)   256         conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+average_pooling2d_4 (AveragePoo (None, 16, 16, 64)   0           batch_normalization_4[0][0]      
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 16, 16, 64)   36928       average_pooling2d_4[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_5 (BatchNor (None, 16, 16, 64)   256         conv2d_5[0][0]                   
+__________________________________________________________________________________________________
+up_sampling2d_1 (UpSampling2D)  (None, 32, 32, 64)   0           batch_normalization_5[0][0]      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 32, 32, 128)  0           batch_normalization_4[0][0]      
+                                                                 up_sampling2d_1[0][0]            
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 32, 32, 64)   73792       concatenate_1[0][0]              
+__________________________________________________________________________________________________
+batch_normalization_6 (BatchNor (None, 32, 32, 64)   256         conv2d_6[0][0]                   
+__________________________________________________________________________________________________
+up_sampling2d_2 (UpSampling2D)  (None, 64, 64, 64)   0           batch_normalization_6[0][0]      
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 64, 64, 128)  0           batch_normalization_3[0][0]      
+                                                                 up_sampling2d_2[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_7 (BatchNor (None, 64, 64, 128)  512         concatenate_2[0][0]              
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 64, 64, 64)   73792       batch_normalization_7[0][0]      
+__________________________________________________________________________________________________
+up_sampling2d_3 (UpSampling2D)  (None, 128, 128, 64) 0           conv2d_7[0][0]                   
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 128, 128, 96) 0           batch_normalization_2[0][0]      
+                                                                 up_sampling2d_3[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_8 (BatchNor (None, 128, 128, 96) 384         concatenate_3[0][0]              
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 128, 128, 32) 27680       batch_normalization_8[0][0]      
+__________________________________________________________________________________________________
+up_sampling2d_4 (UpSampling2D)  (None, 256, 256, 32) 0           conv2d_8[0][0]                   
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 256, 256, 48) 0           batch_normalization_1[0][0]      
+                                                                 up_sampling2d_4[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_9 (BatchNor (None, 256, 256, 48) 192         concatenate_4[0][0]              
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 256, 256, 16) 6928        batch_normalization_9[0][0]      
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 256, 256, 1)  17          conv2d_9[0][0]                   
+==================================================================================================
+Total params: 281,665
+Trainable params: 280,513
+Non-trainable params: 1,152
+__________________________________________________________________________________________________
+20 32 1e-05
+Epoch 1/20
+ - 1161s - loss: 3.0352 - val_loss: 0.9509
+Epoch 2/20
+ - 1154s - loss: 0.9244 - val_loss: 0.9195
+Epoch 3/20
+ - 1153s - loss: 0.9181 - val_loss: 0.9162
+Epoch 4/20
+ - 1154s - loss: 0.9155 - val_loss: 0.9141
+Epoch 5/20
+ - 1154s - loss: 0.9144 - val_loss: 0.9127
+Epoch 6/20
+ - 1153s - loss: 0.9132 - val_loss: 0.9117
+Epoch 7/20
+ - 1154s - loss: 0.9124 - val_loss: 0.9099
+Epoch 8/20
+ - 1154s - loss: 0.9115 - val_loss: 0.9104
+Epoch 9/20
+ - 1155s - loss: 0.9111 - val_loss: 0.9095
+Epoch 10/20
+ - 1154s - loss: 0.9107 - val_loss: 0.9094
+Epoch 11/20
+ - 1152s - loss: 0.9107 - val_loss: 0.9090
+Epoch 12/20
+ - 1152s - loss: 0.9098 - val_loss: 0.9077
+Epoch 13/20
+ - 1154s - loss: 0.9096 - val_loss: 0.9091
+Epoch 14/20
+ - 1154s - loss: 0.9095 - val_loss: 0.9064
+Epoch 15/20
+ - 1155s - loss: 0.9093 - val_loss: 0.9072
+Epoch 16/20
+ - 1154s - loss: 0.9090 - val_loss: 0.9077
+Epoch 17/20
+ - 1152s - loss: 0.9088 - val_loss: 0.9066
+Epoch 18/20
+ - 1152s - loss: 0.9087 - val_loss: 0.9081
+Epoch 19/20
+ - 1153s - loss: 0.9086 - val_loss: 0.9082
+Epoch 20/20
+ - 1153s - loss: 0.9082 - val_loss: 0.9079
+Saving losses
+Save network
+Test loss weights= 1840.2904
+Test pearson = (0.34128594, 0.0)
+Result loss weights=1743.4087
+Result pearson = (0.35819095, 0.0)
+Garbage collect: 39676
+unet simplest deeeper lr = 3e-06
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_2 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 256, 256, 16) 160         input_2[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_10 (BatchNo (None, 256, 256, 16) 64          conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_5 (AveragePoo (None, 128, 128, 16) 0           batch_normalization_10[0][0]     
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 128, 128, 32) 4640        average_pooling2d_5[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_11 (BatchNo (None, 128, 128, 32) 128         conv2d_12[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_6 (AveragePoo (None, 64, 64, 32)   0           batch_normalization_11[0][0]     
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 64, 64, 64)   18496       average_pooling2d_6[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_12 (BatchNo (None, 64, 64, 64)   256         conv2d_13[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_7 (AveragePoo (None, 32, 32, 64)   0           batch_normalization_12[0][0]     
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 32, 32, 64)   36928       average_pooling2d_7[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_13 (BatchNo (None, 32, 32, 64)   256         conv2d_14[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_8 (AveragePoo (None, 16, 16, 64)   0           batch_normalization_13[0][0]     
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 16, 16, 64)   36928       average_pooling2d_8[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_14 (BatchNo (None, 16, 16, 64)   256         conv2d_15[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_5 (UpSampling2D)  (None, 32, 32, 64)   0           batch_normalization_14[0][0]     
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 32, 32, 128)  0           batch_normalization_13[0][0]     
+                                                                 up_sampling2d_5[0][0]            
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 32, 32, 64)   73792       concatenate_5[0][0]              
+__________________________________________________________________________________________________
+batch_normalization_15 (BatchNo (None, 32, 32, 64)   256         conv2d_16[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_6 (UpSampling2D)  (None, 64, 64, 64)   0           batch_normalization_15[0][0]     
+__________________________________________________________________________________________________
+concatenate_6 (Concatenate)     (None, 64, 64, 128)  0           batch_normalization_12[0][0]     
+                                                                 up_sampling2d_6[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_16 (BatchNo (None, 64, 64, 128)  512         concatenate_6[0][0]              
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 64, 64, 64)   73792       batch_normalization_16[0][0]     
+__________________________________________________________________________________________________
+up_sampling2d_7 (UpSampling2D)  (None, 128, 128, 64) 0           conv2d_17[0][0]                  
+__________________________________________________________________________________________________
+concatenate_7 (Concatenate)     (None, 128, 128, 96) 0           batch_normalization_11[0][0]     
+                                                                 up_sampling2d_7[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_17 (BatchNo (None, 128, 128, 96) 384         concatenate_7[0][0]              
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 128, 128, 32) 27680       batch_normalization_17[0][0]     
+__________________________________________________________________________________________________
+up_sampling2d_8 (UpSampling2D)  (None, 256, 256, 32) 0           conv2d_18[0][0]                  
+__________________________________________________________________________________________________
+concatenate_8 (Concatenate)     (None, 256, 256, 48) 0           batch_normalization_10[0][0]     
+                                                                 up_sampling2d_8[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_18 (BatchNo (None, 256, 256, 48) 192         concatenate_8[0][0]              
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 256, 256, 16) 6928        batch_normalization_18[0][0]     
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 256, 256, 1)  17          conv2d_19[0][0]                  
+==================================================================================================
+Total params: 281,665
+Trainable params: 280,513
+Non-trainable params: 1,152
+__________________________________________________________________________________________________
+20 32 3e-06
+Epoch 1/20
+ - 1153s - loss: 2.4179 - val_loss: 0.9407
+Epoch 2/20
+ - 1154s - loss: 0.9174 - val_loss: 0.9057
+Epoch 3/20
+ - 1153s - loss: 0.9004 - val_loss: 0.8956
+Epoch 4/20
+ - 1155s - loss: 0.8934 - val_loss: 0.8906
+Epoch 5/20
+ - 1154s - loss: 0.8896 - val_loss: 0.8868
+Epoch 6/20
+ - 1154s - loss: 0.8871 - val_loss: 0.8849
+Epoch 7/20
+ - 1155s - loss: 0.8856 - val_loss: 0.8829
+Epoch 8/20
+ - 1154s - loss: 0.8843 - val_loss: 0.8830
+Epoch 9/20
+ - 1155s - loss: 0.8834 - val_loss: 0.8820
+Epoch 10/20
+ - 1155s - loss: 0.8826 - val_loss: 0.8802
+Epoch 11/20
+ - 1155s - loss: 0.8820 - val_loss: 0.8803
+Epoch 12/20
+ - 1154s - loss: 0.8814 - val_loss: 0.8787
+Epoch 13/20
+ - 1153s - loss: 0.8808 - val_loss: 0.8801
+Epoch 14/20
+ - 1154s - loss: 0.8803 - val_loss: 0.8783
+Epoch 15/20
+ - 1154s - loss: 0.8799 - val_loss: 0.8792
+Epoch 16/20
+ - 1154s - loss: 0.8795 - val_loss: 0.8781
+Epoch 17/20
+ - 1154s - loss: 0.8792 - val_loss: 0.8777
+Epoch 18/20
+ - 1154s - loss: 0.8788 - val_loss: 0.8774
+Epoch 19/20
+ - 1154s - loss: 0.8784 - val_loss: 0.8776
+Epoch 20/20
+ - 1155s - loss: 0.8781 - val_loss: 0.8777
+Saving losses
+Save network
+Test loss weights= 1840.2904
+Test pearson = (0.34128594, 0.0)
+Result loss weights=1704.3872
+Result pearson = (0.3821293, 0.0)
+Garbage collect: 42074
+Using TensorFlow backend.

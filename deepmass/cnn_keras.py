@@ -11,10 +11,17 @@ from keras.optimizers import Adam
 
 
 # Make batch generator
-def batch_generator(noisy_array, clean_array, gen_batch_size=32):
-    while True:
-        index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
-        yield (noisy_array[index], clean_array[index])
+def batch_generator(noisy_array, clean_array, gen_batch_size=32, sample_weights=False):
+
+    if sample_weights==False:
+        while True:
+            index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
+            yield (noisy_array[index], clean_array[index])
+    else:
+        while True:
+            index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
+            yield (noisy_array[index], clean_array[index], np.array([1./np.var(clean_array[i]) for i in index]))
+
 
 
 class LossHistory(Callback):

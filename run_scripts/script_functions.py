@@ -9,7 +9,7 @@ sys.path = ['../'] + sys.path
 
 
 from deepmass import map_functions as mf
-from deepmass import cnn_keras as cnn
+#from deepmass import cnn_keras as cnn
 
 import scipy.ndimage as ndimage
 

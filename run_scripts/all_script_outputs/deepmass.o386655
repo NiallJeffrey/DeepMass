@@ -1,0 +1,3 @@
+[91mERROR  : There was an error mounting /share/testde: Too many levels of symbolic links
+[0m[31mABORT  : Retval = 255
+[0m

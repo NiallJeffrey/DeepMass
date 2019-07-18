@@ -1,0 +1,63 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading noisy/input data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_wiener.npy
+31.410367488861084
+
+Apply mask
+complete 0.4741683006286621s 
+
+
+Test loaded files
+complete 0.329700231552124s 
+
+
+Number of bad files = 25
+
+complete 1.0457885265350342s 
+
+
+Shuffle and take fraction of test data
+complete 1.0576081275939941s 
+
+Number of pixels sample = 262144000
+pixels out of range (input/noisy) = 0
+noisy array bytes = 3401318400
+
+Rescaling
+complete 2.0214364528656006s 
+
+Saving test array
+0.10712718963623047
+Saving train array
+1.6207630634307861
+Deleted arrays from memory
+Garbage collect: 16
+loading data:
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_kappa_true.npy
+31.464616060256958
+
+Apply mask
+
+Shuffle and take fraction of test data
+Number of pixels sample = 262144000
+pixels out of range (clean) = 4041
+clean array bytes = 3401318400
+Reloading noisy data
+Test loss = 0.00047834872
+Test pearson = (0.34569034, 0.0)
+2019-07-02 10:58:01.988844: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2019-07-02 10:58:02.000127: E tensorflow/stream_executor/cuda/cuda_driver.cc:397] failed call to cuInit: CUDA_ERROR_UNKNOWN
+2019-07-02 10:58:02.000166: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:163] retrieving CUDA diagnostic information for host: gpu-0-1.local
+2019-07-02 10:58:02.000175: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:170] hostname: gpu-0-1.local
+2019-07-02 10:58:02.000239: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:194] libcuda reported version is: Invalid argument: expected %d.%d, %d.%d.%d, or %d.%d.%d.%d form for driver version; got "1"
+2019-07-02 10:58:02.000268: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:198] kernel reported version is: 418.67.0

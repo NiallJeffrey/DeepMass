@@ -1,0 +1,27 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading noisy/input data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data00/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data01/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data02/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data03/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data04/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data05/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data06/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data07/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data08/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data09/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data10/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data11/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data12/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data13/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data14/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data15/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data16/sv_training_wiener.npy

@@ -31,137 +31,34 @@ h5_output_dir = '../outputs/h5_files'
 n_epoch = 20
 batch_size = 32
 
-temp_location = '/home/ucapnje/partition_mount/'
+input_location = '/home/ucapnje/testde_mount/ucapnje/training_data/wiener/'
+
 
 # make SV mask
 print('loading mask \n')
 mask = np.float32(np.real(np.where(np.load('../picola_training/Ncov.npy') > 1.0, 0.0, 1.0)))
 print(mask.shape)
 
-
-print('loading noisy/input data', flush=True)
-t=time.time()
-noisy_files = list(np.genfromtxt('data_file_lists/wiener_data_files_nongauss_noise.txt', dtype='str'))
-noisy_files = [str(os.getcwd()) + s for s in noisy_files]
-train_array_noisy = script_functions.load_data_preallocate(list(noisy_files[:]))
-
-print(time.time()-t)
-time.sleep(int(time.time()-t)/10)
-
-# set masked regions to zero
-print('\nApply mask', flush=True)
+print('Loading input data', flush=True)
 t = time.time()
-train_array_noisy = mf.mask_images(train_array_noisy, mask)
-print('complete ' + str(time.time() - t) + 's \n', flush=True)
+test_array_noisy = np.load(input_location + 'test_array_wiener.npy')
+train_array_noisy = np.load(input_location + 'train_array_wiener.npy')
+print(time.time()-t, flush=True)
 
+gc.collect()
 
-# remove maps where numerical errors give high absolute values due to error
-# (seems to occasionally happen - need to look into this)
-print('\nTest loaded files', flush = True)
-t=time.time()
-where_too_big = np.where(np.abs(np.sum(train_array_noisy[:, :, :, :], axis=(1, 2, 3))) > 1e10)
-print('complete ' + str(time.time() - t) + 's \n', flush=True)
+print('Loading clean data', flush=True)
+t = time.time()
+test_array_clean = np.load(input_location + 'test_array_clean.npy')
+train_array_clean = np.load(input_location + 'train_array_clean.npy')
+print(time.time()-t, flush=True)
 
+gc.collect()
 
-mask_bad_data = np.ones(train_array_noisy[:, 0, 0, 0].shape, dtype=np.bool)
-print('\nNumber of bad files = ' + str(len(where_too_big[0])) + '\n', flush=True)
-t=time.time()
-mask_bad_data[where_too_big] = False
-
-train_array_noisy = train_array_noisy[mask_bad_data, :, :, :]
-print('complete ' + str(time.time() - t) + 's \n', flush=True)
-
-print('\nShuffle and take fraction of test data', flush=True)
-t=time.time()
-random_indices = np.arange(len(train_array_noisy[:, 0, 0, 0]))
-random.shuffle(random_indices)
-
-train_array_noisy = train_array_noisy[random_indices]
-print('complete ' + str(time.time() - t) + 's \n', flush=True)
-
-print('Number of pixels sample = ' + str(len(train_array_noisy[:4000].flatten())))
-
-print('pixels out of range (input/noisy) = ' +
-      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_noisy[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
-
-print('noisy array bytes = ' + str(train_array_noisy.nbytes))
-
-print('\nRescaling', flush=True)
-t=time.time()
-train_array_noisy = mf.rescale_map(train_array_noisy, rescale_factor, 0.5, clip=False)
-np.clip(train_array_noisy, 0.0, 1.0, out=train_array_noisy)
-print('complete ' + str(time.time() - t) + 's \n', flush=True)
-
-# split a validation set
-test_array_noisy = train_array_noisy[:n_test]
-train_array_noisy = train_array_noisy[n_test:]
-
-print('Saving test array', flush=True)
-t= time.time()
-np.save(temp_location + 'temp_test_array_noisy', test_array_noisy)
-print(time.time() - t)
-
-print('Saving train array', flush=True)
-t= time.time()
-np.save(temp_location + 'temp_train_array_noisy', train_array_noisy)
-print(time.time() - t)
-
-test_array_noisy = None
-train_array_noisy = None
-del test_array_noisy
-del train_array_noisy
-print('Deleted arrays from memory', flush=True)
-
-collected = gc.collect() 
-print('Garbage collect: ' + str(collected), flush=True)
-
-
-# Load the clean data
-print('loading data:', flush = True)
-t=time.time()
-clean_files = list(np.genfromtxt('data_file_lists/clean_data_files_nongauss_noise.txt', dtype='str'))
-clean_files = [str(os.getcwd()) + s for s in clean_files]
-train_array_clean = script_functions.load_data_preallocate(list(clean_files[:]))
-
-print(time.time()-t)
-time.sleep(int(time.time()-t)/10)
-
-# set masked regions to zero
-print('\nApply mask', flush=True)
-train_array_clean = mf.mask_images(train_array_clean, mask)
-
-# remove maps where numerical errors give really high absolute values (seem to occasionally happen - need to look into this)
-train_array_clean = train_array_clean[mask_bad_data, :, :, :]
-
-print('\nShuffle and take fraction of test data', flush=True)
-train_array_clean = train_array_clean[random_indices]
-
-print('Number of pixels sample = ' + str(len(train_array_clean[:4000].flatten())))
-print('pixels out of range (clean) = ' + \
-      str(len(np.where(np.abs(-0.5 + mf.rescale_map(train_array_clean[:4000], rescale_factor, 0.5).flatten()) > 0.5)[0])))
-
-print('clean array bytes = ' + str(train_array_clean.nbytes))
-
-train_array_clean = mf.rescale_map(train_array_clean, rescale_factor, 0.5, clip=False)
-np.clip(train_array_clean, 0.0, 1.0, out=train_array_clean)
-
-# split a validation set
-test_array_clean = train_array_clean[:n_test]
-train_array_clean = train_array_clean[n_test:]
-
-#np.save(temp_location + 'temp_test_array_clean.npy', test_array_clean)
-#np.save(temp_location + 'temp_train_array_clean.npy', train_array_clean)
-
-
-print('Reloading noisy data', flush=True)
-test_array_noisy = np.load(temp_location + 'temp_test_array_noisy.npy')
-train_array_noisy = np.load(temp_location + 'temp_train_array_noisy.npy')
-
-os.remove(temp_location + 'temp_test_array_noisy.npy')
-os.remove(temp_location + 'temp_train_array_noisy.npy')
-
-print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten()/np.var(test_array_clean.flatten()), 
+                                                test_array_noisy.flatten()/np.var(test_array_clean.flatten()))))
 print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())), flush=True)
+
 
 
 if plot_results:
@@ -171,8 +68,8 @@ if plot_results:
                                       output_file=str(plot_output_dir) + '/picola_data.png')
 
 
-train_gen = cnn.batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size)
-test_gen = cnn.batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size)
+train_gen = cnn.batch_generator(train_array_noisy, train_array_clean, gen_batch_size=batch_size, sample_weights=True)
+test_gen = cnn.batch_generator(test_array_noisy, test_array_clean, gen_batch_size=batch_size, sample_weights=True)
 
 print(train_gen)
 print(train_array_noisy.shape)
@@ -180,7 +77,7 @@ print(test_array_clean.shape)
 print(train_array_noisy.shape[0] // 32)
 
 
-learning_rates=[None,1e-5,3e-6]
+learning_rates=[1e-5,3e-6]
 
 for learning_rate in learning_rates:
 
@@ -205,14 +102,16 @@ for learning_rate in learning_rates:
 
     # save network
     print('Save network', flush=True)
-    cnn_wiener.save(str(h5_output_dir) + '/losses_droput_unet_' + str(learning_rate) + '.h5')
+    cnn_wiener.save(str(h5_output_dir) + '/model_unet_weights_simplest' + str(learning_rate) + '.h5')
 
     test_output = cnn_wiener.predict(test_array_noisy)
 
-    print('Test loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_array_noisy.flatten())))
+    print('Test loss weights= ' + str(mf.mean_square_error(test_array_clean.flatten()/np.var(test_array_clean.flatten()), 
+                                                           test_array_noisy.flatten()/np.var(test_array_clean.flatten()))))
     print('Test pearson = ' + str(pearsonr(test_array_clean.flatten(), test_array_noisy.flatten())))
 
-    print('Result loss = ' + str(mf.mean_square_error(test_array_clean.flatten(), test_output.flatten())))
+    print('Result loss weights=' + str(mf.mean_square_error(test_array_clean.flatten()/np.var(test_array_clean.flatten()),
+                                                            test_output.flatten()/np.var(test_array_clean.flatten()))))
     print('Result pearson = ' + str(pearsonr(test_array_clean.flatten(), test_output.flatten())), flush=True)
 
     test_output = None
@@ -221,7 +120,7 @@ for learning_rate in learning_rates:
     print('Garbage collect: ' + str(collected), flush=True)
 
 
-
+"""
 for learning_rate in learning_rates:
 
     print('unet deeeper lr = ' + str(learning_rate))
@@ -245,7 +144,7 @@ for learning_rate in learning_rates:
 
     # save network
     print('Save network', flush=True)
-    cnn_wiener.save(str(h5_output_dir) + '/losses_droput_unet_' + str(learning_rate) + '.h5')
+    cnn_wiener.save(str(h5_output_dir) + '/model_unet_simple' + str(learning_rate) + '.h5')
 
     test_output = cnn_wiener.predict(test_array_noisy)
 
@@ -259,3 +158,5 @@ for learning_rate in learning_rates:
 
     collected = gc.collect()
     print('Garbage collect: ' + str(collected), flush=True)
+
+"""

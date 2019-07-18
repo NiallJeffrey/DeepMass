@@ -1,0 +1,207 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading noisy/input data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB00/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB01/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB02/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB03/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB04/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB05/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB06/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB07/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB08/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB09/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB10/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB11/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB12/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB13/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB14/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB15/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data00/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data01/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data02/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data03/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data04/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data05/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data06/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data07/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data08/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data09/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data10/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data11/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data12/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data13/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data14/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data15/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data16/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data17/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data18/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data19/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data30/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data31/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data32/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data33/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data34/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data35/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data36/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data37/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data38/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data39/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data40/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data41/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data42/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data43/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data44/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data45/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data46/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data47/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data48/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data49/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data50/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data51/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data52/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data53/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data54/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data55/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data56/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data57/sv_training_wiener.npy
+2737.5431525707245
+
+Apply mask
+complete 19.79484486579895s 
+
+
+Test loaded files
+complete 13.713997602462769s 
+
+
+Number of bad files = 1076
+
+complete 5381.492331981659s 
+
+
+Shuffle and take fraction of test data
+complete 54.54903292655945s 
+
+Number of pixels sample = 262144000
+pixels out of range (input/noisy) = 0
+noisy array bytes = 125809197056
+
+Rescaling
+complete 88.97870922088623s 
+
+Saving test array
+1.8241302967071533
+Saving train array
+368.58356046676636
+Deleted arrays from memory
+Garbage collect: 232
+loading data:
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB00/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB01/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB02/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB03/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB04/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB05/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB06/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB07/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB08/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB09/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB10/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB11/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB12/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB13/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB14/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_dataB15/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data00/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data01/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data02/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data03/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data04/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data05/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data06/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data07/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data08/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data09/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data10/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data11/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data12/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data13/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data14/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data15/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data16/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data17/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data18/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data19/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data30/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data31/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data32/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data33/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data34/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data35/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data36/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data37/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data38/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data39/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data40/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data41/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data42/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data43/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data44/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data45/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data46/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data47/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data48/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data49/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data50/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data51/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data52/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data53/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data54/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data55/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data56/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data57/sv_training_kappa_true.npy
+3061.8359248638153
+
+Apply mask
+
+Shuffle and take fraction of test data
+Using TensorFlow backend.
+Number of pixels sample = 262144000
+pixels out of range (clean) = 2166
+clean array bytes = 125809197056
+Traceback (most recent call last):
+  File "test_wiener_prototype.py", line 153, in <module>
+    np.save(temp_location + 'temp_train_array_clean.npy', train_array_clean)
+  File "/anaconda/envs/tensorflow/lib/python3.6/site-packages/numpy/lib/npyio.py", line 511, in save
+    pickle_kwargs=pickle_kwargs)
+  File "/anaconda/envs/tensorflow/lib/python3.6/site-packages/numpy/lib/format.py", line 597, in write_array
+    array.tofile(fp)
+OSError: 30928011264 requested and 3066392544 written

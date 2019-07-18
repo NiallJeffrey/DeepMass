@@ -1,0 +1,71 @@
+[33mWARNING: Non existent mountpoint (directory) in container: '/var/singularity/mnt/final/home/ucapnje/partition1'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading noisy data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_wiener.npy
+13.807363271713257
+
+Apply mask
+complete 2.2232437133789062s 
+
+
+Test loaded files
+complete 1.6231207847595215s 
+
+
+Number of bad files = 148
+
+
+Shuffle and take fraction of test data
+Number of pixels sample = 262144000
+pixels out of range (input/noisy) = 0
+noisy array bytes = 17000562688
+
+Rescaling
+complete 9.991536617279053s 
+
+Saving test array
+21.400761604309082
+Saving train array
+135.57849502563477
+Deleted arrays from memory
+loading data:
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_kappa_true.npy
+154.54890871047974
+
+Apply mask
+
+Shuffle and take fraction of test data
+Using TensorFlow backend.
+Number of pixels sample = 262144000
+pixels out of range (clean) = 874
+clean array bytes = 17000562688
+Traceback (most recent call last):
+  File "test_wiener_all.py", line 142, in <module>
+    np.clip(train_array_noisy, 0.0, 1.0, out=train_array_noisy)
+NameError: name 'train_array_noisy' is not defined

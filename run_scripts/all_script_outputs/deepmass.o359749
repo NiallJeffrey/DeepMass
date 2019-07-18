@@ -1,0 +1,292 @@
+[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-debugdump'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-persistenced'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-control'
+[0m[33mWARNING: Non existent mount point (file) in container: '/var/singularity/mnt/final/usr/bin/nvidia-cuda-mps-server'
+[0m/home/ucapnje
+/home/ucapnje/share/DeepMass/run_scripts
+loading mask 
+
+(256, 256)
+loading noisy data
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_wiener.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_wiener.npy
+13.695330381393433
+
+Apply mask
+complete 2.27006196975708s 
+
+
+Test loaded files
+complete 1.6227900981903076s 
+
+
+Number of bad files = 148
+
+
+Shuffle and take fraction of test data
+Number of pixels sample = 262144000
+pixels out of range (input/noisy) = 0
+noisy array bytes = 17000562688
+
+Rescaling
+complete 9.993330955505371s 
+
+Saving test array
+1.0758569240570068
+Saving train array
+7.554009199142456
+Deleted arrays from memory
+Garbage collect: 40
+loading data:
+loaded first file: /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data20/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data21/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data22/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data23/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data24/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data25/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data26/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data27/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data28/sv_training_kappa_true.npy
+Loading /home/ucapnje/share/DeepMass/run_scripts/../picola_training/nicaea_rescaled_nongauss_noise/training_data29/sv_training_kappa_true.npy
+15.03403902053833
+
+Apply mask
+
+Shuffle and take fraction of test data
+Number of pixels sample = 262144000
+pixels out of range (clean) = 947
+clean array bytes = 17000562688
+Test loss = 0.00039899035
+Test pearson = (0.3250802, 0.0)
+2019-06-25 14:58:11.965234: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2019-06-25 14:58:17.907660: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: Tesla V100-PCIE-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.38
+pciBusID: 0000:3b:00.0
+totalMemory: 15.75GiB freeMemory: 15.44GiB
+2019-06-25 14:58:17.907762: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2019-06-25 14:58:21.359411: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-06-25 14:58:21.359470: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2019-06-25 14:58:21.359478: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2019-06-25 14:58:21.359647: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 14941 MB memory) -> physical GPU (device: 0, name: Tesla V100-PCIE-16GB, pci bus id: 0000:3b:00.0, compute capability: 7.0)
+Plotting data. Saving to: ../outputs/picola_script_outputs/picola_data.png
+<generator object batch_generator at 0x2b3b310b8780>
+(56852, 256, 256, 1)
+(8000, 256, 256, 1)
+1776
+training network wiener (no dropout) 
+
+
+simple lr = 1e-05
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 256, 256, 1)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 256, 256, 32)      320       
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 256, 256, 32)      128       
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 256, 256, 32)      128       
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 256, 256, 1)       289       
+=================================================================
+Total params: 28,609
+Trainable params: 28,481
+Non-trainable params: 128
+_________________________________________________________________
+1 32 1e-05
+Epoch 1/1
+ - 178s - loss: 0.0032 - val_loss: 0.0017
+sleep
+Test loss = 0.00039899035
+Test pearson = (0.3250802, 0.0)
+Result loss = 0.0016959046
+Result pearson = (0.05965933, 0.0)
+
+simple lr = 3e-06
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_2 (InputLayer)         (None, 256, 256, 1)       0         
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 256, 256, 32)      320       
+_________________________________________________________________
+conv2d_7 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+batch_normalization_3 (Batch (None, 256, 256, 32)      128       
+_________________________________________________________________
+conv2d_8 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+conv2d_9 (Conv2D)            (None, 256, 256, 32)      9248      
+_________________________________________________________________
+batch_normalization_4 (Batch (None, 256, 256, 32)      128       
+_________________________________________________________________
+conv2d_10 (Conv2D)           (None, 256, 256, 1)       289       
+=================================================================
+Total params: 28,609
+Trainable params: 28,481
+Non-trainable params: 128
+_________________________________________________________________
+1 32 3e-06
+Epoch 1/1
+ - 174s - loss: 0.0049 - val_loss: 0.0026
+sleep
+Test loss = 0.00039899035
+Test pearson = (0.3250802, 0.0)
+Result loss = 0.0025736664
+Result pearson = (0.027001146, 0.0)
+
+unet deep lr = 1e-05
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 256, 256, 32) 320         input_3[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_5 (BatchNor (None, 256, 256, 32) 128         conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_1 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_5[0][0]      
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_1[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_6 (BatchNor (None, 128, 128, 64) 256         conv2d_12[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_2 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_6[0][0]      
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_2[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_7 (BatchNor (None, 64, 64, 128)  512         conv2d_13[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_3 (AveragePoo (None, 32, 32, 128)  0           batch_normalization_7[0][0]      
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_3[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_8 (BatchNor (None, 32, 32, 128)  512         conv2d_14[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_1 (UpSampling2D)  (None, 64, 64, 128)  0           batch_normalization_8[0][0]      
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 64, 64, 256)  0           batch_normalization_7[0][0]      
+                                                                 up_sampling2d_1[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_9 (BatchNor (None, 64, 64, 256)  1024        concatenate_1[0][0]              
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 64, 64, 64)   147520      batch_normalization_9[0][0]      
+__________________________________________________________________________________________________
+up_sampling2d_2 (UpSampling2D)  (None, 128, 128, 64) 0           conv2d_15[0][0]                  
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 128, 128, 128 0           batch_normalization_6[0][0]      
+                                                                 up_sampling2d_2[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_10 (BatchNo (None, 128, 128, 128 512         concatenate_2[0][0]              
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 128, 128, 64) 73792       batch_normalization_10[0][0]     
+__________________________________________________________________________________________________
+up_sampling2d_3 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_16[0][0]                  
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_5[0][0]      
+                                                                 up_sampling2d_3[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_11 (BatchNo (None, 256, 256, 96) 384         concatenate_3[0][0]              
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 256, 256, 32) 27680       batch_normalization_11[0][0]     
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 256, 256, 1)  33          conv2d_17[0][0]                  
+==================================================================================================
+Total params: 492,609
+Trainable params: 490,945
+Non-trainable params: 1,664
+__________________________________________________________________________________________________
+1 32 1e-05
+Epoch 1/1
+ - 294s - loss: 0.0015 - val_loss: 4.8019e-04
+sleep
+Test loss = 0.00039899035
+Test pearson = (0.3250802, 0.0)
+Result loss = 0.0004783631
+Result pearson = (0.15602885, 0.0)
+
+unet deep lr = 3e-06
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_4 (InputLayer)            (None, 256, 256, 1)  0                                            
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 256, 256, 32) 320         input_4[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization_12 (BatchNo (None, 256, 256, 32) 128         conv2d_19[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_4 (AveragePoo (None, 128, 128, 32) 0           batch_normalization_12[0][0]     
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 128, 128, 64) 18496       average_pooling2d_4[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_13 (BatchNo (None, 128, 128, 64) 256         conv2d_20[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_5 (AveragePoo (None, 64, 64, 64)   0           batch_normalization_13[0][0]     
+__________________________________________________________________________________________________
+conv2d_21 (Conv2D)              (None, 64, 64, 128)  73856       average_pooling2d_5[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_14 (BatchNo (None, 64, 64, 128)  512         conv2d_21[0][0]                  
+__________________________________________________________________________________________________
+average_pooling2d_6 (AveragePoo (None, 32, 32, 128)  0           batch_normalization_14[0][0]     
+__________________________________________________________________________________________________
+conv2d_22 (Conv2D)              (None, 32, 32, 128)  147584      average_pooling2d_6[0][0]        
+__________________________________________________________________________________________________
+batch_normalization_15 (BatchNo (None, 32, 32, 128)  512         conv2d_22[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_4 (UpSampling2D)  (None, 64, 64, 128)  0           batch_normalization_15[0][0]     
+__________________________________________________________________________________________________
+concatenate_4 (Concatenate)     (None, 64, 64, 256)  0           batch_normalization_14[0][0]     
+                                                                 up_sampling2d_4[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_16 (BatchNo (None, 64, 64, 256)  1024        concatenate_4[0][0]              
+__________________________________________________________________________________________________
+conv2d_23 (Conv2D)              (None, 64, 64, 64)   147520      batch_normalization_16[0][0]     
+__________________________________________________________________________________________________
+up_sampling2d_5 (UpSampling2D)  (None, 128, 128, 64) 0           conv2d_23[0][0]                  
+__________________________________________________________________________________________________
+concatenate_5 (Concatenate)     (None, 128, 128, 128 0           batch_normalization_13[0][0]     
+                                                                 up_sampling2d_5[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_17 (BatchNo (None, 128, 128, 128 512         concatenate_5[0][0]              
+__________________________________________________________________________________________________
+conv2d_24 (Conv2D)              (None, 128, 128, 64) 73792       batch_normalization_17[0][0]     
+__________________________________________________________________________________________________
+up_sampling2d_6 (UpSampling2D)  (None, 256, 256, 64) 0           conv2d_24[0][0]                  
+__________________________________________________________________________________________________
+concatenate_6 (Concatenate)     (None, 256, 256, 96) 0           batch_normalization_12[0][0]     
+                                                                 up_sampling2d_6[0][0]            
+__________________________________________________________________________________________________
+batch_normalization_18 (BatchNo (None, 256, 256, 96) 384         concatenate_6[0][0]              
+__________________________________________________________________________________________________
+conv2d_25 (Conv2D)              (None, 256, 256, 32) 27680       batch_normalization_18[0][0]     
+__________________________________________________________________________________________________
+conv2d_26 (Conv2D)              (None, 256, 256, 1)  33          conv2d_25[0][0]                  
+==================================================================================================
+Total params: 492,609
+Trainable params: 490,945
+Non-trainable params: 1,664
+__________________________________________________________________________________________________
+1 32 3e-06
+Epoch 1/1
+ - 293s - loss: 0.0061 - val_loss: 0.0020
+Using TensorFlow backend.
+sleep
+Test loss = 0.00039899035
+Test pearson = (0.3250802, 0.0)
+Result loss = 0.0020250895
+Result pearson = (0.048264302, 0.0)

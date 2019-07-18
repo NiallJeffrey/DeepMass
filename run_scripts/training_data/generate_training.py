@@ -9,7 +9,7 @@ from deepmass import map_functions as mf
 command_line_index = int(sys.argv[1])
 
 # kappa healpix directory
-kappa_dir = '/share/splinter/ucapnje/picola_for_peaks/l-picola_peak_statistics/kappaA/kappa_nicaea_rescaled/'
+kappa_dir = '/share/splinter/ucapnje/picola_for_peaks/l-picola_peak_statistics/kappaB/kappa_nicaea_rescaled/'
 
 list_kappa = os.listdir(kappa_dir)
 
@@ -24,7 +24,7 @@ power_map = np.load('../../picola_training/power_map_y1_fiducial.npy')
 Ncov = np.load('../../picola_training/Ncov.npy')
 
 # make training data
-output_file_base = '../../picola_training/nicaea_rescaled_nongauss_noise/training_data' + str(command_line_index).zfill(2) + '/sv_training'
+output_file_base = '../../picola_training/nicaea_rescaled_nongauss_noise/training_dataB' + str(command_line_index).zfill(2) + '/sv_training'
 
 
 t = time.time()
