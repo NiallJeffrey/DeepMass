@@ -5,6 +5,8 @@ import sys
 import healpy as hp
 from astropy.io import fits
 import time
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
 from deepmass import lens_data as ld
@@ -13,7 +15,7 @@ from deepmass import wiener
 
 def power_function(k, sigmasignal = 17.5, amplitude = 1e6 ):
     """
-    simple power spectrum function
+    simple power spectrum example function
     :param k:
     :param sigmasignal:
     :param amplitude:
@@ -110,16 +112,13 @@ def rescale_unit_test():
         sys.exit()
 
 
-# def downscale_images(image_array, new_size, correct_mask):
-#     image_array_new = np.empty((len(image_array[:,0,0,0]), new_size, new_size, 1), dtype = np.float32)
-#
-#     for i in range(len(image_array[:,0,0,0])):
-#         image_array_new[i,:,:,0] = resize(image_array[i,:,:,0], (new_size,new_size))*correct_mask
-#
-#     return image_array_new
-
-
 def mask_images(image_array, correct_mask):
+    """
+    Apply mask
+    :param image_array: input image
+    :param correct_mask: 1 for unmasked (visible pixels), 0 for mask
+    :return: masked image
+    """
 
     for i in range(len(image_array[:,0,0,0])):
         image_array[i,:,:,0] = image_array[i,:,:,0]*correct_mask
@@ -127,11 +126,12 @@ def mask_images(image_array, correct_mask):
     return image_array
 
 
-
-
-
-# # function to compute the power spectrum of a 2d image
 def radial_profile(data):
+    """
+    Compute the radial profile of 2d image
+    :param data: 2d image
+    :return: radial profile
+    """
     center = data.shape[0]/2
     y, x = np.indices((data.shape))
     r = np.sqrt((x - center)**2 + (y - center)**2)
@@ -143,10 +143,14 @@ def radial_profile(data):
     return radialprofile / data.shape[0]**2
 
 
-def compute_spectrum_map(Px,size):
+def compute_spectrum_map(power1d,size):
     """
     takes 1D power spectrum and makes it an isotropic 2D map
+    :param power: 1d power spectrum
+    :param size:
+    :return:
     """
+
     power_map = np.zeros((size, size), dtype = float)
     k_map =  np.zeros((size, size), dtype = float)
 
@@ -156,19 +160,18 @@ def compute_spectrum_map(Px,size):
         k2 = j - size/2.0
         k_map[i, j] = (np.sqrt(k1*k1 + k2*k2))
 
-        if k_map[i,j]==0:
-            #print(i,j)
+        if k_map[i,j] == 0:
             power_map[i, j] = 1e-15
         else:
-            #print(k_map[i, j])
-            power_map[i, j] = Px[int(k_map[i, j])]
-    return power_map
+            power_map[i, j] = power1d[int(k_map[i, j])]
 
+    return power_map
 
 
 def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power, Ncov,
                      size=256, mask=None, fast_noise=True, sigma_eps=0.2865, wiener_iter=30, reso=4.5):
     """
+    Very hard coded function to make training data from healpix maps and save them
 
     :param healpix_fits_file: fits file location of true kappa healpix map
     :param data_file: catalogue of galaxies to match properties
@@ -282,6 +285,11 @@ def generate_sv_maps(healpix_fits_file, data_file, output_base, n_outputs, power
         np.save(str(output_base + '_wiener'), output_wiener_array)
 
 
-
 def mean_square_error(y_true, y_pred):
+    """
+    Calculate mean square error
+    :param y_true: true data
+    :param y_pred: predicted data
+    :return: mean square error
+    """
     return np.mean((y_pred.flatten() - y_true.flatten())**2.)

@@ -11,7 +11,7 @@ from keras.optimizers import Adam
 
 
 # Make batch generator
-def batch_generator(noisy_array, clean_array, gen_batch_size=32, sample_weights=False):
+def BatchGenerator(noisy_array, clean_array, gen_batch_size=32, sample_weights=False):
 
     if sample_weights==False:
         while True:
@@ -21,7 +21,6 @@ def batch_generator(noisy_array, clean_array, gen_batch_size=32, sample_weights=
         while True:
             index = np.random.randint(0, noisy_array.shape[0], gen_batch_size)
             yield (noisy_array[index], clean_array[index], np.array([1./np.var(clean_array[i]) for i in index]))
-
 
 
 class LossHistory(Callback):
@@ -34,9 +33,7 @@ class LossHistory(Callback):
         self.val_losses.append(logs.get('val_loss'))
 
 
-
-
-class simple_model:
+class SimpleModel:
     """
     A CNN class that creates a simple denoiser
     """
@@ -49,7 +46,6 @@ class simple_model:
         """
         self.map_size = map_size
         self.learning_rate = learning_rate
-
 
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
@@ -77,10 +73,9 @@ class simple_model:
         return simple
 
 
-
-class unetlike_baseline:
+class UnetlikeBaseline:
     """
-    A CNN class that creates a denoising U-NET
+    A CNN class that creates a denoising Unet
     """
 
     def __init__(self, map_size, learning_rate, dropout_val=None):
@@ -94,7 +89,6 @@ class unetlike_baseline:
         self.dropout_val = dropout_val
         if dropout_val is not None:
             print('using dropout: ' + str(dropout_val))
-
 
     def model(self):
         input_img = Input(shape=(self.map_size, self.map_size, 1))
