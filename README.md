@@ -1,7 +1,7 @@
-# Deep Mass
-Using CNNs from Keras with Tensorflow to reconstruct weak lensing mass maps from noisy and incomplete data. Still being written.
+# DeepMass
+See the paper: "Deep learning dark matter map reconstructions from DES SV weak lensing data"
 
-
+This code makes uses Keras with Tensorflow to create a CNN to reconstruct dark matter maps from noisy and incomplete weak lensing data.
 
 ### Installation
 ```
