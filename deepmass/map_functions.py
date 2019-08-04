@@ -6,7 +6,8 @@ import healpy as hp
 from astropy.io import fits
 import time
 import matplotlib
-matplotlib.use('agg')
+
+
 import matplotlib.pyplot as plt
 
 from deepmass import lens_data as ld
