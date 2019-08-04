@@ -1,12 +1,12 @@
 
 
 import numpy as np
-from keras import backend as K
-from keras.layers import Input, Dropout, Conv2D, MaxPooling2D, UpSampling2D, add, BatchNormalization, Conv2DTranspose
-from keras.layers import concatenate, AveragePooling2D
-from keras.models import Model
-from keras.callbacks import Callback
-from keras.optimizers import Adam
+import tensorflow.keras as keras
+from tensorflow.keras.layers import Input, Dropout, Conv2D, MaxPooling2D, UpSampling2D, add, BatchNormalization, Conv2DTranspose
+from tensorflow.keras.layers import concatenate, AveragePooling2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.callbacks import Callback
+from tensorflow.keras.optimizers import Adam
 
 
 
@@ -146,6 +146,3 @@ class UnetlikeBaseline:
             unet.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
 
         return unet
-
-
-
