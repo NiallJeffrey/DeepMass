@@ -4,6 +4,13 @@ See the paper: "Deep learning dark matter map reconstructions from DES SV weak l
 This code makes uses Keras with Tensorflow to create a CNN to reconstruct dark matter maps from noisy and incomplete weak lensing data.
 
 ### Installation
+#### Using pip
+
+```
+!pip install 'git+https://github.com/NiallJeffrey/DeepMass.git'
+```
+
+#### From source
 ```
 python setup.py install 
 ```
