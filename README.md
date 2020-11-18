@@ -25,9 +25,7 @@ python setup.py install --user
 ```
 Python 3 (version 3.6 works)
 
-Tensorflow (version 1.12.0 works)
-
-Keras (version 2.2.4 works)
+Tensorflow (version 2)
 ```
 
 ### Running the tests
