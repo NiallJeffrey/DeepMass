@@ -78,7 +78,7 @@ class UnetlikeBaseline:
     A CNN class that creates a denoising Unet
     """
 
-    def __init__(self, map_size, learning_rate, dropout_val=None):
+    def __init__(self, map_size, learning_rate, channels=[1,1], dropout_val=None):
         """
         Initialisation
         :param map_size: size of square image (there are map_size**2 pixels)
@@ -87,11 +87,13 @@ class UnetlikeBaseline:
         self.map_size = map_size
         self.learning_rate = learning_rate
         self.dropout_val = dropout_val
+        self.channels = channels
+
         if dropout_val is not None:
             print('using dropout: ' + str(dropout_val))
 
     def model(self):
-        input_img = Input(shape=(self.map_size, self.map_size, 1))
+        input_img = Input(shape=(self.map_size, self.map_size, self.channels[0]))
 
         x1 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(input_img)
         x1 = BatchNormalization()(x1)
@@ -135,7 +137,7 @@ class UnetlikeBaseline:
         merge7 = BatchNormalization()(merge7)
 
         x7 = Conv2D(16, 3, activation='relu', padding='same', kernel_initializer='he_normal')(merge7)
-        output = Conv2D(1, 1, activation='sigmoid')(x7)
+        output = Conv2D(self.channels[1], 1, activation='sigmoid')(x7)
 
         unet = Model(input_img, output)
         unet.summary()
