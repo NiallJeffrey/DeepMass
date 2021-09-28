@@ -10,10 +10,48 @@ import healpy as hp
 from pygsp.graphs import SphereHealpix
 from pygsp import filters
 
-import healpy_layers as hp_layer
-import gnn_layers as gnn
-import utils
-import plot
+from deepsphere import healpy_layers as hp_layer
+from deepsphere import gnn_layers as gnn
+from deepsphere import utils
+from deepsphere import plot
+
+def rotate(sky,z,y,x,nside,p=3,pixel=True,forward=True,nest2ring=True):
+    '''
+    Up-samples the data, rotates map, then pools it to original nside. Map has to be in "NEST" ordering.
+    
+    Input:
+    sky        map (In NEST ordering if nest2ring=True)
+    z          longitude
+    y          latitude
+    x          about axis that goes through center of map (rotation of object centered in center)
+    nside  
+    p          up-samples data by 2**p 
+    pixel      if True rotation happens in pixel space. Otherwise it happens in spherical harmonics space.
+    forward    if True, +10degree rotation does +10degree rotation. Otherwise it does a -10 degree rotation
+    nest2ring  if True converts NEST ordering to RING ordering before rotating, and RING to NEST after rotation.
+               (rotation only works with RING ordering)
+    
+    Output:
+    Rotated map
+    
+    '''
+    #the point provided in rot will be the center of the map
+    rot_custom = hp.Rotator(rot=[z,y,x],inv=forward)#deg=True
+    
+    if nest2ring == True:
+        sky = hp.reorder(sky,n2r=True)
+    
+    up = hp.ud_grade(sky,nside*2**p)#up-sample
+    if pixel == True:
+        m_smoothed_rotated_pixel = rot_custom.rotate_map_pixel(up)
+    else:
+        m_smoothed_rotated_pixel = rot_custom.rotate_map_alms(up)#uses spherical harmonics instad
+    down = hp.ud_grade(m_smoothed_rotated_pixel,nside)#down-sample
+    
+    if nest2ring == True:
+        down = hp.reorder(down,r2n=True)
+    
+    return down
 
 class HealpyUNet:
     """
