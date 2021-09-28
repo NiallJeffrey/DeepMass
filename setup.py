@@ -11,6 +11,5 @@ setup(name='deepmass',
       packages=find_packages(),
       install_requires=[
           "tensorflow>=2.3.0",
-          "numpy"
       ])
 
