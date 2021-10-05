@@ -58,9 +58,9 @@ class HealpyUNet:
     A graph UNet convolutional network.
     """
     
-    def __init__(self, nside, indices, learning_rate, mask, mean, n_neighbors=20):
+    def __init__(self, nside, indices, learning_rate, mask, mean, K=10):    
         """
-        self, nside, indices, n_neighbors=20
+        self, nside, indices, K=10
         
         Initiates the UNet.
         Input:
@@ -69,7 +69,7 @@ class HealpyUNet:
         #Create the instance attributes from inputs
         self.current_nside = nside
         self.current_indices = indices
-        self.n_neighbors = n_neighbors
+        self.K = K
         self.learning_rate = learning_rate
         self.mask = mask
         self.mean = mean
@@ -78,19 +78,19 @@ class HealpyUNet:
         """self, inputs"""
         
         inputs = Input(shape = (12*self.current_nside**2,1))
-        x1 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=10, Fout=16,
+        x1 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=self.K, Fout=16,
                                   initializer='he_normal', activation='relu', use_bias=True, use_bn=True)(inputs)
         
         x2 = self.HealpyPool(self.current_nside, self.current_indices, p=1, pool="AVG")(x1)
-        x2 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=10, Fout=32,
+        x2 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=self.K, Fout=32,
                                   initializer='he_normal', activation='relu', use_bias=True, use_bn=True)(x2)
 
         x3 = self.HealpyPool(self.current_nside, self.current_indices, p=1, pool="AVG")(x2)
-        x3 = self.HealpyChebyshev(self.current_nside,self.current_indices,K=10,Fout=32,
+        x3 = self.HealpyChebyshev(self.current_nside,self.current_indices,K=self.K,Fout=32,
                                   initializer='he_normal', activation='relu', use_bias=True, use_bn=True)(x3)
         
         xdeep = self.HealpyPool(self.current_nside, self.current_indices, p=1, pool="AVG")(x3)        
-        xdeep = self.HealpyChebyshev(self.current_nside, self.current_indices, K=10, Fout=32,                 
+        xdeep = self.HealpyChebyshev(self.current_nside, self.current_indices, K=self.K, Fout=32,                 
                                   initializer='he_normal', activation='relu', use_bias=True, use_bn=True)(xdeep)
                 
         x4 = self.HealpyPseudoConv_Transpose(self.current_nside,self.current_indices,p=1,Fout=32,
@@ -114,11 +114,11 @@ class HealpyUNet:
         x6 = BatchNormalization()(x6)
         #add convolution
         
-        x7 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=10, Fout=16, 
+        x7 = self.HealpyChebyshev(self.current_nside, self.current_indices, K=self.K, Fout=16, 
                                   initializer='he_normal', activation='relu', use_bias=True, use_bn=False)(x6)               
         
         
-        output = self.HealpyChebyshev(self.current_nside, self.current_indices, K=10, Fout=1, 
+        output = self.HealpyChebyshev(self.current_nside, self.current_indices, K=self.K, Fout=1, 
                                       initializer='he_normal', activation='sigmoid', use_bias=True, use_bn=False)(x7)
             
         unet = Model(inputs,output)
@@ -130,7 +130,7 @@ class HealpyUNet:
             unet.compile(optimizer=Adam(lr=self.learning_rate), loss='mse')
               
         return unet
-            
+    
     def HealpyUpSample(self, current_nside, current_indices, p):
         """
         :param p: Boost factor >=1 of the nside -> number of nodes increases by 4^p, note that the layer only checks if the dimensionality of the input is evenly divisible by 4^p and not if the ordering is correct (should be nested ordering)
