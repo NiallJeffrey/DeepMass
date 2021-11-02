@@ -7,7 +7,6 @@ import gc
 import scipy.ndimage as ndimage
 
 
-from deepmass import map_functions as mf
 from deepmass import lens_data as ld
 from deepmass import wiener
 from deepmass import cnn_keras as cnn
