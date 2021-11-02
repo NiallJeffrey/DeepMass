@@ -2,7 +2,7 @@
 ## Cosmological map inference with deep learning
 [![arXiv](https://img.shields.io/badge/arXiv-1908.00543-b31b1b.svg)](https://arxiv.org/abs/1908.00543) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This code, developed for infering dark matter maps from weak gravitational lensing measurements, uses deep learning to reconstruct cosmological maps.
+DeepMass was developed for infering dark matter maps from weak gravitational lensing measurements, and uses deep learning to reconstruct cosmological maps.
 
 ### Installation
 #### Using pip
