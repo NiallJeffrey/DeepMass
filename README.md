@@ -1,4 +1,5 @@
 # DeepMass
+[![arXiv](https://img.shields.io/badge/arXiv-1908.00543-b31b1b.svg)](https://arxiv.org/abs/1908.00543) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 See the paper: "Deep learning dark matter map reconstructions from DES SV weak lensing data"
 
 This code makes uses Keras with Tensorflow to create a CNN to reconstruct dark matter maps from noisy and incomplete weak lensing data.
