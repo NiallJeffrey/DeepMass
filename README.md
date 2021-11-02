@@ -4,11 +4,15 @@
 
 DeepMass was developed for infering dark matter maps from weak gravitational lensing measurements, and uses deep learning to reconstruct cosmological maps.
 
-![readme_image](https://github.com/NiallJeffrey/DeepMass/blob/master/DES_mass_maps_demo/plots/DeepMass_result.jpg)
+
+![DeepMass_result](https://github.com/NiallJeffrey/DeepMass/blob/master/DES_mass_maps_demo/plots/DeepMass_result.jpg)
+
 
 DeepMass can be incorporated into a Moment Network ([Solving high-dimensional parameter inference: marginal posterior densities & Moment Networks (Accepted in the Third Workshop on Machine Learning and the Physical Sciences, NeurIPS 2020)](https://arxiv.org/abs/2011.05991)) to be used for high-dimensional likelihood-free inference:
 
-![readme_image](https://github.com/NiallJeffrey/DeepMass/blob/master/CMB_foreground_demo/plots/CMB_readme_fig.jpg)
+
+![CMB_readme_fig](https://github.com/NiallJeffrey/DeepMass/blob/master/CMB_foreground_demo/CMB_readme_fig.jpg)
+
 
 (Single frequency CMB B-mode inference with realistic foregrounds from a single training image)
 
