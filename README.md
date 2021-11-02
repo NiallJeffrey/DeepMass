@@ -24,9 +24,7 @@ python setup.py install --user
 ### Prerequisites
 
 ```
-Python 3 (version 3.6 works)
-
-Tensorflow (version 2)
+Python 3; Tensorflow>=2.2; healpy
 ```
 
 ### Running the tests
