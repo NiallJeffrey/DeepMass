@@ -10,6 +10,7 @@ setup(name='deepmass',
       url='https://github.com/NiallJeffrey/DeepMass',
       packages=find_packages(),
       install_requires=[
-          "tensorflow>=2.3.0",
+          "tensorflow>=2.2.0",
+          "healpy"
       ])
 

@@ -4,6 +4,8 @@
 
 DeepMass was developed for infering dark matter maps from weak gravitational lensing measurements, and uses deep learning to reconstruct cosmological maps.
 
+![readme_image](https://github.com/NiallJeffrey/DeepMass/blob/master/DES_maps_demo/plots/DeepMass_result.jpg)
+
 ### Installation
 #### Using pip
 
