@@ -38,13 +38,13 @@ or for a cluster:
 python setup.py install --user
 ```
 
-### Prerequisites
+#### Prerequisites
 
 ```
 Python 3; Tensorflow>=2.2; healpy
 ```
 
-### Running the tests
+#### Running the tests
 
 ```
 python unit_tests.py
