@@ -155,7 +155,7 @@ class HealpyUNet:
         :param use_bn: Apply batch norm before adding the bias
         """
         sphere = SphereHealpix(subdivisions=current_nside, indexes=current_indices, nest=True, 
-                               k=self.n_neighbors, lap_type='normalized')
+                               k=K, lap_type='normalized')
         current_L = sphere.L
         
         layer = hp_layer.HealpyChebyshev(K, Fout, initializer, activation, use_bias, use_bn)
