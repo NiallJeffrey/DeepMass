@@ -17,6 +17,11 @@ DeepMass can be incorporated into a Moment Network (see [Solving high-dimensiona
 ([Single frequency CMB B-mode inference with realistic foregrounds from a single training image](https://arxiv.org/abs/2111.01138) Jeffrey et al. 2021 MNRAS Letters)
 
 ### Installation
+
+To download data associated with the demos, this repository uses Git Large File Storage (git-lfs): https://git-lfs.github.com/
+
+If this is not installed locally, the downloaded repository will include code but not data.
+
 #### Using pip
 
 ```
