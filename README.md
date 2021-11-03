@@ -10,6 +10,7 @@ DeepMass can also be incorporated into a Moment Network (see [ArXiv:2011.05991](
 (Dark matter mass map demo [DES_mass_maps_demo/Training_example](https://github.com/NiallJeffrey/DeepMass/blob/main/DES_mass_maps_demo/Training_example.ipynb))
 ##
 ![CMB_readme_fig](https://github.com/NiallJeffrey/DeepMass/blob/main/CMB_foreground_demo/CMB_readme_fig.jpg)
+
 CMB result from [``Single frequency CMB B-mode inference with realistic foregrounds from a single training image'' Jeffrey et al. 2021 MNRAS Letters](https://arxiv.org/abs/2111.01138) 
 
 (CMB Foreground demo [CMB_foreground_demo/MomentNetwork_foregrounds](https://github.com/NiallJeffrey/DeepMass/blob/main/CMB_foreground_demo/MomentNetwork_foregrounds.ipynb))
