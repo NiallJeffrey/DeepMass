@@ -13,8 +13,8 @@ DeepMass can be incorporated into a Moment Network (see [Solving high-dimensiona
 
 ![CMB_readme_fig](https://github.com/NiallJeffrey/DeepMass/blob/main/CMB_foreground_demo/CMB_readme_fig.jpg)
 
-
-([Single frequency CMB B-mode inference with realistic foregrounds from a single training image](https://arxiv.org/abs/2111.01138) Jeffrey et al. 2021 MNRAS Letters)
+See CMB Foreground demo: [CMB_foreground_demo/MomentNetwork_foregrounds](https://github.com/NiallJeffrey/DeepMass/blob/main/CMB_foreground_demo/MomentNetwork_foregrounds.ipynb)
+[Single frequency CMB B-mode inference with realistic foregrounds from a single training image](https://arxiv.org/abs/2111.01138) Jeffrey et al. 2021 MNRAS Letters
 
 ## Installation
 
