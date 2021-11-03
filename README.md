@@ -16,7 +16,7 @@ DeepMass can be incorporated into a Moment Network (see [Solving high-dimensiona
 
 ([Single frequency CMB B-mode inference with realistic foregrounds from a single training image](https://arxiv.org/abs/2111.01138) Jeffrey et al. 2021 MNRAS Letters)
 
-### Installation
+## Installation
 
 To download data associated with the demos, this repository uses Git Large File Storage (git-lfs): https://git-lfs.github.com/
 
@@ -50,11 +50,11 @@ Python 3; Tensorflow>=2.2; healpy
 python unit_tests.py
 ```
 
-### Authors
+## Authors
 
 * **Niall Jeffrey** 
 * **Francois Lanusse** 
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
